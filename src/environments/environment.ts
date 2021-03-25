@@ -3,9 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyDyP1Z7JpirT37wrJNb7GdjFhla-c86rcA",
+    authDomain: "picloud-project.firebaseapp.com",
+    projectId: "picloud-project",
+    storageBucket: "picloud-project.appspot.com",
+    messagingSenderId: "18765484938",
+    appId: "1:18765484938:web:99caa64adc79a06bbfee73"
+  }
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
