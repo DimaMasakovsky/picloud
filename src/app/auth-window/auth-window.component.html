@@ -1,0 +1,7 @@
+<div class="auth-wrapper" *ngIf="authService.user$ | async as user; else login">
+  <h2>Hello, you logged in successfully!</h2>
+</div>
+<ng-template #login>
+  <button class="sign-in-window-button" 
+  (click)="signInWithGoogle()">Sign In With Google</button>
+</ng-template>

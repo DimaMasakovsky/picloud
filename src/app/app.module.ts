@@ -8,9 +8,19 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthWindowComponent } from './auth-window/auth-window.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { FeedComponent } from './feed/feed.component';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthWindowComponent,
+    HeaderComponent,
+    FooterComponent,
+    FeedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
