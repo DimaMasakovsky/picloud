@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { take,  tap} from 'rxjs/operators'
 import firebase from 'firebase';
 import auth = firebase.auth; 
@@ -11,7 +11,6 @@ import auth = firebase.auth;
 export class AuthService {
 
   public user$: Observable<firebase.User | null>; 
-
   constructor(private angAuthService: AngularFireAuth) {
     this.user$ = this.angAuthService.authState;
   }
@@ -25,6 +24,6 @@ export class AuthService {
     )
   }
   public signOut(): void {
-    this.angAuthService.signOut();
+    this.angAuthService.signOut(); 
   }
 }

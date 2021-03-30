@@ -1,5 +1,5 @@
 <div class="app-wrapper">
-  <app-header *ngIf="authService.user$ | async as user"></app-header>
+  <app-header *ngIf="!isLoginPage()"></app-header>
   <router-outlet></router-outlet>
   <app-footer></app-footer>
 </div>

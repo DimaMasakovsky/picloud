@@ -1,5 +1,17 @@
 <div class="header-wrapper">
-  <p>header works!</p>
-  <button class="sign-out-window-button" 
-    (click)="signOut()">Sign Out</button>
+  <div class="logo-wrapper">
+    <h1 class="logo">picloud</h1>
+  </div>  
+  <app-search></app-search>
+  <nav>
+    <ul class="nav-list-wrapper">
+      <li class="nav-list-item"><a>Home</a></li>
+      <li class="nav-list-item"><a>Profile</a></li>
+      <li> <button class="sign-out-window-button" 
+        (click)="signOut()">Sign Out</button></li>
+    </ul>
+    
+  </nav>
+ 
+ 
 </div>

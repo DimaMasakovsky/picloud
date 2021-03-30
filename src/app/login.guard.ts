@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {
-   }
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
       return this.authService.user$.pipe(
-        map((value) => !!value),
-        tap((isAuth) => {
-          if (!isAuth) {
-            console.log('User in not authorized');
-            this.router.navigate(['login']);
+        map((value) => !value),
+        tap((guest) => {
+          if (!guest) {
+            console.log('User is authorized');
+            this.router.navigate(['feed']);
           }
         }),
         take(1)
@@ -28,3 +28,6 @@ export class AuthGuard implements CanActivate {
   }
   
 }
+
+
+
