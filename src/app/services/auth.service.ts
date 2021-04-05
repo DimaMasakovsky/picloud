@@ -23,7 +23,7 @@ export class AuthService {
       take(1)
     )
   }
-  public signOut(): void {
-    this.angAuthService.signOut(); 
+  public signOut(): Observable<void> {
+    return from(this.angAuthService.signOut()).pipe(take(1)); 
   }
 }

@@ -1,5 +1,12 @@
+@import '../../styles.scss';
+
 .footer-wrapper { 
-  position: absolute;
+  @include flex-center(row);
+  position: fixed;
+  width: 8rem;
+  height: 4rem;
   bottom: 1rem;
-  background-color: blanchedalmond;
+  right: 1rem;
+  background-color: rgba(1,1,1,0.5);
+  color: white;
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { CrudService } from '../services/crud.service'
 
 @Component({
   selector: 'app-header',
@@ -20,8 +20,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   signOut(): void {
-    this.authService.signOut();
-    // need to click button two times to jump to login page
-    this.router.navigate(['']);
+    this.authService.signOut().subscribe(() => this.router.navigate(['']));  
   }
 }

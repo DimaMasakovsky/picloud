@@ -14,6 +14,9 @@ import { FooterComponent } from './footer/footer.component';
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { FeedPostComponent } from './feed-post/feed-post.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PostHeaderComponent } from './post-header/post-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,14 +25,17 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     FeedComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    FeedPostComponent,
+    PostHeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

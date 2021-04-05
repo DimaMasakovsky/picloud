@@ -5,8 +5,8 @@ import { AuthWindowComponent } from './auth-window/auth-window.component';
 
 import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthGuard } from './auth.guard.service';
-import { LoginGuard } from './login.guard';
+import { AuthGuard } from './guards/auth.guard.service';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
