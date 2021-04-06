@@ -17,6 +17,7 @@ import { SearchComponent } from './search/search.component';
 import { FeedPostComponent } from './feed-post/feed-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostHeaderComponent } from './post-header/post-header.component';
+import { NewPostFormComponent } from './new-post-form/new-post-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { PostHeaderComponent } from './post-header/post-header.component';
     ProfileComponent,
     SearchComponent,
     FeedPostComponent,
-    PostHeaderComponent
+    PostHeaderComponent,
+    NewPostFormComponent
   ],
   imports: [
     BrowserModule,

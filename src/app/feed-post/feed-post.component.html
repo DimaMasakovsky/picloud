@@ -1,4 +1,4 @@
-<app-post-header></app-post-header>
+<app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
 <div class="post-image-wrapper" (click)="deletePost()">
   <div class="post-image" [style.backgroundImage]="getBackgroundImage()"></div>
 </div>

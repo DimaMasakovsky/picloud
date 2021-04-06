@@ -1,0 +1,19 @@
+<form [formGroup]="postForm" (submit)="onSubmit()" class="form-wrapper">
+  <div class="form-label-input-wrapper">
+    <label for="textContent">What's new?</label>
+    <input type="text" id="text-content" formControlName="textContent" placeholder="What's new?"/>
+  </div>
+  
+  <div class="form-footer">
+    <div class="form-footer-item form-label-input-wrapper">
+      <label for="contentPicURL">Pic URL</label>
+      <input type="text" id="content-pic-url" formControlName="contentPicURL" placeholder="Pic URL"/>
+    </div>
+    <div class="form-footer-item form-label-input-wrapper">
+      <label for="tag">Tag</label>
+      <input type="text" id="tag" formControlName="tag" placeholder="Tag"/>
+    </div>    
+    <button type="submit">Post!</button>   
+  </div>
+  
+</form>

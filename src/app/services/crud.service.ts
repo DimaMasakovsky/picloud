@@ -12,7 +12,10 @@ export class CrudService {
   constructor(private firestoreService: AngularFirestore) { }
 
   public getObjectByRef(collectionName: string, id:string): Observable<any> {
-    return this.firestoreService.doc(id).get();
+    return this.firestoreService.collection(collectionName).doc(id).get().pipe(
+      map(doc => doc.data()), 
+      take(1)
+    );
   }
 
   public createEntity(collectionName: string, data: {}): Observable<string> {

@@ -1,9 +1,9 @@
 <div class="post-header-wrapper">
   <div class="post-profile-image-wrapper">
-    <div class="post-profile-image"></div>
+    <div class="post-profile-image" [style.backgroundImage]="getBackgroundImage()"></div>
   </div>
   <div class="post-profile-info-wrapper">
-    <p class="post-profile-name">Iv An</p>
-    <p class="post-profile-date"></p>
+    <p class="post-profile-name">{{user?.name}}</p>
+    <p class="post-profile-date">{{getDate()}}</p>
   </div>        
 </div>
