@@ -1,40 +1,43 @@
 @import '../../styles.scss';
 
-.header-wrapper {
-  // position: fixed;
-  // top: 0;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 2fr 5fr 2fr;
-  justify-content: space-around;
-  align-items: center;
-  background: #FFFFFF;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-  height: 5rem;
+:host {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 4.2rem;
 
-  .nav-list-wrapper { 
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 15% 50% 35%;
+  align-items: center;
+
+  background: #FFFFFF;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.25);  
+  nav {
     margin: 0 2rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    .nav-list-item {
-      font-size: 1.6rem;
-      margin: 0rem 1rem;
+    ul { 
+      @include justify-align-direction(space-around, center, row);
+  
+      li {
+        font-size: 1.4rem;
+        margin: 0 1rem;
+      }
     }
   }
+  
   .logo-wrapper {
-    @include flex-center(column);
-    .logo { 
+    @include justify-align-direction(center, center, column);
+    margin: 0 1rem;
+    h1 { 
       font-size: 2.4rem;
       font-family: $font-secondary;
       font-weight: 700;
-      margin: 1rem 2rem;
+      margin: 0 1rem;
     }
   }
 }
 
-.sign-out-window-button {
-  width: 8rem;
+button {
   padding: 0.5rem 1rem;
   background: #FFFFFF;
   outline: none;

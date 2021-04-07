@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+// Style-rest
 @import './styles-reset.scss';
 
 @mixin flex-center($direction) {
@@ -8,17 +8,30 @@
   flex-direction: $direction;
 }
 
+@mixin justify-align-direction($justify, $align, $direction) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@function color($color-name) {
+  @return map-get($colors, $color-name)
+}
+
+
 $font-main: 'Roboto', sans-serif; 
 $font-secondary: 'Raleway', sans-serif;
+
 $colors: (
   accent: #005FF9,
   background: #EFF0F4,
-  text-secondary-color: #5F5F5F 
+  text-secondary: #5F5F5F
 );
-
 html {
   font-size: 10px;
-  font-family: 'Raleway', sans-serif;
   font-family: 'Roboto', sans-serif;
+}
+body {  
   box-sizing: border-box;
 }

@@ -1,27 +1,27 @@
 @import '../../styles.scss';
 
-.feed-wrapper {
-  background: map-get($colors , background);
-  height: 100%;
-  flex-grow: 1;
-}
-.post-list {
-  @include flex-center(column);
-  width: 55rem;
-  margin: 0 auto;
-  .post-wrapper {
-    background: #ffffff;
-    margin: 1.5rem 0;
-    padding: 2rem;
-    border-radius: 0.5rem; 
+:host {
+  min-height: 100vh;
+  @include justify-align-direction(flex-start, center,column);
+  
+  background: color(background);
+
+  .grid {
+    padding-top: 4.2rem;
+    display: grid;
+    grid-template-columns: auto auto; 
+    grid-column-gap: min(3vw,8rem);
+  }
+  ul {
+    @include justify-align-direction(none, center, column);
+    margin-top: 1.5rem;
+    li {
+      background: #ffffff;
+      margin-bottom: 1.5rem;
+      padding: 2rem;
+      border-radius: 0.5rem; 
+    }
   }
 }
 
-label {
-  width: 40px;
-  display: inline-block
-  }
-  
-  input.ng-touched.ng-invalid{
-    border-color: red;
-  }
+

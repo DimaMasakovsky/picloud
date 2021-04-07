@@ -1,21 +1,20 @@
 @import '../../styles.scss';
 
-.search-wrapper {
-  @include flex-center(row);
-  justify-content: flex-start;
-  background-color: map-get($colors, background);
+:host {
+  @include justify-align-direction(flex-start, center, row);
+
+  background-color: color(background);
   padding: 0.5rem;
-  border: 1px solid #B0B0B0;
-  border-radius: 5px;
-  flex-grow: 3;
+  border: 0.1rem solid #B0B0B0;
+  border-radius: 0.5rem;
   
   input {
-    background-color: map-get($colors, background);
+    background-color: color(background);
     border: none;
     outline: none;
     padding: 0;
     font-family: $font-main;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     width: 100%;
   }
   .icon-wrapper {

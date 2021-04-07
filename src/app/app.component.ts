@@ -10,15 +10,11 @@ import { ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Picloud';
+
+  public title: string ='Picloud';
+
   constructor (private firestore: AngularFirestore, public authService: AuthService, public router: Router) {
   }
   ngOnInit() : void {
-    this.firestore.collection("heroes").valueChanges().subscribe(value => {
-      //console.log(value);    
-    }); 
-  } 
-  isLoginPage() : boolean {
-    return this.router.url === "/login";
   }
 }

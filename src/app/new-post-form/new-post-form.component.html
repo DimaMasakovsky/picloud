@@ -1,19 +1,31 @@
-<form [formGroup]="postForm" (submit)="onSubmit()" class="form-wrapper">
-  <div class="form-label-input-wrapper">
+<form [formGroup]="postForm" (submit)="onSubmit()">
+  <div class="label-input-wrapper">
     <label for="textContent">What's new?</label>
     <input type="text" id="text-content" formControlName="textContent" placeholder="What's new?"/>
   </div>
-  
-  <div class="form-footer">
-    <div class="form-footer-item form-label-input-wrapper">
+  <ul class="form-footer">
+    <li class="label-input-wrapper">
       <label for="contentPicURL">Pic URL</label>
       <input type="text" id="content-pic-url" formControlName="contentPicURL" placeholder="Pic URL"/>
-    </div>
-    <div class="form-footer-item form-label-input-wrapper">
+    </li>
+    <li class="label-input-wrapper">
       <label for="tag">Tag</label>
       <input type="text" id="tag" formControlName="tag" placeholder="Tag"/>
-    </div>    
-    <button type="submit">Post!</button>   
-  </div>
-  
+    </li>
+    <li class="label-input-wrapper">
+      <button type="submit">Post!</button>  
+    </li>
+  </ul>  
 </form>
+<!-- 
+<div class="form-group col-12">
+  <input type="file"
+         id="file"
+         #userPhoto
+         (change)="onFileSelected($event)"
+         name="image"
+         autocomplete="off"
+  />
+</div>
+<img  *ngIf="imageLink" [src]="imageLink" width="500" height="600"/>
+<progress max="100" [value]="progress" ></progress> -->

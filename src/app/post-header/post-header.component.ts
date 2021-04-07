@@ -7,8 +7,11 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./post-header.component.scss']
 })
 export class PostHeaderComponent implements OnInit {  
-  @Input() userID: string;
-  @Input() createTime: {seconds: string};
+  @Input()
+  public userID: string;
+
+  @Input()
+  public createTime: {seconds: string};
 
   public user: any; 
 
@@ -19,7 +22,8 @@ export class PostHeaderComponent implements OnInit {
     
   }
   public getBackgroundImage(): string {
-    return `url(${this.user?.profilePicURL})`;
+    // sign ? 
+    return `url(${this.user.profilePicURL})`;
   }
   public getDate(): string { 
     const months: string[] = ['January','February','March','April','May','June','July','August','September','October','November','December'] 

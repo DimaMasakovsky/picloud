@@ -1,9 +1,18 @@
-<div class="post-header-wrapper">
-  <div class="post-profile-image-wrapper">
-    <div class="post-profile-image" [style.backgroundImage]="getBackgroundImage()"></div>
-  </div>
-  <div class="post-profile-info-wrapper">
-    <p class="post-profile-name">{{user?.name}}</p>
-    <p class="post-profile-date">{{getDate()}}</p>
-  </div>        
+<div class="image-wrapper">
+  <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
+  </ng-container>
 </div>
+<div class="info-wrapper">
+  <!-- sign - ?  -->
+  <p class="name">{{user?.name}}</p>
+  <p class="date">{{getDate()}}</p>
+</div>        
+
+<ng-template #userImage>
+  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+</ng-template>
+
+
+<ng-template #defaultImage>
+  <div class="image"></div>
+</ng-template>

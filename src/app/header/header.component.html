@@ -1,17 +1,12 @@
-<div class="header-wrapper">
-  <div class="logo-wrapper">
-    <h1 class="logo">picloud</h1>
-  </div>  
-  <app-search></app-search>
-  <nav>
-    <ul class="nav-list-wrapper">
-      <li class="nav-list-item"><a>Home</a></li>
-      <li class="nav-list-item"><a>Profile</a></li>
-      <li> <button class="sign-out-window-button" 
-        (click)="signOut()">Sign Out</button></li>
-    </ul>
-    
-  </nav>
- 
- 
-</div>
+<div class="logo-wrapper">
+  <h1>picloud</h1>
+</div>  
+<app-search></app-search>
+<nav>
+  <ul>
+    <li><a>Home</a></li>
+    <li><a>Profile</a></li>
+    <li><button (click)="signOut()">Sign Out</button></li>
+  </ul>
+  
+</nav>

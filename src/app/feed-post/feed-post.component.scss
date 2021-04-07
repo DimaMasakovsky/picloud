@@ -3,8 +3,8 @@
 .post-image-wrapper {
   margin-top: 2rem;
   .post-image {
-    width: 55rem;
-    height: 55rem;
+    width: 50rem;
+    height: 25rem;
     border-radius: 0.5rem;
     background: #6558da;
     background-position: center;
@@ -12,27 +12,19 @@
   }
 }
 
-.post-footer-wrapper {
+.footer-wrapper {
+  @include justify-align-direction(space-between, center, row);
   margin-top: 2rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  .post-footer-stats-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    .stat-block-wrapper {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
+  ul {
+    @include justify-align-direction(flex-start, center, row);
+    li {
+      @include justify-align-direction(flex-start,center, row);
       font-size: 1.6rem;
-      color: map-get($colors , text-secondary-color);
+      color: color(text-secondary-color);
       font-family: $font-main;
+      margin-right:2rem;
       .stat-count {
-        margin: 0 2rem 0 1rem;
+        margin: 0 0.5rem;
       }
     }
   }
@@ -45,6 +37,5 @@
     border-radius: 3rem;
     background-color: #285A36;
     color: #ffffff;
-
   }
 }

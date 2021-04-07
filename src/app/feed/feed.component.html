@@ -1,8 +1,9 @@
-<div class="feed-wrapper">
-  <ul  class="post-list">
-    <app-new-post-form></app-new-post-form>
+<div class="grid">
+  <app-new-post-form></app-new-post-form>
+  <ul>
     <li *ngFor="let post of postsSubscription | async; trackBy:trackFunction" class="post-wrapper">
       <app-feed-post [post]="post"></app-feed-post>
     </li>
   </ul>
 </div>
+

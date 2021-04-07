@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { combineLatest } from 'rxjs';
+import { takeWhile, tap } from 'rxjs/operators';
 import { CrudService} from '../services/crud.service';
-
+import { UploadService} from '../services/upload.service';
 @Component({
   selector: 'app-new-post-form',
   templateUrl: './new-post-form.component.html',
@@ -9,8 +11,10 @@ import { CrudService} from '../services/crud.service';
 })
 export class NewPostFormComponent implements OnInit {
   public postForm: FormGroup; 
+  public imageLink: string; 
+  public progress: string; 
 
-  constructor(private fb:  FormBuilder, private crudService: CrudService) { }
+  constructor(private fb:  FormBuilder, private crudService: CrudService, private uploadService: UploadService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -56,4 +60,15 @@ export class NewPostFormComponent implements OnInit {
     }
   }
 
+  // public onFileSelected(event): void {
+  //   const file = event.target.files[0];
+  //   combineLatest(this.uploadService.uploadFile("test", file)).pipe(
+  //     tap(([percent,link])=>{
+  //       this.progress = percent.toString();
+  //       this.imageLink = link;
+  //     }),
+  //     takeWhile(([percent, link]) =>!link)
+  //   ).subscribe(([percent, link])=> (console.log([percent, link])))
+  //   console.log(file);
+  // } 
 }
