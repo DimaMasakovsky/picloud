@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
       return this.authService.user$.pipe(
-        map((value) => !!value),
+        map(value => !!value),
         tap((isAuth) => {
           if (!isAuth) {
             console.log('User in not authorized');

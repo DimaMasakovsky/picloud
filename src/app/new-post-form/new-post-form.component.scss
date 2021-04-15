@@ -13,14 +13,31 @@ form {
 
   font-size: 1.6rem;
   font-weight: 500;
-
+  @include desktop-medium{
+    width: 50rem;
+    position: unset;
+  }
+  ul {
+    @include justify-align-direction(center, stretch, column);
+  }
+  li {
+    @include justify-align-direction(center, flex-start, column);
+    margin-bottom: 2rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .wrapper {
+    @include justify-align-direction(space-between, center,row);
+  }
   label {
     margin-bottom: 0.5rem;
   }
   button {
-    height: 3rem;
-    padding: 0.5rem 1.5rem;
+    height: 2.4rem;
+    padding: 0.1rem 1.5rem;
 
+    cursor: pointer;
     color: #ffffff;
     background-color: color(accent);
     border: 0.1rem solid color(accent);
@@ -39,24 +56,24 @@ form {
     font-size: 1.6rem;
     width: 100%;
   }
-  #text-content {
-    width: 100%;
-  }
-  .form-footer {
-    @include justify-align-direction(space-between, flex-end, row);
-    margin-top: 2rem;
-  }
-  .label-input-wrapper {
-    @include justify-align-direction(center, flex-start, column);
-  }
-  li {
-    margin-right: 2rem;
-    &:last-child {
-      margin-right: 0;
-    }
+}
+
+#hidden-file-input {
+  display: none;
+}
+.upload {
+  cursor: pointer;
+  display: inline-block;
+  &:hover { 
+    color: color(accent); 
   }
 }
 
+img { 
+  width: 100%;
+  height: auto;
+  margin-top: 2rem;
+}
 input.ng-touched.ng-invalid{
   border-color: red;
 }

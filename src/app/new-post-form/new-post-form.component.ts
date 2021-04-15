@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { combineLatest } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { combineLatest, Subscription } from 'rxjs';
+import { switchMap, takeLast, takeWhile, tap } from 'rxjs/operators';
+import { User } from '../interfaces';
+import { AuthService } from '../services/auth.service';
 import { CrudService} from '../services/crud.service';
 import { UploadService} from '../services/upload.service';
 @Component({
@@ -9,15 +11,28 @@ import { UploadService} from '../services/upload.service';
   templateUrl: './new-post-form.component.html',
   styleUrls: ['./new-post-form.component.scss']
 })
-export class NewPostFormComponent implements OnInit {
+export class NewPostFormComponent implements OnInit, OnDestroy {
   public postForm: FormGroup; 
   public imageLink: string; 
-  public progress: string; 
+  public progress: string = ""; 
+  public currentUserData: User; 
+  private subscriptions: Array<Subscription> = []; 
 
-  constructor(private fb:  FormBuilder, private crudService: CrudService, private uploadService: UploadService) { }
+  constructor(
+    private fb:  FormBuilder, 
+    private authService: AuthService, 
+    private crudService: CrudService, 
+    private uploadService: UploadService
+    ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.subscriptions.push(
+      this.crudService.getCurrentUserData().subscribe(value => this.currentUserData = value)
+    );    
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
   private initForm(): void {
     this.postForm = this.fb.group({
@@ -30,45 +45,56 @@ export class NewPostFormComponent implements OnInit {
         Validators.required,
         Validators.pattern(/[A-z]/)
       ]],
-      contentPicURL: ['', [
+      file:['',[
         Validators.required
       ]]
     })
-  }
-  private isControlInvalid(controlName: string): boolean {
-    const control = this.postForm.controls[controlName];
-
-    const result = control.invalid && control.touched;
-
-    return result;
   }
   public onSubmit(): void {
     const controls = this.postForm.controls;
 
     if (this.postForm.valid) {
       const data = { 
-        author: "G2avpGZZyj2KzGZRFkM7",
+        author: this.currentUserData.uid,
         commentCount: 0,
         comments: [],
         createTime: {seconds: Date.now()},
         likeCount: 0,
-        contentPicURL: controls["contentPicURL"].value,
+        contentPicURL: this.imageLink,
         tag: controls["tag"].value,
         textContent: controls["textContent"].value     
       }
-      this.crudService.createEntity("posts", data).subscribe(() => this.postForm.reset());
+      this.subscriptions.push(
+        this.crudService.createEntity('posts', data).pipe(
+          tap((postID) =>this.currentUserData.postsCount = this.currentUserData.posts.push(postID)),
+          switchMap(() => this.crudService.updateObject('users', this.currentUserData.uid, {
+            posts: this.currentUserData.posts,
+            postsCount: this.currentUserData.postsCount
+          })),
+          tap(() => this.resetForm())
+        ).subscribe()
+      );      
     }
   }
 
-  // public onFileSelected(event): void {
-  //   const file = event.target.files[0];
-  //   combineLatest(this.uploadService.uploadFile("test", file)).pipe(
-  //     tap(([percent,link])=>{
-  //       this.progress = percent.toString();
-  //       this.imageLink = link;
-  //     }),
-  //     takeWhile(([percent, link]) =>!link)
-  //   ).subscribe(([percent, link])=> (console.log([percent, link])))
-  //   console.log(file);
-  // } 
+  public onFileSelected(event): void {
+    const file = event.target.files[0];
+
+    this.subscriptions.push(
+      combineLatest(this.uploadService.uploadFile("test", file)).pipe(
+        tap(([percent,link])=>{
+          this.progress = percent.toString();
+          this.imageLink = link;
+        }),
+        takeWhile(([percent, link]) =>!link)
+      ).subscribe()
+    )
+    
+  } 
+  public resetForm(): void {
+    this.postForm.reset();
+    this.imageLink = null; 
+    this.progress = "";
+  }
+  
 }

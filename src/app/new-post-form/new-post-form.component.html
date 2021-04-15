@@ -1,31 +1,29 @@
 <form [formGroup]="postForm" (submit)="onSubmit()">
-  <div class="label-input-wrapper">
-    <label for="textContent">What's new?</label>
-    <input type="text" id="text-content" formControlName="textContent" placeholder="What's new?"/>
-  </div>
-  <ul class="form-footer">
-    <li class="label-input-wrapper">
-      <label for="contentPicURL">Pic URL</label>
-      <input type="text" id="content-pic-url" formControlName="contentPicURL" placeholder="Pic URL"/>
+  <ul>
+    <li>
+      <label for="textContent">What's new?</label>
+      <input type="text" id="text-content" formControlName="textContent" placeholder="What's new?"/>
     </li>
-    <li class="label-input-wrapper">
+    <li>
       <label for="tag">Tag</label>
       <input type="text" id="tag" formControlName="tag" placeholder="Tag"/>
     </li>
-    <li class="label-input-wrapper">
+    <li class="wrapper">
+      <span class="material-icons upload" (click)="hiddenfileinput.click()">image</span>
+      <progress max="100" min="0" [value]="progress"></progress> 
       <button type="submit">Post!</button>  
     </li>
-  </ul>  
-</form>
-<!-- 
-<div class="form-group col-12">
+  </ul>
+  <img  *ngIf="imageLink" [src]="imageLink"/> 
   <input type="file"
-         id="file"
-         #userPhoto
+         formControlName="file"
+         id="hidden-file-input"
          (change)="onFileSelected($event)"
          name="image"
          autocomplete="off"
-  />
-</div>
-<img  *ngIf="imageLink" [src]="imageLink" width="500" height="600"/>
-<progress max="100" [value]="progress" ></progress> -->
+         #hiddenfileinput
+      />
+</form>
+
+  
+

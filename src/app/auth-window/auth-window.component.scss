@@ -1,20 +1,18 @@
 @import '../../styles.scss';
 
-.auth-wrapper {
+:host {
+  @include justify-align-direction(flex-start,center, row);
+
   background-color: rgba(0,0,0,0.5) ;
   background-image: url(https://images.unsplash.com/photo-1503022584968-edbf200e0fb1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80);
   background-position: center;
   background-size: cover;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   height: 100vh;
 
   .auth-text-wrapper {
-    display: flex;
-    flex-direction: column;
+    @include justify-align-direction(none, flex-start, column);
+   
     margin: 0 1rem;
-    align-items: flex-start;
     margin-left: 20%;
 
     h2 {
@@ -33,15 +31,11 @@
       margin: 1rem 0;
       text-shadow: black 0 0.1rem 1.5rem;
     }
-
-  }
-  .auth-button-wrapper { 
-    @include flex-center(row);
-    margin-top: 3rem;
   }
 }
 
-.google-sign-in-button {
+button {
+  margin-top: 3rem;
   padding: 1rem;
   width: 20rem;
   font-family: $font-main;

@@ -21,6 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'profile',
+    redirectTo: 'feed',
+  },
+  {
+    path: 'profile/:id',
     component: ProfileComponent, 
     canActivate: [AuthGuard]
   },

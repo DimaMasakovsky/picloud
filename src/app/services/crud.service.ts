@@ -1,23 +1,24 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentSnapshot} from '@angular/fire/firestore';
 import {from, Observable, of} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {map, take, switchMap} from 'rxjs/operators';
 import firebase from 'firebase';
 import DocumentReference = firebase.firestore.DocumentReference;
+import { User, Post } from '../interfaces';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
-  constructor(private firestoreService: AngularFirestore) { }
+  constructor(private firestoreService: AngularFirestore, private authService: AuthService) { }
 
-  public getObjectByRef(collectionName: string, id:string): Observable<any> {
+  public getObjectByRef(collectionName: string, id:string): Observable<Post | User | any> {
     return this.firestoreService.collection(collectionName).doc(id).get().pipe(
       map(doc => doc.data()), 
       take(1)
     );
   }
-
   public createEntity(collectionName: string, data: {}): Observable<string> {
     return from(this.firestoreService.collection(collectionName).add(data)).pipe(
       map((value: DocumentReference) => value.id),
@@ -53,5 +54,13 @@ export class CrudService {
   }
   public deleteObject(collectionName: string, id: string): Observable<unknown> {
     return from(this.firestoreService.collection(collectionName).doc(id).delete()).pipe(take(1));
+  }
+  public getCurrentUserData(): any {
+    return this.authService.user$.pipe(
+      map(value => value.uid),
+      switchMap(uid => {
+        return this.firestoreService.collection('users').doc(uid).valueChanges();
+      })
+    )
   }
 }

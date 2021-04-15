@@ -28,7 +28,7 @@
       margin-top: 0.5rem;
       font-family: $font-main;
       font-size: 1.4rem;
-      color: map-get($colors , text-secondary-color)
+      color: color(text-secondary);
     }
   }
   

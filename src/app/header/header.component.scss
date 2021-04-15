@@ -1,5 +1,6 @@
 @import '../../styles.scss';
 
+
 :host {
   position: fixed;
   top: 0;
@@ -14,13 +15,13 @@
   background: #FFFFFF;
   box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.25);  
   nav {
-    margin: 0 2rem;
+    margin: 0 0.5rem;
     ul { 
       @include justify-align-direction(space-around, center, row);
   
       li {
         font-size: 1.4rem;
-        margin: 0 1rem;
+        margin: 0 0.5rem;
       }
     }
   }
@@ -32,13 +33,12 @@
       font-size: 2.4rem;
       font-family: $font-secondary;
       font-weight: 700;
-      margin: 0 1rem;
     }
   }
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 1rem;
   background: #FFFFFF;
   outline: none;
   border: 0.1rem solid black;

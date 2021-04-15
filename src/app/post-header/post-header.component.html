@@ -3,8 +3,7 @@
   </ng-container>
 </div>
 <div class="info-wrapper">
-  <!-- sign - ?  -->
-  <p class="name">{{user?.name}}</p>
+  <p class="name" (click)="this.router.navigate(['/profile', this.userID])">{{user?.displayName}}</p>
   <p class="date">{{getDate()}}</p>
 </div>        
 

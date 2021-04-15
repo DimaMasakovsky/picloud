@@ -18,6 +18,9 @@ import { FeedPostComponent } from './feed-post/feed-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostHeaderComponent } from './post-header/post-header.component';
 import { NewPostFormComponent } from './new-post-form/new-post-form.component';
+import { ZoomDirective } from './zoom.directive';
+import { DoubleContentDirective } from './double-content.directive';
+import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,10 @@ import { NewPostFormComponent } from './new-post-form/new-post-form.component';
     SearchComponent,
     FeedPostComponent,
     PostHeaderComponent,
-    NewPostFormComponent
+    NewPostFormComponent,
+    ZoomDirective,
+    DoubleContentDirective,
+    ProfileHeaderComponent
   ],
   imports: [
     BrowserModule,

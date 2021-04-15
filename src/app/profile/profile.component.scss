@@ -1,0 +1,18 @@
+@import '../../styles.scss';
+
+
+:host {
+  @include justify-align-direction(stretch, stretch, column);
+  min-height: 100vh;
+  background-color: color(background);
+  
+
+  .wrapper {
+    margin: 0 auto;
+    margin-top: 4.2rem;
+  }
+}
+h1 {
+  color: black; 
+  font-size: 5.4rem;
+}

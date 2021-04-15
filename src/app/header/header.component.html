@@ -4,8 +4,8 @@
 <app-search></app-search>
 <nav>
   <ul>
-    <li><a>Home</a></li>
-    <li><a>Profile</a></li>
+    <li><a routerLink="/feed">Home</a></li>
+    <li><a routerLink="/profile/{{userID}}">Profile</a></li>
     <li><button (click)="signOut()">Sign Out</button></li>
   </ul>
   

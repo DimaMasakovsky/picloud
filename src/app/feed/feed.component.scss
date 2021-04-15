@@ -1,16 +1,19 @@
 @import '../../styles.scss';
 
 :host {
-  min-height: 100vh;
   @include justify-align-direction(flex-start, center,column);
-  
+  min-height: 100vh;  
   background: color(background);
 
   .grid {
-    padding-top: 4.2rem;
+    margin-top: 4.2rem;
     display: grid;
     grid-template-columns: auto auto; 
     grid-column-gap: min(3vw,8rem);
+    @include desktop-medium { 
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto; 
+    }
   }
   ul {
     @include justify-align-direction(none, center, column);

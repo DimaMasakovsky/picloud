@@ -1,7 +1,7 @@
 @import '../../styles.scss';
 
-.footer-wrapper { 
-  @include flex-center(row);
+:host { 
+  @include justify-align-direction(center, center, row);
   position: fixed;
   width: 8rem;
   height: 4rem;
