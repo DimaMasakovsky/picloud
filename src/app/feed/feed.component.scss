@@ -1,23 +1,35 @@
 @import '../../styles.scss';
 
 :host {
-  @include justify-align-direction(flex-start, center,column);
+  @include justify-align-direction(center, center, none);
   min-height: 100vh;  
+  width: 100%;
   background: color(background);
-
-  .grid {
-    margin-top: 4.2rem;
-    display: grid;
-    grid-template-columns: auto auto; 
-    grid-column-gap: min(3vw,8rem);
+  
+  .wrapper {
+    @include justify-align-direction(center,flex-start,row);
+    margin: 0 0.5rem;
+    margin-top: 4.2rem + 1.5rem;
+    width: 100%;
+    .gap {
+      width: 3%;
+    }
     @include desktop-medium { 
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto; 
+      @include justify-align-direction(flex-start,center,column);
+    }
+    
+    aside {
+      @include justify-align-direction(stretch, flex-start, column);
+      position: sticky;
+      top: 4.2rem + 1.5rem;
+      @include desktop-medium {
+        position: unset;
+        margin-bottom: 1.5rem;
+      }
     }
   }
   ul {
     @include justify-align-direction(none, center, column);
-    margin-top: 1.5rem;
     li {
       background: #ffffff;
       margin-bottom: 1.5rem;

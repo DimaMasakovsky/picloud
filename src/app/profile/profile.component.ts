@@ -9,10 +9,11 @@ import { User } from '../interfaces';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  
+
   private userID: string; 
   public user: User;
   private subscriptions: Array<Subscription> = [];
+  public postsSubscription: any; 
 
   constructor(
     private route: ActivatedRoute,
@@ -22,11 +23,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+    this.postsSubscription = this.crudService.handleData('posts');
     this.subscriptions.push(
-      this.crudService.getObjectByRef('users', this.userID).subscribe(value => this.user = value)
+      this.crudService.getObjectByRef('users', this.userID).subscribe((value) => {
+        this.user = value;
+      })
     );
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+  public trackFunction(index: any, item: any): string {
+    return item.id;
   }
 }

@@ -1,0 +1,48 @@
+@import '../../styles.scss';
+
+:host{ 
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  .wrapper {
+    padding: 2rem;
+    @include justify-align-direction(flex-start, center,row);
+  }
+  section {
+    margin: 0 2rem;
+    h2 {
+      font-family: $font-secondary;
+      font-weight: 600;
+      font-size: 2.4rem;
+    }
+    ul {
+      @include justify-align-direction(space-between, center, row);
+      margin-top: 1rem;
+      li {
+        margin-right: 2rem;
+        h6 {
+          font-family: $font-main;
+          font-size: 2rem;
+        }
+        span {
+          font-family: $font-main;
+          font-size: 1.6rem;
+          color: color(text-secondary);
+        }
+      }
+      
+    }
+  }
+  
+}
+
+.image-wrapper {
+  .image {
+    background: blanchedalmond;
+    background-position: center;
+    background-size: cover;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 0.5rem;
+  }
+}

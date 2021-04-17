@@ -1,4 +1,11 @@
 <div class="wrapper">
-  <h1>{{user.uid}}</h1>
+  <app-profile-header [user]="user"></app-profile-header>
+  <ul>
+    <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction;">
+      <li *ngIf="user?.posts.includes(post.id)">
+        <app-profile-post [post]="post"></app-profile-post>
+      </li>
+    </ng-container>    
+  </ul>
 </div>
 

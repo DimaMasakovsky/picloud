@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../interfaces';
 
 @Component({
   selector: 'app-profile-header',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileHeaderComponent implements OnInit {
 
+  @Input() 
+  public user : User; 
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  public getBackgroundImage(): string {
+    return `url(${this.user.photoURL})`;
+  }
 }

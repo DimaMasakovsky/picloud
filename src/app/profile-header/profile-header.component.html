@@ -1,1 +1,33 @@
-<p>profile-header works!</p>
+<div class="wrapper">
+  <div class="image-wrapper">
+    <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
+    </ng-container>
+  </div>
+  <section>
+    <h2>{{user?.displayName}}</h2>
+    <ul>
+      <li>
+        <h6>{{user?.postsCount}}</h6>
+        <span>posts</span>
+      </li>
+      <li>
+        <h6>{{user?.followersCount}}</h6>
+        <span>followers</span>
+      </li>
+      <li>
+        <h6>{{user?.followingCount}}</h6>
+        <span>following</span>
+      </li>
+    </ul>
+  </section>
+</div>
+
+
+
+
+<ng-template #userImage>
+  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+</ng-template>
+<ng-template #defaultImage>
+  <div class="image"></div>
+</ng-template>

@@ -26,11 +26,28 @@ export class AuthService {
       tap((authUser: auth.UserCredential) => {
         firebase.auth().onAuthStateChanged(user => {
           if (user) {
-            this.db.collection('users').doc(user.uid).update({
-              uid: user.uid,
-              displayName: user.displayName,
-              photoURL: user.photoURL
+            this.db.collection('users').doc(user.uid).get().subscribe(value => {
+              if (value.exists) {
+                this.db.collection('users').doc(user.uid).update({
+                  uid: user.uid,
+                  displayName: user.displayName,
+                  photoURL: user.photoURL,
+                  email: user.email
+                });
+              } else {
+                this.db.collection('users').doc(user.uid).set({
+                  uid: user.uid,
+                  displayName: user.displayName,
+                  photoURL: user.photoURL,
+                  email: user.email, 
+                  posts: [],
+                  postsCount: 0,
+                  followersCount: 0,
+                  followingCount: 0
+                });
+              }
             });
+            
           }
         })
       }),

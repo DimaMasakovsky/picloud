@@ -14,8 +14,9 @@ export interface Post {
   commentCount: number, 
   comments: Array<string>, 
   contentPicURL: string, 
-  createTime: Map<string, number>,
+  createTime: {seconds: Number},
   likeCount: number, 
-  tags: Array<string>,
+  tag: Array<string>,
   textContent: string
+  id?: string 
 }

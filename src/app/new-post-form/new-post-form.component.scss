@@ -1,13 +1,12 @@
 @import '../../styles.scss';
 
-
+:host {
+  width: 100%;
+}
 form {
-  position: sticky;
-  top: 5.7rem;
   padding: 2rem;
   margin-top: 1.5rem;
-  width: 35rem;
-
+  
   border-radius: 0.5rem;
   background-color: #ffffff;
 
@@ -15,7 +14,6 @@ form {
   font-weight: 500;
   @include desktop-medium{
     width: 50rem;
-    position: unset;
   }
   ul {
     @include justify-align-direction(center, stretch, column);

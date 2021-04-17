@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { combineLatest, Subscription } from 'rxjs';
-import { switchMap, takeLast, takeWhile, tap } from 'rxjs/operators';
-import { User } from '../interfaces';
+import { finalize, switchMap, takeLast, takeWhile, tap } from 'rxjs/operators';
+import { Post, User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
 import { CrudService} from '../services/crud.service';
 import { UploadService} from '../services/upload.service';
@@ -28,7 +28,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe(value => this.currentUserData = value)
+      this.crudService.getCurrentUserData().subscribe((value : User)=> this.currentUserData = value)
     );    
   }
   ngOnDestroy(): void {
@@ -38,12 +38,12 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     this.postForm = this.fb.group({
       textContent: ['', [
         Validators.required,
-        Validators.pattern(/[A-z]/)
+        Validators.pattern(/[ -~]/)
         // Change the validators
       ]],
       tag:['', [
         Validators.required,
-        Validators.pattern(/[A-z]/)
+        Validators.pattern(/[a-z0-9_-]/)
       ]],
       file:['',[
         Validators.required
@@ -52,9 +52,8 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
   }
   public onSubmit(): void {
     const controls = this.postForm.controls;
-
     if (this.postForm.valid) {
-      const data = { 
+      const data: Post = { 
         author: this.currentUserData.uid,
         commentCount: 0,
         comments: [],
@@ -63,7 +62,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
         contentPicURL: this.imageLink,
         tag: controls["tag"].value,
         textContent: controls["textContent"].value     
-      }
+      } as Post
       this.subscriptions.push(
         this.crudService.createEntity('posts', data).pipe(
           tap((postID) =>this.currentUserData.postsCount = this.currentUserData.posts.push(postID)),
@@ -71,7 +70,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
             posts: this.currentUserData.posts,
             postsCount: this.currentUserData.postsCount
           })),
-          tap(() => this.resetForm())
+          finalize(() => this.resetForm())
         ).subscribe()
       );      
     }

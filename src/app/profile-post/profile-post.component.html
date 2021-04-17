@@ -1,0 +1,10 @@
+<ng-container [ngTemplateOutlet]="post ? userImage : defaultImage">
+</ng-container>
+
+
+<ng-template #userImage>
+  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+</ng-template>
+<ng-template #defaultImage>
+  <div class="image"></div>
+</ng-template>

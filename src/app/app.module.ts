@@ -21,6 +21,7 @@ import { NewPostFormComponent } from './new-post-form/new-post-form.component';
 import { ZoomDirective } from './zoom.directive';
 import { DoubleContentDirective } from './double-content.directive';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
+import { ProfilePostComponent } from './profile-post/profile-post.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { ProfileHeaderComponent } from './profile-header/profile-header.componen
     NewPostFormComponent,
     ZoomDirective,
     DoubleContentDirective,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    ProfilePostComponent
   ],
   imports: [
     BrowserModule,
