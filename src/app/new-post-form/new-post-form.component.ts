@@ -72,7 +72,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
           })),
           finalize(() => this.resetForm())
         ).subscribe()
-      );      
+      );      ``
     }
   }
 
@@ -94,6 +94,5 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     this.postForm.reset();
     this.imageLink = null; 
     this.progress = "";
-  }
-  
+  }  
 }
