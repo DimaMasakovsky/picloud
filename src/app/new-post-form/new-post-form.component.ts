@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, switchMap, takeLast, takeWhile, tap } from 'rxjs/operators';
 import { Post, User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
 import { CrudService} from '../services/crud.service';
+import { CustomValidationService } from '../services/custom-validation.service';
 import { UploadService} from '../services/upload.service';
 @Component({
   selector: 'app-new-post-form',
@@ -13,7 +15,7 @@ import { UploadService} from '../services/upload.service';
 })
 export class NewPostFormComponent implements OnInit, OnDestroy {
   public postForm: FormGroup; 
-  public imageLink: string; 
+  public imageLink: string = ""; 
   public progress: string = ""; 
   public currentUserData: User; 
   private subscriptions: Array<Subscription> = []; 
@@ -22,7 +24,9 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     private fb:  FormBuilder, 
     private authService: AuthService, 
     private crudService: CrudService, 
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private toast: ToastrService,
+    private customValidation: CustomValidationService
     ) { }
 
   ngOnInit(): void {
@@ -39,7 +43,6 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
       textContent: ['', [
         Validators.required,
         Validators.pattern(/[ -~]/)
-        // Change the validators
       ]],
       tag:['', [
         Validators.required,
@@ -47,8 +50,12 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
       ]],
       file:['',[
         Validators.required
+      ]],
+      fileUpload: ['', [
+        Validators.required
       ]]
-    })
+    });
+    console.log(this.postForm);
   }
   public onSubmit(): void {
     const controls = this.postForm.controls;
@@ -70,9 +77,10 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
             posts: this.currentUserData.posts,
             postsCount: this.currentUserData.postsCount
           })),
+          tap(() => this.toast.success('Post created!')),
           finalize(() => this.resetForm())
         ).subscribe()
-      );      ``
+      );
     }
   }
 
@@ -85,14 +93,19 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
           this.progress = percent.toString();
           this.imageLink = link;
         }),
-        takeWhile(([percent, link]) =>!link)
-      ).subscribe()
-    )
+        takeWhile(([percent, link]) =>!link),
+      ).subscribe(([percent, link]) => {
+        if (percent == 100) this.postForm.controls.fileUpload.setValue(true);
+      })
+    );
     
   } 
   public resetForm(): void {
     this.postForm.reset();
-    this.imageLink = null; 
+    this.imageLink = ""; 
     this.progress = "";
   }  
+  public getBackgroundImage(): string {
+    return `url(${this?.imageLink})`;
+  }
 }

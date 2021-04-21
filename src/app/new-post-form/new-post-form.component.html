@@ -11,10 +11,10 @@
     <li class="wrapper">
       <span class="material-icons upload" (click)="hiddenfileinput.click()">image</span>
       <progress max="100" min="0" [value]="progress"></progress> 
-      <button type="submit">Post!</button>  
+      <button type="submit" [disabled]="!this.postForm.valid">Post!</button>  
     </li>
   </ul>
-  <img  *ngIf="imageLink" [src]="imageLink"/> 
+  <div  *ngIf="imageLink" class="image" [style.backgroundImage]="getBackgroundImage()"></div>  
   <input type="file"
          formControlName="file"
          id="hidden-file-input"

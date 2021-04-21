@@ -1,6 +1,6 @@
 // Style-rest
 @import './styles-reset.scss';
-
+@import '~ngx-toastr/toastr';
 
 @mixin justify-align-direction($justify, $align, $direction) {
   display: flex;
@@ -46,4 +46,17 @@ a {
   &:visited {
     color: inherit;
   }
+}
+.toast-message {
+  font-size: 1.6rem;
+  font-family: $font-secondary;
+  font-weight: 400;
+  border-radius: 0.5rem;
+}
+.toast-bottom-center {
+  bottom: 2rem;  
+}
+.toast-success {
+  background-color: color(accent); 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23ffffff'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3E%3C/svg%3E");
 }

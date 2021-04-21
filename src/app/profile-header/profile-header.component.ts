@@ -16,6 +16,6 @@ export class ProfileHeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   public getBackgroundImage(): string {
-    return `url(${this.user.photoURL})`;
+    return `url(${this.user?.photoURL})`;
   }
 }

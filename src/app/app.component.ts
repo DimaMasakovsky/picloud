@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { StorageService } from './services/storage.service';
 import { CrudService } from './services/crud.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -27,7 +28,7 @@ export class AppComponent {
   ngOnInit() : void {
     this.subscriptions.push(
       this.crudService.handleData("posts").subscribe((data) => this.storage.posts = data)
-    );
+    ); 
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
