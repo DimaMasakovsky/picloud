@@ -29,8 +29,14 @@ export class AppComponent {
     this.subscriptions.push(
       this.crudService.handleData("posts").subscribe((data) => this.storage.posts = data)
     ); 
+    console.table({
+      "23.04": this.ProjectUpdateData("Add console table", "link")
+    });
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+  }
+  ProjectUpdateData( description: string, commitLink: string) {
+    return {description: description, commitLink: commitLink}
   }
 }

@@ -6,7 +6,6 @@ import { finalize, switchMap, takeLast, takeWhile, tap } from 'rxjs/operators';
 import { Post, User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
 import { CrudService} from '../services/crud.service';
-import { CustomValidationService } from '../services/custom-validation.service';
 import { UploadService} from '../services/upload.service';
 @Component({
   selector: 'app-new-post-form',
@@ -25,8 +24,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     private authService: AuthService, 
     private crudService: CrudService, 
     private uploadService: UploadService,
-    private toast: ToastrService,
-    private customValidation: CustomValidationService
+    private toast: ToastrService
     ) { }
 
   ngOnInit(): void {

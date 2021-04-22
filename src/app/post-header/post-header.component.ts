@@ -34,8 +34,12 @@ export class PostHeaderComponent implements OnInit, OnDestroy {
   }
   public getDate(): string { 
     const months: string[] = ['January','February','March','April','May','June','July','August','September','October','November','December'] 
-    const d = new Date (this.createTime.seconds)
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()} `;
+    const d = new Date (this.createTime.seconds);
+    if (d.getMinutes() < 10) {
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} at ${d.getHours()}:0${d.getMinutes()} ` 
+    } else {
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()} ` 
+    }
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
