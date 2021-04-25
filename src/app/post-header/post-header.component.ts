@@ -1,46 +1,69 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { CrudService } from '../services/crud.service';
-import { Observable, of, Subscription } from 'rxjs'; 
+import { Observable, of, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CrudService } from '../services/crud.service';
 import { User } from '../interfaces';
 @Component({
   selector: 'app-post-header',
   templateUrl: './post-header.component.html',
-  styleUrls: ['./post-header.component.scss']
+  styleUrls: ['./post-header.component.scss'],
 })
-export class PostHeaderComponent implements OnInit, OnDestroy {  
+export class PostHeaderComponent implements OnInit, OnDestroy {
   @Input()
   public userID: string;
 
   @Input()
-  public createTime: {seconds: string};
+  public createTime: number;
 
-  public user: User; 
+  public user: User;
+
   private subscriptions: Array<Subscription> = [];
 
   constructor(
-    private crudService: CrudService, 
+    private crudService: CrudService,
     public router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.crudService.getObjectByRef('users', this.userID).subscribe((value) => this.user = value)
-    )
+      this.crudService.getObjectByRef('users', this.userID).subscribe((value) => {
+        this.user = value;
+      }),
+    );
   }
+
   public getBackgroundImage(): string {
-    // sign ? 
+    // sign ?
     return `url(${this.user.photoURL})`;
   }
-  public getDate(): string { 
-    const months: string[] = ['January','February','March','April','May','June','July','August','September','October','November','December'] 
-    const d = new Date (this.createTime.seconds);
+
+  public getDate(): string {
+    const months: string[] = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    const d = new Date(this.createTime);
     if (d.getMinutes() < 10) {
-      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} at ${d.getHours()}:0${d.getMinutes()} ` 
-    } else {
-      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()} ` 
+      return `${d.getDate()} ${
+        months[d.getMonth()]
+      } ${d.getFullYear()} at ${d.getHours()}:0${d.getMinutes()} `;
     }
+    return `${d.getDate()} ${
+      months[d.getMonth()]
+    } ${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()} `;
   }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }

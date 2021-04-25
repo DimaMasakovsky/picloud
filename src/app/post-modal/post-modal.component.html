@@ -1,0 +1,6 @@
+<div *ngIf="post">
+  <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
+  <div class="post-image-wrapper">
+    <div class="post-image" [style.backgroundImage]="getBackgroundImage()"></div>
+  </div>  
+</div>

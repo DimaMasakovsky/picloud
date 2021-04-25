@@ -23,12 +23,21 @@
       color: color(text-secondary-color);
       font-family: $font-main;
       margin-right:2rem;
+      span {
+        cursor: pointer;
+        &::selection {
+          color: none;
+          background: none;
+      }
+      }
       .stat-count {
         margin: 0 0.5rem;
       }
     }
   }
-
+  .liked {
+    color: color(liked);
+  }
   .post-footer-tag {
     padding: 0.5rem 1.5rem;
     font-size: 1.6rem;

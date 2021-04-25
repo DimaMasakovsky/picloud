@@ -4,17 +4,14 @@ import { User } from '../interfaces';
 @Component({
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
-  styleUrls: ['./profile-header.component.scss']
+  styleUrls: ['./profile-header.component.scss'],
 })
 export class ProfileHeaderComponent implements OnInit {
+  @Input()
+  public user: User;
 
-  @Input() 
-  public user : User; 
+  ngOnInit(): void {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
   public getBackgroundImage(): string {
     return `url(${this.user?.photoURL})`;
   }

@@ -12,12 +12,12 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    component: AuthWindowComponent, 
-    canActivate: [LoginGuard]
+    component: AuthWindowComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'profile',
@@ -25,18 +25,18 @@ const routes: Routes = [
   },
   {
     path: 'profile/:id',
-    component: ProfileComponent, 
-    canActivate: [AuthGuard]
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'feed',
     component: FeedComponent,
-    canActivate: [AuthGuard]
-  }
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
