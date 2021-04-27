@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -24,6 +25,10 @@ import { DoubleContentDirective } from './double-content.directive';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ProfilePostComponent } from './profile-post/profile-post.component';
 import { PostModalComponent } from './post-modal/post-modal.component';
+import { PostStatsComponent } from './post-stats/post-stats.component';
+import { CommentComponent } from './comment/comment.component';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +45,10 @@ import { PostModalComponent } from './post-modal/post-modal.component';
     ProfileHeaderComponent,
     ProfilePostComponent,
     PostModalComponent,
+    PostStatsComponent,
+    CommentComponent,
+    CustomDatePipe,
+    UrlParentesisPipe,
   ],
   entryComponents: [PostModalComponent],
   imports: [
@@ -50,6 +59,7 @@ import { PostModalComponent } from './post-modal/post-modal.component';
     AngularFireAuthModule,
     ReactiveFormsModule,
     MatDialogModule,
+    OverlayModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-center',

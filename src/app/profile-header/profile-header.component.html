@@ -1,24 +1,44 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="user">
   <div class="image-wrapper">
     <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
     </ng-container>
   </div>
-  <section>
-    <h2>{{user?.displayName}}</h2>
+  <section class="user-fields">
+    <h2>{{user.displayName}}</h2>
+    <p class="bio" *ngIf="!this.isEditing">{{user.bio}}</p>
+    <form *ngIf="this.isEditing" [formGroup]="updateProfileForm">
+      <input type="text" id="bio" formControlName="bio" [placeholder]="this.user.bio"/>
+      <button (click)="hiddenfileinput.click()">
+        <span class="material-icons upload">image</span>Set new profile picture
+      </button>
+      <progress max="100" min="0" [value]="progress"></progress>
+      <input type="file"
+         formControlName="file"
+         id="hidden-file-input"
+         (change)="onFileSelected($event)"
+         name="image"
+         autocomplete="off"
+         #hiddenfileinput
+      />
+    </form>
     <ul>
       <li>
-        <h6>{{user?.postsCount}}</h6>
+        <h6>{{user.postsCount}}</h6>
         <span>posts</span>
       </li>
       <li>
-        <h6>{{user?.followersCount}}</h6>
+        <h6>{{user.followersCount}}</h6>
         <span>followers</span>
       </li>
       <li>
-        <h6>{{user?.followingCount}}</h6>
+        <h6>{{user.followingCount}}</h6>
         <span>following</span>
       </li>
     </ul>
+  </section>
+  <section class="edit-controls">
+    <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
+    <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null" (click)="this.isEditing = false; onSubmit()">check</span>
   </section>
 </div>
 
@@ -26,7 +46,7 @@
 
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+  <div class="image" [style.backgroundImage]="this.user.photoURL | urlParentesis"></div>
 </ng-template>
 <ng-template #defaultImage>
   <div class="image"></div>

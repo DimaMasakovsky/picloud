@@ -38,6 +38,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add console table',
         'https://github.com/DimaMasakovsky/picloud/commit/0a2f9245acc45b834920cb9921f17b115fe02c72',
       ),
+      '25.04': this.ProjectUpdateData(
+        'Add post like feature',
+        'https://github.com/DimaMasakovsky/picloud/commit/0343c75f6d5c66a72fea955bc1472b4d19523bb2',
+      ),
     });
   }
 

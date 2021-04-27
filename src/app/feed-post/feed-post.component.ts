@@ -1,6 +1,7 @@
 import { isNgTemplate } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
 import { Observable, of, Subscription } from 'rxjs';
 import { Post, User } from '../interfaces';
 import { CrudService } from '../services/crud.service';
@@ -32,23 +33,12 @@ export class FeedPostComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
-  public deletePost(): void {
-    // this.crudService.deleteObject('posts', this.post.id);
-    this.dialog.open(PostModalComponent, { data: { postID: this.post.id }, width: '80%' });
-  }
-
-  public toggleLike(): void {
-    if (this.post.likes.includes(this.currentUserID)) {
-      this.post.likes.splice(this.post.likes.indexOf(this.currentUserID), 1);
-      this.post.likeCount -= 1;
-      this.crudService.updateObject('posts', this.post.id, this.post);
-    } else {
-      this.post.likeCount = this.post.likes.push(this.currentUserID);
-      this.crudService.updateObject('posts', this.post.id, this.post);
-    }
-  }
-
-  public getBackgroundImage(): string {
-    return `url(${this.post.contentPicURL})`;
+  public openModal(): void {
+    const dialogRef = this.dialog.open(PostModalComponent, {
+      data: { postID: this.post.id },
+      width: '80vw',
+      maxHeight: '90%',
+      hasBackdrop: true,
+    });
   }
 }

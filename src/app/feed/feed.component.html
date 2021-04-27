@@ -1,6 +1,6 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="user">
   <aside>
-    <app-profile-header [user]="user"></app-profile-header>
+    <app-profile-header [userID]="user.uid"></app-profile-header>
     <app-new-post-form></app-new-post-form>
   </aside> 
   <div class="gap">

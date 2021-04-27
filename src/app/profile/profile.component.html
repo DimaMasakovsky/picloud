@@ -1,5 +1,5 @@
-<div class="wrapper">
-  <app-profile-header [user]="user"></app-profile-header>
+<div class="wrapper" *ngIf="user">
+  <app-profile-header [userID]="user.uid"></app-profile-header>
   <ul>
     <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction;">
       <li *ngIf="user?.posts.includes(post.id)">

@@ -45,6 +45,7 @@ export class AuthService {
                     postsCount: 0,
                     followersCount: 0,
                     followingCount: 0,
+                    bio: '',
                   });
                 }
               });

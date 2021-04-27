@@ -1,6 +1,39 @@
-<div *ngIf="post">
+<mat-dialog-content *ngIf="post">
   <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
-  <div class="post-image-wrapper">
-    <div class="post-image" [style.backgroundImage]="getBackgroundImage()"></div>
+  <p>{{post.textContent}}</p>
+  <div class="image-wrapper">
+    <img [src]="this.post.contentPicURL" (click)="deletePost()">
   </div>  
-</div>
+  <app-post-stats [post]="post"></app-post-stats>
+  <ul class="users-liked" *ngIf="this.post.likeCount > 0">
+    <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">
+      <li *ngIf="post.likes.includes(user.uid)">
+        <div 
+          class="small-profile-pic" 
+          (click)="this.router.navigate(['/profile', user.uid]); this.matDialog.closeAll()" 
+          [style.backgroundImage]="user.photoURL | urlParentesis">
+        </div>
+      </li>
+    </ng-container>    
+  </ul>
+  <form [formGroup]="commentForm" (submit)="onSubmit()">
+    <ng-container [ngTemplateOutlet]="currentUser ? userImage : defaultImage">
+    </ng-container>
+    <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
+    <button type="submit" [disabled]="!this.commentForm.valid">Comment!</button>
+  </form>  
+  <ul class="comment-section">
+    <li *ngFor="let commentID of post.comments; trackBy:trackFunction" >
+      <app-comment [commentID]="commentID" [post]="post"></app-comment>
+    </li>
+  </ul>
+</mat-dialog-content>
+
+
+<ng-template #userImage>
+  <div class="image" [style.backgroundImage]="this.currentUser.photoURL | urlParentesis"></div>
+</ng-template>
+
+<ng-template #defaultImage>
+  <div class="image"></div>
+</ng-template>

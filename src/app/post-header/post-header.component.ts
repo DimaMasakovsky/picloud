@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable, of, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from '../services/crud.service';
@@ -23,6 +24,7 @@ export class PostHeaderComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     public router: Router,
     private route: ActivatedRoute,
+    public matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -31,37 +33,6 @@ export class PostHeaderComponent implements OnInit, OnDestroy {
         this.user = value;
       }),
     );
-  }
-
-  public getBackgroundImage(): string {
-    // sign ?
-    return `url(${this.user.photoURL})`;
-  }
-
-  public getDate(): string {
-    const months: string[] = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    const d = new Date(this.createTime);
-    if (d.getMinutes() < 10) {
-      return `${d.getDate()} ${
-        months[d.getMonth()]
-      } ${d.getFullYear()} at ${d.getHours()}:0${d.getMinutes()} `;
-    }
-    return `${d.getDate()} ${
-      months[d.getMonth()]
-    } ${d.getFullYear()} at ${d.getHours()}:${d.getMinutes()} `;
   }
 
   ngOnDestroy(): void {

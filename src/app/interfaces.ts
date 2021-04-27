@@ -6,6 +6,7 @@ export interface User {
   followersCount: number;
   followingCount: number;
   posts: Array<string>;
+  bio: string;
   uid: string;
 }
 
@@ -18,6 +19,13 @@ export interface Post {
   likeCount: number;
   likes: Array<string>;
   tag: Array<string>;
+  textContent: string;
+  id?: string;
+}
+
+export interface Commentary {
+  author: string;
+  createTime: number;
   textContent: string;
   id?: string;
 }

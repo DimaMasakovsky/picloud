@@ -1,0 +1,25 @@
+<div *ngIf="comment" class="comment-wrapper">
+  <section>
+    <ng-container [ngTemplateOutlet]="authorUser ? userImage : defaultImage">
+    </ng-container>
+    <div>
+      <p class="name" 
+      (click)="this.router.navigate(['/profile', this.authorUser.uid]); this.matDialog.closeAll()"
+      >{{authorUser?.displayName}}</p>
+      <p class="text-content">{{comment.textContent}}</p>  
+      <p class="date">{{comment.createTime | customDate}}</p>
+    </div>
+  </section>  
+  <span *ngIf="canDelete()" class="material-icons" (click)="deleteComment()">clear</span>
+</div>
+
+
+
+<ng-template #userImage>
+  <div class="image" [style.backgroundImage]="this.authorUser.photoURL | urlParentesis"></div>
+</ng-template>
+
+
+<ng-template #defaultImage>
+  <div class="image"></div>
+</ng-template>

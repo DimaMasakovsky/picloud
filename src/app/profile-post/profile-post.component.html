@@ -1,9 +1,9 @@
-<ng-container [ngTemplateOutlet]="post ? userImage : defaultImage">
+<ng-container [ngTemplateOutlet]="post ? userImage : defaultImage" >
 </ng-container>
 
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+  <div class="image" (click)="openModal()" [style.backgroundImage]="this.post.contentPicURL | urlParentesis"></div>
 </ng-template>
 <ng-template #defaultImage>
   <div class="image"></div>

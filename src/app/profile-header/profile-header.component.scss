@@ -4,16 +4,26 @@
   width: 100%;
   background-color: #ffffff;
   border-radius: 0.5rem;
+  
   .wrapper {
     padding: 2rem;
-    @include justify-align-direction(flex-start, center,row);
+    @include justify-align-direction(flex-start, flex-start,  row);
+    @include desktop-medium{
+      width: 50rem;
+    }
   }
-  section {
+  .user-fields {
     margin: 0 2rem;
     h2 {
       font-family: $font-secondary;
       font-weight: 600;
       font-size: 2.4rem;
+    }
+    .bio {
+      font-family: $font-main; 
+      font-size: 1.8rem; 
+      margin: 1rem 0;
+      word-wrap: break-word;
     }
     ul {
       @include justify-align-direction(space-between, center, row);
@@ -33,7 +43,51 @@
       
     }
   }
+  form {
+    @include justify-align-direction(flex-start, flex-start, column);
+    margin-top: 1rem;
+    width: 100%;
+    input {
+      width: 98%;
+      height: 2.5rem;
   
+      border-radius: 0.5rem;
+      border: 0.1rem solid rgb(238, 238, 238);
+      outline: none;
+      padding: 0.2rem;
+      font-size: 1.6rem;
+    }
+    button {
+      margin-top: 1rem;
+      @include justify-align-direction(center, center, row);
+      height: 3rem;
+      padding: 0.1rem 1.5rem;
+      width: 100%;  
+      cursor: pointer;
+      color: #ffffff;
+      background-color: color(accent);
+      border: 0.1rem solid color(accent);
+      outline: none;
+      border-radius: 0.5rem;
+      font-family: $font-main;
+      font-size: 1.6rem;  
+      &:disabled {
+        background-color: lighten(color(accent), 20%);
+        border: 0.1rem solid lighten(color(accent), 20%);
+      }
+      span {
+        color: #ffffff;
+        margin-right: 0.5rem;
+      }
+    }
+    progress {
+      margin-top: 1rem; 
+      width: 100%;
+    }
+  }
+  .edit-controls {
+    cursor: pointer;
+  }
 }
 
 .image-wrapper {
@@ -45,4 +99,8 @@
     height: 12rem;
     border-radius: 0.5rem;
   }
+}
+
+#hidden-file-input {
+  display: none;
 }

@@ -92,7 +92,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     const file = event.target.files[0];
 
     this.subscriptions.push(
-      combineLatest(this.uploadService.uploadFile('test', file))
+      combineLatest(this.uploadService.uploadFile('postPictures', file))
         .pipe(
           tap(([percent, link]) => {
             this.progress = percent.toString();
@@ -109,9 +109,5 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     this.postForm.reset();
     this.imageLink = '';
     this.progress = '';
-  }
-
-  public getBackgroundImage(): string {
-    return `url(${this?.imageLink})`;
   }
 }

@@ -3,12 +3,12 @@
   </ng-container>
 </div>
 <div class="info-wrapper">
-  <p class="name" (click)="this.router.navigate(['/profile', this.userID])">{{user?.displayName}}</p>
-  <p class="date">{{getDate()}}</p>
+  <p class="name" (click)="this.router.navigate(['/profile', this.userID]); this.matDialog.closeAll()">{{user?.displayName}}</p>
+  <p class="date">{{createTime | customDate}}</p>
 </div>        
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="getBackgroundImage()"></div>
+  <div class="image" [style.backgroundImage]="this.user.photoURL | urlParentesis"></div>
 </ng-template>
 
 

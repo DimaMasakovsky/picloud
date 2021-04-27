@@ -14,7 +14,7 @@
       <button type="submit" [disabled]="!this.postForm.valid">Post!</button>  
     </li>
   </ul>
-  <div  *ngIf="imageLink" class="image" [style.backgroundImage]="getBackgroundImage()"></div>  
+  <div  *ngIf="imageLink" class="image" [style.backgroundImage]="this.imageLink | urlParentesis"></div>  
   <input type="file"
          formControlName="file"
          id="hidden-file-input"

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { User } from '../interfaces';
 import { CrudService } from '../services/crud.service';
@@ -11,7 +11,7 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['./feed.component.scss'],
 })
 export class FeedComponent implements OnInit, OnDestroy {
-  public postsSubscription: any;
+  public postsSubscription: Observable<any>;
 
   public user: User;
 

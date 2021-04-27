@@ -1,18 +1,9 @@
 <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
-<div class="post-image-wrapper" (click)="deletePost()">
-  <div class="post-image" [style.backgroundImage]="getBackgroundImage()"></div>
+<div class="post-image-wrapper" (click)="openModal()">
+  <div class="post-image" [style.backgroundImage]="this.post.contentPicURL | urlParentesis"></div>
 </div>
 <div class="footer-wrapper">
-  <ul >
-    <li>
-      <span class="material-icons" (click)="toggleLike()" [class.liked]="this.post.likes.includes(this.currentUserID)">favorite</span>
-      <p class="stat-count" [class.liked]="this.post.likes.includes(this.currentUserID)">{{post.likeCount}}</p>
-    </li>
-    <li>
-      <span class="material-icons">chat_bubble</span>
-      <p class="stat-count">{{post.commentCount}}</p>
-    </li>
-  </ul>
+  <app-post-stats [post]="post"></app-post-stats>
   <div class="post-footer-tag">
     #{{post.tag}}
   </div>
