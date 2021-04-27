@@ -42,6 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add post like feature',
         'https://github.com/DimaMasakovsky/picloud/commit/0343c75f6d5c66a72fea955bc1472b4d19523bb2',
       ),
+      '27.04': this.ProjectUpdateData(
+        'Add comments, profile bio, profile pic uploading',
+        'https://github.com/DimaMasakovsky/picloud/commit/cd7187d9870451735322c8f2df9b3c6143e8cd83',
+      ),
     });
   }
 

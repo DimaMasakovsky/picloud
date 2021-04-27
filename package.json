@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~11.2.4",
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
+    "@angular/service-worker": "~11.2.4",
     "firebase": "^8.3.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
