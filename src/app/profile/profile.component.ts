@@ -22,7 +22,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.postsSubscription = this.crudService.handleData('posts');
+    this.postsSubscription = this.crudService.handleData('posts', {
+      fieldPath: 'createTime',
+      direction: 'desc',
+    });
     this.subscriptions.push(
       this.crudService.getObjectByRef('users', this.userID).subscribe((value) => {
         this.user = value;

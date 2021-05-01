@@ -53,9 +53,14 @@ export class CrudService {
       );
   }
 
-  public handleData<T>(collectionName: string): Observable<T[]> {
+  public handleData<T>(
+    collectionName: string,
+    orderFilter: { fieldPath: string; direction: firebase.firestore.OrderByDirection },
+  ): Observable<T[]> {
     return this.firestoreService
-      .collection(collectionName)
+      .collection(collectionName, (ref) =>
+        ref.orderBy(orderFilter.fieldPath, orderFilter.direction),
+      )
       .snapshotChanges()
       .pipe(
         map((actions) => {

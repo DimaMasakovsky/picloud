@@ -1,4 +1,4 @@
-<div *ngIf="comment" class="comment-wrapper">
+<div *ngIf="comment && currentUser" class="comment-wrapper">
   <section>
     <ng-container [ngTemplateOutlet]="authorUser ? userImage : defaultImage">
     </ng-container>

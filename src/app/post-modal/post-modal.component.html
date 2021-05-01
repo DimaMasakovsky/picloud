@@ -16,15 +16,20 @@
       </li>
     </ng-container>    
   </ul>
-  <form [formGroup]="commentForm" (submit)="onSubmit()">
+  <form [formGroup]="commentForm">
     <ng-container [ngTemplateOutlet]="currentUser ? userImage : defaultImage">
     </ng-container>
     <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
-    <button type="submit" [disabled]="!this.commentForm.valid">Comment!</button>
+    <button 
+      [disabled]="this.commentForm.invalid || this.commentIsUploading"
+      (click)="this.commentIsUploading = true; onSubmit()">Comment!</button>
   </form>  
   <ul class="comment-section">
-    <li *ngFor="let commentID of post.comments; trackBy:trackFunction" >
-      <app-comment [commentID]="commentID" [post]="post"></app-comment>
+    <li *ngFor="let comment of commentsSubscription | async; trackBy:trackFunction">
+      <app-comment 
+        [comment]="comment" 
+        [post]="post"
+        *ngIf="post.comments.includes(comment.id)"></app-comment>
     </li>
   </ul>
 </mat-dialog-content>

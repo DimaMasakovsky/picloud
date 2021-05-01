@@ -12,11 +12,9 @@ import { CrudService } from '../services/crud.service';
   styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent implements OnInit {
-  @Input() commentID: string;
+  @Input() comment: Commentary;
 
   @Input() post: Post;
-
-  public comment: Commentary;
 
   public authorUser: User;
 
@@ -30,17 +28,9 @@ export class CommentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.crudService
-      .getObjectByRef('comments', this.commentID)
-      .pipe(
-        tap((comment) => {
-          this.comment = comment;
-        }),
-        switchMap((comment) => this.crudService.getObjectByRef('users', comment.author)),
-      )
-      .subscribe((author: User) => {
-        this.authorUser = author;
-      });
+    this.crudService.getObjectByRef('users', this.comment.author).subscribe((author: User) => {
+      this.authorUser = author;
+    });
     this.crudService.getCurrentUserData().subscribe((value) => {
       this.currentUser = value;
     });
@@ -48,12 +38,12 @@ export class CommentComponent implements OnInit {
 
   public deleteComment(): void {
     if (this.canDelete()) {
-      this.post.comments.splice(this.post.comments.indexOf(this.commentID), 1);
+      this.post.comments.splice(this.post.comments.indexOf(this.comment.id), 1);
       this.crudService.updateObject('posts', this.post.id, {
         commentCount: (this.post.commentCount -= 1),
         comments: this.post.comments,
       });
-      this.crudService.deleteObject('comments', this.commentID);
+      this.crudService.deleteObject('comments', this.comment.id);
       this.toast.error('Comment deleted');
     }
   }

@@ -27,11 +27,13 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(
-      this.crudService.handleData('posts').subscribe((data) => {
-        this.storage.posts = data;
-      }),
-    );
+    // STORAGE
+    // this.subscriptions.push(
+    //   this.crudService.handleData('posts').subscribe((data) => {
+    //     this.storage.posts = data;
+    //   }),
+    // );
+
     // eslint-disable-next-line no-console
     console.table({
       '23.04': this.ProjectUpdateData(
@@ -45,6 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
       '27.04': this.ProjectUpdateData(
         'Add comments, profile bio, profile pic uploading',
         'https://github.com/DimaMasakovsky/picloud/commit/cd7187d9870451735322c8f2df9b3c6143e8cd83',
+      ),
+      '27.04-1': this.ProjectUpdateData(
+        'Add @angular/pwa',
+        'https://github.com/DimaMasakovsky/picloud/commit/1705a6293c07b9f057ff48d7b4055a53efb1b8c8',
       ),
     });
   }

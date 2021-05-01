@@ -22,7 +22,11 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   public userSubscription: Observable<Array<User>>;
 
+  public commentsSubscription: Observable<Array<Commentary>>;
+
   private subscriptions: Array<Subscription> = [];
+
+  public commentIsUploading = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -44,8 +48,15 @@ export class PostModalComponent implements OnInit, OnDestroy {
         this.currentUser = value;
       }),
     );
+    this.userSubscription = this.crudService.handleData('users', {
+      fieldPath: 'followersCount',
+      direction: 'desc',
+    });
+    this.commentsSubscription = this.crudService.handleData('comments', {
+      fieldPath: 'createTime',
+      direction: 'desc',
+    });
     this.initForm();
-    this.userSubscription = this.crudService.handleData('users');
   }
 
   ngOnDestroy(): void {
@@ -84,7 +95,10 @@ export class PostModalComponent implements OnInit, OnDestroy {
             }),
           ),
           tap(() => this.toast.success('Comment created')),
-          finalize(() => this.commentForm.reset()),
+          finalize(() => {
+            this.commentIsUploading = false;
+            this.commentForm.reset();
+          }),
         )
         .subscribe();
     }

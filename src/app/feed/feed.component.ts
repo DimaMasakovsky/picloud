@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { User } from '../interfaces';
 import { CrudService } from '../services/crud.service';
-import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-feed',
@@ -17,17 +15,13 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private crudService: CrudService, private storage: StorageService) {}
+  constructor(private crudService: CrudService) {}
 
   ngOnInit(): void {
-    this.postsSubscription = this.crudService.handleData('posts').pipe(
-      tap((value) => {
-        // console.log(value);
-        // value.sort(this.compareByDate)
-        // console.log(value);
-      }),
-    );
-    // this.storage.posts$.subscribe();
+    this.postsSubscription = this.crudService.handleData('posts', {
+      fieldPath: 'createTime',
+      direction: 'desc',
+    });
     this.subscriptions.push(
       this.crudService.getCurrentUserData().subscribe((value) => {
         this.user = value;
@@ -41,9 +35,5 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  }
-
-  private compareByDate(a: any, b: any): number {
-    return a.createTime.seconds - b.createTime.seconds;
   }
 }
