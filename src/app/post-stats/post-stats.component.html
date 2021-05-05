@@ -3,7 +3,7 @@
     <span class="material-icons" (click)="toggleLike()" [class.liked]="this.post.likes?.includes(this.currentUserID)">favorite</span>
     <p class="stat-count" [class.liked]="this.post.likes?.includes(this.currentUserID)">{{post.likeCount}}</p>
   </li>
-  <li (click)="openModal()">
+  <li>
     <span class="material-icons">chat_bubble</span>
     <p class="stat-count">{{post.commentCount}}</p>
   </li>

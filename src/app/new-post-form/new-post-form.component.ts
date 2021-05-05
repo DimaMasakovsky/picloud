@@ -19,6 +19,8 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
 
   public progress = '';
 
+  public isLoading = false;
+
   public currentUserData: User;
 
   private subscriptions: Array<Subscription> = [];
@@ -109,5 +111,6 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
     this.postForm.reset();
     this.imageLink = '';
     this.progress = '';
+    this.isLoading = false;
   }
 }

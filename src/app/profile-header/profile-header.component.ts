@@ -18,6 +18,8 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy {
 
   public user: User;
 
+  public currentUser: User;
+
   public isEditing: boolean;
 
   public imageLink = '';
@@ -37,9 +39,14 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.crudService.handleObjectByRef('users', this.userID).subscribe((user: User) => {
-      this.user = user;
-    });
+    this.subscriptions.push(
+      this.crudService.handleObjectByRef('users', this.userID).subscribe((user: User) => {
+        this.user = user;
+      }),
+      this.crudService.getCurrentUserData().subscribe((value) => {
+        this.currentUser = value;
+      }),
+    );
   }
 
   ngOnDestroy(): void {

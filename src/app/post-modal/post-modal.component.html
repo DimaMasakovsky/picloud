@@ -2,12 +2,15 @@
   <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
   <p>{{post.textContent}}</p>
   <div class="image-wrapper">
-    <img [src]="this.post.contentPicURL" (click)="deletePost()">
+    <img [src]="this.post.contentPicURL">
+  </div>
+  <div class="controls-wrapper">
+    <app-post-stats [post]="post"></app-post-stats>
+    <button (click)="deletePost()">Delete post!</button>
   </div>  
-  <app-post-stats [post]="post"></app-post-stats>
   <ul class="users-liked" *ngIf="this.post.likeCount > 0">
     <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">
-      <li *ngIf="post.likes.includes(user.uid)">
+      <li *ngIf="post.likes?.includes(user.uid)">
         <div 
           class="small-profile-pic" 
           (click)="this.router.navigate(['/profile', user.uid]); this.matDialog.closeAll()" 
@@ -29,7 +32,7 @@
       <app-comment 
         [comment]="comment" 
         [post]="post"
-        *ngIf="post.comments.includes(comment.id)"></app-comment>
+        *ngIf="post.comments?.includes(comment.id)"></app-comment>
     </li>
   </ul>
 </mat-dialog-content>

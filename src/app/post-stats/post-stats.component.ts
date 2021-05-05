@@ -1,8 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { Post, User } from '../interfaces';
-import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CrudService } from '../services/crud.service';
 
 @Component({
@@ -17,7 +15,7 @@ export class PostStatsComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private crudService: CrudService, private dialog: MatDialog) {}
+  constructor(private crudService: CrudService) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -40,14 +38,5 @@ export class PostStatsComponent implements OnInit, OnDestroy {
       this.post.likeCount = this.post.likes.push(this.currentUserID);
       this.crudService.updateObject('posts', this.post.id, this.post);
     }
-  }
-
-  public openModal(): void {
-    const dialogRef = this.dialog.open(PostModalComponent, {
-      data: { postID: this.post.id },
-      width: '80vw',
-      maxHeight: '90%',
-      hasBackdrop: true,
-    });
   }
 }

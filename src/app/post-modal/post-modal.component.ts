@@ -109,11 +109,17 @@ export class PostModalComponent implements OnInit, OnDestroy {
   }
 
   public deletePost(): void {
-    this.crudService.getCurrentUserData().subscribe((user: User) => {
-      if (this.post.author === user.uid) {
-        this.crudService.deleteObject('posts', this.post.id);
-        this.dialogRef.close();
-      }
-    });
+    if (this.post.author === this.currentUser.uid) {
+      this.currentUser.posts.splice(this.currentUser.posts.indexOf(this.post.id), 1);
+      this.currentUser.postsCount -= 1;
+      const data = {
+        posts: this.currentUser.posts,
+        postsCount: this.currentUser.postsCount,
+      };
+      this.crudService.deleteObject('posts', this.post.id);
+      this.dialogRef.close();
+      this.crudService.updateObject('users', this.currentUser.uid, data);
+      this.toast.error('Post deleted!');
+    }
   }
 }

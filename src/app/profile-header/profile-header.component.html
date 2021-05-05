@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="user">
+<div class="wrapper" *ngIf="user && currentUser">
   <div class="image-wrapper">
     <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
     </ng-container>
@@ -36,7 +36,7 @@
       </li>
     </ul>
   </section>
-  <section class="edit-controls">
+  <section class="edit-controls" *ngIf="this.currentUser.uid == this.user.uid">
     <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
     <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null" (click)="this.isEditing = false; onSubmit()">check</span>
   </section>

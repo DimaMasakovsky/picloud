@@ -22,7 +22,6 @@ import { SearchComponent } from './search/search.component';
 import { FeedPostComponent } from './feed-post/feed-post.component';
 import { PostHeaderComponent } from './post-header/post-header.component';
 import { NewPostFormComponent } from './new-post-form/new-post-form.component';
-import { DoubleContentDirective } from './double-content.directive';
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
 import { ProfilePostComponent } from './profile-post/profile-post.component';
 import { PostModalComponent } from './post-modal/post-modal.component';
@@ -42,7 +41,6 @@ import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
     FeedPostComponent,
     PostHeaderComponent,
     NewPostFormComponent,
-    DoubleContentDirective,
     ProfileHeaderComponent,
     ProfilePostComponent,
     PostModalComponent,

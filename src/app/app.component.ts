@@ -52,6 +52,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add @angular/pwa',
         'https://github.com/DimaMasakovsky/picloud/commit/1705a6293c07b9f057ff48d7b4055a53efb1b8c8',
       ),
+      '01.05': this.ProjectUpdateData(
+        'Fix: feed and comment order, comment button',
+        'https://github.com/DimaMasakovsky/picloud/commit/fb3e1812b3114f93990f15527f339c9b1953b67b',
+      ),
     });
   }
 

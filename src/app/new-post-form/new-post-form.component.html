@@ -1,4 +1,4 @@
-<form [formGroup]="postForm" (submit)="onSubmit()">
+<form [formGroup]="postForm">
   <ul>
     <li>
       <label for="textContent">What's new?</label>
@@ -11,7 +11,10 @@
     <li class="wrapper">
       <span class="material-icons upload" (click)="hiddenfileinput.click()">image</span>
       <progress max="100" min="0" [value]="progress"></progress> 
-      <button type="submit" [disabled]="!this.postForm.valid">Post!</button>  
+      <button
+        [disabled]="this.postForm.invalid || this.isLoading"        
+        (click)="this.isLoading = true; onSubmit();" 
+        >Post!</button>  
     </li>
   </ul>
   <div  *ngIf="imageLink" class="image" [style.backgroundImage]="this.imageLink | urlParentesis"></div>  
