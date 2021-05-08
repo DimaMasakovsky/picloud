@@ -29,6 +29,8 @@ import { PostStatsComponent } from './post-stats/post-stats.component';
 import { CommentComponent } from './comment/comment.component';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
+import { FollowButtonComponent } from './follow-button/follow-button.component';
+import { RecommendedUsersComponent } from './recommended-users/recommended-users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,8 @@ import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
     CommentComponent,
     CustomDatePipe,
     UrlParentesisPipe,
+    FollowButtonComponent,
+    RecommendedUsersComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [

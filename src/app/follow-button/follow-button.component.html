@@ -1,0 +1,7 @@
+<ng-container *ngIf="currentUser && currentUser.uid !== user.uid">
+  <button *ngIf="!user.followers.includes(currentUser.uid)"
+  (click)="follow()">Follow!</button>
+  <button  *ngIf="user.followers.includes(currentUser.uid)" class="unfollow"
+  (click)="unfollow()">Unfollow</button>
+</ng-container>
+

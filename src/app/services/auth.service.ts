@@ -42,9 +42,12 @@ export class AuthService {
                     photoURL: user.photoURL,
                     email: user.email,
                     posts: [],
+                    followers: [],
+                    following: [],
                     postsCount: 0,
                     followersCount: 0,
                     followingCount: 0,
+                    isPrivate: false,
                     bio: '',
                   });
                 }

@@ -1,15 +1,18 @@
-<div class="wrapper" *ngIf="user">
+<div class="wrapper" *ngIf="currentUser">
   <aside>
-    <app-profile-header [userID]="user.uid"></app-profile-header>
+    <app-profile-header [userID]="currentUser.uid"></app-profile-header>
     <app-new-post-form></app-new-post-form>
   </aside> 
   <div class="gap">
-
   </div> 
   <ul>
-    <li *ngFor="let post of postsSubscription | async; trackBy:trackFunction" class="post-wrapper">
-      <app-feed-post [post]="post"></app-feed-post>
-    </li>
+    <app-recommended-users></app-recommended-users>
+    <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction">
+      <li class="post-wrapper" *ngIf="currentUser.following.includes(post.author)">
+        <app-feed-post [post]="post"></app-feed-post>
+      </li>
+    </ng-container>
+    
   </ul>
 </div>
 

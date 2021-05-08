@@ -2,6 +2,7 @@
   <div class="image-wrapper">
     <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
     </ng-container>
+    <app-follow-button [user]="user"></app-follow-button>
   </div>
   <section class="user-fields">
     <h2>{{user.displayName}}</h2>

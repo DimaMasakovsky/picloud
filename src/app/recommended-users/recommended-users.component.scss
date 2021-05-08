@@ -1,0 +1,46 @@
+@import '../../styles.scss';
+
+:host {
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  background-color: white;
+}
+.wrapper {
+  width: 50rem;
+  padding: 1rem;
+  h6 {
+    font-size: 1.8rem;
+    font-family: $font-main;
+    margin-bottom: 1rem;
+  }
+  ul {
+    @include justify-align-direction(flex-start, center, row);
+    width: 100%;
+    gap: 1rem; 
+    overflow-x: auto;
+    
+  }
+  li {
+    @include justify-align-direction(space-between, center, column);
+    border: 0.1rem solid rgb(238, 238, 238);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    .profile-pic {
+      width: 15rem;
+      height: 15rem;
+      background: blanchedalmond;
+      background-position: center;
+      background-size: cover;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+    p {
+      font-family: $font-secondary;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-overflow: ellipsis;
+    }
+    width: 15rem;
+    height: 24rem;
+  }
+}

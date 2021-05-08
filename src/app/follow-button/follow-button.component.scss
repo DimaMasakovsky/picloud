@@ -1,0 +1,42 @@
+@import '../../styles.scss';
+
+:host {
+  width: 100%;
+}
+button {
+  @include justify-align-direction(center, center, row);
+  width: 100%;
+  margin-top: 1rem;
+  height: 3rem;
+  padding: 0.1rem 1.5rem;
+  width: 100%;  
+  cursor: pointer;
+  color: #ffffff;
+  background-color: color(accent);
+  border: 0.1rem solid color(accent);
+  outline: none;
+  border-radius: 0.5rem;
+  font-family: $font-main;
+  font-size: 1.6rem;  
+  &:disabled {
+    background-color: lighten(color(accent), 20%);
+    border: 0.1rem solid lighten(color(accent), 20%);
+  }
+  span {
+    color: #ffffff;
+    margin-right: 0.5rem;
+  }
+}
+.unfollow {
+  background-color: #ffffff;
+  color: #000000;
+  border: 0.1rem solid #000000;
+  &:disabled {
+    background-color: lighten(#ffffff, 20%);
+    border: 0.1rem solid lighten(#ffffff, 20%);
+  }
+  span {
+    color: #000000;
+    margin-right: 0.5rem;
+  }
+}

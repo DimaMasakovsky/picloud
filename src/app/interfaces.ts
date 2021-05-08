@@ -6,6 +6,9 @@ export interface User {
   followersCount: number;
   followingCount: number;
   posts: Array<string>;
+  following: Array<string>;
+  followers: Array<string>;
+  isPrivate: boolean;
   bio: string;
   uid: string;
 }

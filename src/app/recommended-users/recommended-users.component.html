@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <h6>Recommended users:</h6>
+  <ul>
+    <li *ngFor="let user of usersSubscription | async; trackBy:trackFunction" class="user-card">
+      <div class="profile-pic" [style.backgroundImage]="user.photoURL | urlParentesis"></div>
+      <p>{{user.displayName}}</p>
+      <app-follow-button [user]="user"></app-follow-button>
+    </li>
+  </ul>  
+</div>
+

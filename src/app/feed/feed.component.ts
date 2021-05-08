@@ -11,7 +11,7 @@ import { CrudService } from '../services/crud.service';
 export class FeedComponent implements OnInit, OnDestroy {
   public postsSubscription: Observable<any>;
 
-  public user: User;
+  public currentUser: User;
 
   private subscriptions: Array<Subscription> = [];
 
@@ -23,8 +23,8 @@ export class FeedComponent implements OnInit, OnDestroy {
       direction: 'desc',
     });
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((value) => {
-        this.user = value;
+      this.crudService.getCurrentUserData().subscribe((user: User) => {
+        this.currentUser = user;
       }),
     );
   }
