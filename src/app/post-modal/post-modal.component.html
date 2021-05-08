@@ -6,7 +6,7 @@
   </div>
   <div class="controls-wrapper">
     <app-post-stats [post]="post"></app-post-stats>
-    <button (click)="deletePost()">Delete post!</button>
+    <button *ngIf="this.post?.author === this.currentUser?.uid" (click)="deletePost()">Delete post!</button>
   </div>  
   <ul class="users-liked" *ngIf="this.post.likeCount > 0">
     <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">

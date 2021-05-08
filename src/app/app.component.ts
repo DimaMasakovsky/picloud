@@ -56,6 +56,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Fix: feed and comment order, comment button',
         'https://github.com/DimaMasakovsky/picloud/commit/fb3e1812b3114f93990f15527f339c9b1953b67b',
       ),
+      '05.05': this.ProjectUpdateData(
+        'Add: post delete button; fix: profile editing, new post button',
+        'https://github.com/DimaMasakovsky/picloud/commit/ccbbdbb8bfe92cd0c2eb86b90c1e3433de75be3b',
+      ),
     });
   }
 
