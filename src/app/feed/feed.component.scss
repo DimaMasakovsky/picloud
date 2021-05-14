@@ -1,42 +1,58 @@
 @import '../../styles.scss';
 
 :host {
-  @include justify-align-direction(center, center, none);
   min-height: 100vh;  
   width: 100%;
   background: color(background);
   
   .wrapper {
     @include justify-align-direction(center,flex-start,row);
-    margin: 0 0.5rem;
-    margin-top: 4.2rem + 1.5rem;
+    margin: 0 auto;
     width: 100%;
-    .gap {
-      width: 3%;
-    }
+    gap: 1.5rem;
+    margin-top: 4.2rem + 1.5rem;
     @include desktop-medium { 
       @include justify-align-direction(flex-start,center,column);
     }
+    @include mobile {
+      margin-top: 0rem;
+      gap: 0;
+      margin-bottom: 4.5rem;
+    }
     
     aside {
-      @include justify-align-direction(stretch, flex-start, column);
+      @include justify-align-direction(flex-start, flex-start, column);
+      width: 50rem;
       position: sticky;
       top: 4.2rem + 1.5rem;
       @include desktop-medium {
         position: unset;
-        margin-bottom: 1.5rem;
+      }
+      @include mobile {
+        width: 100%;
       }
     }
-  }
-  ul {
-    @include justify-align-direction(none, center, column);
-    li {
-      background: #ffffff;
-      margin-bottom: 1.5rem;
-      padding: 2rem;
-      border-radius: 0.5rem; 
+    ul {
+      @include justify-align-direction(flex-start, center, column);
+      width: 50rem;
+      gap: 1.5rem;
+      @include mobile {
+        width: 100%;
+      }
+      li {
+        box-sizing: border-box;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        @include mobile {
+          border-radius: 0;
+        }
+        &:last-child {
+          margin-bottom: 1.5rem;
+        }
+      }
     }
-  }
+  }  
 }
-
 

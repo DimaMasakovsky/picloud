@@ -1,12 +1,34 @@
-<div class="logo-wrapper">
-  <h1><a routerLink="/feed">picloud</a></h1>
-</div>  
-<app-search></app-search>
-<nav>
-  <ul>
-    <li><a routerLink="/feed">Home</a></li>
-    <li><a routerLink="/profile/{{userID}}">Profile</a></li>
-    <li><button (click)="signOut()">Sign Out</button></li>
-  </ul>
-  
-</nav>
+<ng-container *ngIf="!media.isActive('xs') else mobile">
+  <div class="desktop-wrapper">
+    <div class="logo-wrapper">
+      <h1><a routerLink="/feed">picloud</a></h1>
+    </div>  
+    <app-search></app-search>
+    <nav>
+      <ul>
+        <li><a routerLink="/feed">Home</a></li>
+        <li><a routerLink="/profile/{{userID}}">Profile</a></li>
+        <li><button (click)="signOut()">Sign Out</button></li>
+      </ul>
+    </nav>
+  </div>  
+</ng-container>
+
+<ng-template #mobile>
+  <nav class="mobile-wrapper">
+    <ul class="mobile-nav">
+      <li class="menu-icon"><a routerLink="/feed">
+        <span class="material-icons">home</span></a>
+      </li>
+      <li class="menu-icon"><a routerLink="/feed">
+        <span class="material-icons">search</span></a>
+      </li>
+      <li class="menu-icon"><a routerLink="/create-post">
+        <span class="material-icons">add</span></a>
+      </li>
+      <li class="menu-icon"><a routerLink="/profile/{{userID}}">
+        <span class="material-icons">account_circle</span></a>
+      </li>
+    </ul>
+  </nav>
+</ng-template>

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MediaObserver } from '@angular/flex-layout';
 import { CrudService } from '../services/crud.service';
 import { AuthService } from '../services/auth.service';
 @Component({
@@ -15,10 +15,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscriptions: Array<Subscription> = [];
 
   constructor(
-    private firestore: AngularFirestore,
     public authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
+    public media: MediaObserver,
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +38,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   signOut(): void {
-    this.subscriptions.push(this.authService.signOut().subscribe(() => this.router.navigate([''])));
+    this.authService.signOut().subscribe(() => this.router.navigate(['']));
   }
 }

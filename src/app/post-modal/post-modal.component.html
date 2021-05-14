@@ -6,7 +6,11 @@
   </div>
   <div class="controls-wrapper">
     <app-post-stats [post]="post"></app-post-stats>
-    <button *ngIf="this.post?.author === this.currentUser?.uid" (click)="deletePost()">Delete post!</button>
+    <button 
+      class="delete-button"
+      *ngIf="this.post?.author === this.currentUser?.uid" 
+      (click)="deletePost()">Delete post!
+    </button>
   </div>  
   <ul class="users-liked" *ngIf="this.post.likeCount > 0">
     <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">
@@ -24,8 +28,10 @@
     </ng-container>
     <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
     <button 
+      class="comment-button"
       [disabled]="this.commentForm.invalid || this.commentIsUploading"
-      (click)="this.commentIsUploading = true; onSubmit()">Comment!</button>
+      (click)="this.commentIsUploading = true; onSubmit()">Comment!
+    </button>
   </form>  
   <ul class="comment-section">
     <li *ngFor="let comment of commentsSubscription | async; trackBy:trackFunction">
@@ -39,9 +45,9 @@
 
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="this.currentUser.photoURL | urlParentesis"></div>
+  <div class="image" [style.backgroundImage]="this.currentUser.photoURL | urlParentesis" fxHide.xs></div>
 </ng-template>
 
 <ng-template #defaultImage>
-  <div class="image"></div>
+  <div class="image" fxHide.xs></div>
 </ng-template>

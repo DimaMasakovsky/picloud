@@ -3,5 +3,5 @@
 :host {
   height: 100%;
   width: 100%;
-  @include justify-align-direction(flex-start, none, column);
+  @include justify-align-direction(flex-start, flex-start, column);
 }

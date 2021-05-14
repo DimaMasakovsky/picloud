@@ -43,13 +43,10 @@ $picloud-theme: mat-light-theme((
   align-items: $align;
   flex-direction: $direction;
 }
-@mixin desktop-medium { 
-  @media (max-width: #{$desktop-medium}) {
-    @content;
-  }
-}
 
-$desktop-medium: 1000px;
+
+$desktop-medium: 1040px;
+$mobile: 599px; 
 
 $font-main: 'Roboto', sans-serif; 
 $font-secondary: 'Raleway', sans-serif;
@@ -68,6 +65,7 @@ $colors: (
 html {
   font-size: 10px;
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 body {  
   box-sizing: border-box;
@@ -108,3 +106,13 @@ a {
 // Angular Material addons
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+@mixin desktop-medium { 
+  @media (max-width: #{$desktop-medium}) {
+    @content;
+  }
+}

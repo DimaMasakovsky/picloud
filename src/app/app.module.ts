@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -31,6 +32,7 @@ import { CustomDatePipe } from './pipes/custom-date.pipe';
 import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { RecommendedUsersComponent } from './recommended-users/recommended-users.component';
+import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,10 +54,12 @@ import { RecommendedUsersComponent } from './recommended-users/recommended-users
     UrlParentesisPipe,
     FollowButtonComponent,
     RecommendedUsersComponent,
+    CreatePostPageComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

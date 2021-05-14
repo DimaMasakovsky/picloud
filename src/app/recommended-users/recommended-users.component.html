@@ -1,11 +1,16 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="currentUser" >
   <h6>Recommended users:</h6>
   <ul>
-    <li *ngFor="let user of usersSubscription | async; trackBy:trackFunction" class="user-card">
-      <div class="profile-pic" [style.backgroundImage]="user.photoURL | urlParentesis"></div>
-      <p>{{user.displayName}}</p>
-      <app-follow-button [user]="user"></app-follow-button>
-    </li>
+    <ng-container *ngFor="let user of usersSubscription | async; trackBy:trackFunction">
+      <li *ngIf="user.uid !== currentUser.uid" class="user-card">
+        <div class="profile-pic" 
+          [style.backgroundImage]="user.photoURL | urlParentesis" 
+          (click)="this.router.navigate(['/profile', user.uid]);">
+        </div>
+        <p (click)="this.router.navigate(['/profile', user.uid]);">{{user.displayName}}</p>
+        <app-follow-button [user]="user"></app-follow-button>
+      </li>
+    </ng-container>
   </ul>  
 </div>
 

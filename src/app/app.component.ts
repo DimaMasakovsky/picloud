@@ -60,6 +60,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add: post delete button; fix: profile editing, new post button',
         'https://github.com/DimaMasakovsky/picloud/commit/ccbbdbb8bfe92cd0c2eb86b90c1e3433de75be3b',
       ),
+      '08.05': this.ProjectUpdateData(
+        'Add: follow/unfollow feature, pwa custom icons',
+        'https://github.com/DimaMasakovsky/picloud/commit/bf4d0387077961154609fb8143e29a0ce4c6932c',
+      ),
     });
   }
 

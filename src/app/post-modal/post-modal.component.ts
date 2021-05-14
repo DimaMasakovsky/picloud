@@ -43,6 +43,9 @@ export class PostModalComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.crudService.handleObjectByRef('posts', this.data.postID).subscribe((value) => {
         this.post = value;
+        if (!value.author) {
+          this.matDialog.closeAll();
+        }
       }),
       this.crudService.getCurrentUserData().subscribe((value) => {
         this.currentUser = value;

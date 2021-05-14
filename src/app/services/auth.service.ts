@@ -32,7 +32,6 @@ export class AuthService {
                   this.db.collection('users').doc(user.uid).update({
                     uid: user.uid,
                     displayName: user.displayName,
-                    photoURL: user.photoURL,
                     email: user.email,
                   });
                 } else {

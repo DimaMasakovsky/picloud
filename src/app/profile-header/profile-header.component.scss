@@ -4,16 +4,25 @@
   width: 100%;
   background-color: #ffffff;
   border-radius: 0.5rem;
+  @include mobile {
+    border-radius: 0;
+  }
   
   .wrapper {
-    padding: 2rem;
     @include justify-align-direction(flex-start, flex-start,  row);
-    @include desktop-medium{
-      width: 50rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2rem;
+    @include mobile {
+      @include justify-align-direction(flex-start,flex-start, column);
     }
   }
   .user-fields {
     margin: 0 2rem;
+    @include mobile {
+      margin: 0;
+      width: 100%;
+    }
     h2 {
       font-family: $font-secondary;
       font-weight: 600;
@@ -28,8 +37,8 @@
     ul {
       @include justify-align-direction(space-between, center, row);
       margin-top: 1rem;
+      gap: 2rem;
       li {
-        margin-right: 2rem;
         h6 {
           font-family: $font-main;
           font-size: 2rem;
@@ -40,7 +49,13 @@
           color: color(text-secondary);
         }
       }
-      
+    }
+  }
+  .edit-controls {
+    cursor: pointer;
+    @include mobile {
+      align-self: flex-end;
+      margin-top: 1.5rem;
     }
   }
   form {
@@ -85,9 +100,6 @@
       width: 100%;
     }
   }
-  .edit-controls {
-    cursor: pointer;
-  }
 }
 
 .image-wrapper {
@@ -98,6 +110,10 @@
     width: 12rem;
     height: 12rem;
     border-radius: 0.5rem;
+    @include mobile {
+      width: 6rem;
+      height: 6rem;
+    }
   }
 }
 

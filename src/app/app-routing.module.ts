@@ -7,6 +7,7 @@ import { FeedComponent } from './feed/feed.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard.service';
 import { LoginGuard } from './guards/login.guard';
+import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'create-post',
+    component: CreatePostPageComponent,
     canActivate: [AuthGuard],
   },
 ];

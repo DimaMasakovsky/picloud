@@ -1,7 +1,9 @@
 @import '../../styles.scss';
 
-
 :host {
+  width: 100%;
+}
+.desktop-wrapper {
   position: fixed;
   top: 0;
   width: 100%;
@@ -36,7 +38,6 @@
     }
   }
 }
-
 button {
   padding: 0.4rem 1rem;
   background: #FFFFFF;
@@ -45,4 +46,23 @@ button {
   border-radius: 0.5rem;
   font-family: $font-main;
   cursor: pointer;
+}
+
+.mobile-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  box-shadow: 0 -0.1rem 0.1rem rgba(0, 0, 0, 0.25); 
+  .mobile-nav {
+    width: 100%;
+    @include justify-align-direction(space-around, center, row);
+
+    .material-icons {
+      font-size: 4.2rem;
+      color: #000000;
+    }
+  }
 }

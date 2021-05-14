@@ -3,6 +3,7 @@
 p {
   margin-top: 2rem;
   font-size: 2.4rem;
+  word-break: break-all;
 }
 .image-wrapper {
   @include justify-align-direction(center, center, none);
@@ -26,7 +27,11 @@ button {
   outline: none;
   border-radius: 0.5rem;
   font-family: $font-main;
-  font-size: 1.6rem;  
+  font-size: 1.6rem;
+  @include mobile {
+    margin: 0;
+    width: 100%;
+  }
   &:disabled {
     background-color: lighten(color(accent), 20%);
     border: 0.1rem solid lighten(color(accent), 20%);
@@ -38,9 +43,12 @@ form {
   grid-template-columns: 7rem 1fr 12rem;
   grid-column-gap: 1rem;
   margin: 2rem 0;
+  @include mobile {
+    @include justify-align-direction(flex-start, flex-start, column);
+  }
   input {
+    width: 100%;
     height: 2.5rem;
-
     border-radius: 0.5rem;
     border: 0.1rem solid rgb(238, 238, 238);
     outline: none;
@@ -63,10 +71,9 @@ form {
   padding: 0.5rem 0;
   border-top: 0.1rem solid rgb(238, 238, 238);
   border-bottom: 0.1rem solid rgb(238, 238, 238);
-  display: grid; 
-  grid-template-columns: repeat(10, 4rem);
-  grid-row-gap: 1rem;
-  grid-column-gap: 1rem;
+  @include justify-align-direction(flex-start, center, row);
+  flex-wrap: wrap;
+  gap: 1rem;
   li {
     display: grid;
     width: 4rem;
@@ -82,7 +89,11 @@ form {
     cursor: pointer;
   }
 }
-
+.comment-button {
+  @include mobile {
+    margin-top: 1rem;
+  }  
+}
 .controls-wrapper {
   @include justify-align-direction(space-between, center, row);
   button {

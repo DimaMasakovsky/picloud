@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="user">
+<div class="wrapper" *ngIf="user && currentUser">
   <app-profile-header [userID]="user.uid"></app-profile-header>
   <ul>
     <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction;">
@@ -7,5 +7,10 @@
       </li>
     </ng-container>    
   </ul>
+  <button 
+    fxHide.gt-xs
+    *ngIf="user.uid === currentUser.uid"
+    (click)="signOut()">Sign Out
+  </button>
 </div>
 
