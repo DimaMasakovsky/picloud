@@ -1,0 +1,81 @@
+@import '../../styles.scss';
+
+:host {
+  @include justify-align-direction(flex-start, flex-start, column);
+  min-height: 100vh;
+  width: 100%;
+  background-color: color(background);
+  gap: 1rem;
+  h2 {
+    width: 100%;
+    font-size: 1.8rem;
+    margin-top: 3.7rem;
+    color: color(text-secondary);
+    font-family: $font-main;
+    margin-bottom: 1rem;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+  section {
+    width: 50%;
+    background-color: #ffffff;
+    margin: 0 auto;
+    margin-top: 3.7rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    @include desktop-medium {
+      width: 80%;
+    }
+    @include mobile {
+      border-radius: 0;
+      margin-top: 0;
+      width: 100%;
+    }
+    &:last-child {
+      margin-bottom: 5rem;
+    }
+  }
+  h6 {
+    font-size: 1.8rem;
+    font-family: $font-main;
+    margin-bottom: 1rem;
+    text-overflow: ellipsis;
+  }
+}
+.search-wrapper {
+  @include justify-align-direction(center, center,row);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem; 
+  background-color: #ffffff;
+}
+ul {
+  @include justify-align-direction(flex-start, center, column);
+  width: 100%;
+  gap: 1rem;
+  .post-wrapper {
+    width: 100%;
+    cursor: pointer;
+    @include justify-align-direction(flex-start,center, row);
+    
+    .image {
+      width: 7rem;
+      height: 7rem;
+      background: blanchedalmond;
+      background-position: center;
+      background-size: cover;
+      border-radius: 0.5rem;
+      box-sizing: border-box;
+      margin-right: 1rem;
+    }
+    .text-content {
+      max-width: 30rem;
+      font-size: 1.8rem;
+      font-family: $font-main;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { UploadService } from '../services/upload.service';
   templateUrl: './profile-header.component.html',
   styleUrls: ['./profile-header.component.scss'],
 })
-export class ProfileHeaderComponent implements OnInit, OnDestroy {
+export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   @Input()
   public userID: string;
 
@@ -37,14 +37,19 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
   ) {}
 
-  ngOnInit(): void {
-    this.initForm();
+  ngOnChanges(): void {
     this.subscriptions.push(
       this.crudService.handleObjectByRef('users', this.userID).subscribe((user: User) => {
         this.user = user;
       }),
-      this.crudService.getCurrentUserData().subscribe((value) => {
-        this.currentUser = value;
+    );
+  }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.subscriptions.push(
+      this.crudService.getCurrentUserData().subscribe((user: User) => {
+        this.currentUser = user;
       }),
     );
   }

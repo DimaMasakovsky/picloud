@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard.service';
 import { LoginGuard } from './guards/login.guard';
 import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'create-post',
     component: CreatePostPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search',
+    component: SearchPageComponent,
     canActivate: [AuthGuard],
   },
 ];

@@ -1,0 +1,30 @@
+<div class="search-wrapper">
+  <app-search (searchInputEvent)="updateSearchResults($event)" fxHide.gt-xs></app-search>
+</div>
+<h2 *ngIf="!filter">Search for people and posts!</h2>
+<section *ngIf="filter">
+  <h6>Posts:</h6>
+  <ul>
+    <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction">
+      <li class="post-wrapper" *ngIf="(post.textContent | uppercase).includes(this.filter | uppercase)">
+        <div class="image" [style.backgroundImage]="post.contentPicURL | urlParentesis"></div>
+        <h5 class="text-content">{{post.textContent}}</h5>
+      </li>
+    </ng-container>
+  </ul>
+</section>
+
+<section *ngIf="filter">
+  <h6>Users:</h6>
+  <ul>
+    <ng-container *ngFor="let user of usersSubscription | async; trackBy:trackFunction">
+      <li 
+        class="post-wrapper" 
+        *ngIf="(user.displayName | uppercase).includes(this.filter | uppercase)"
+        (click)="this.router.navigate(['/profile', user.uid]);">
+        <div class="image" [style.backgroundImage]="user.photoURL | urlParentesis"></div>
+        <h5 class="text-content">{{user.displayName}}</h5>
+      </li>
+    </ng-container>
+  </ul>
+</section>

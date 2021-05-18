@@ -64,6 +64,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add: follow/unfollow feature, pwa custom icons',
         'https://github.com/DimaMasakovsky/picloud/commit/bf4d0387077961154609fb8143e29a0ce4c6932c',
       ),
+      '14.05': this.ProjectUpdateData(
+        'Add: responsive design',
+        'https://github.com/DimaMasakovsky/picloud/commit/24bb332023e0fcc2fb652c4d36d47a5a9f9b2bd6',
+      ),
     });
   }
 

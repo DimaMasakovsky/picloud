@@ -33,6 +33,7 @@ import { UrlParentesisPipe } from './pipes/url-parentesis.pipe';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { RecommendedUsersComponent } from './recommended-users/recommended-users.component';
 import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { CreatePostPageComponent } from './create-post-page/create-post-page.com
     FollowButtonComponent,
     RecommendedUsersComponent,
     CreatePostPageComponent,
+    SearchPageComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [

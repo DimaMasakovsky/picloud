@@ -68,13 +68,14 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.commentForm = this.fb.group({
-      textContent: ['', [Validators.required, Validators.pattern(/[ -~]/)]],
+      textContent: ['', [Validators.required]],
     });
   }
 
   public onSubmit(): void {
     const { controls } = this.commentForm;
     if (this.commentForm.valid) {
+      this.commentIsUploading = true;
       const data: Commentary = {
         author: this.currentUser.uid,
         createTime: Date.now(),

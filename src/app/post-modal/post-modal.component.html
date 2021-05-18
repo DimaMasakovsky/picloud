@@ -30,7 +30,7 @@
     <button 
       class="comment-button"
       [disabled]="this.commentForm.invalid || this.commentIsUploading"
-      (click)="this.commentIsUploading = true; onSubmit()">Comment!
+      (click)="onSubmit()">Comment!
     </button>
   </form>  
   <ul class="comment-section">

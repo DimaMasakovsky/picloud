@@ -3,7 +3,7 @@
     <div class="logo-wrapper">
       <h1><a routerLink="/feed">picloud</a></h1>
     </div>  
-    <app-search></app-search>
+    <app-search (click)="router.navigate(['search'])"></app-search>
     <nav>
       <ul>
         <li><a routerLink="/feed">Home</a></li>
@@ -20,7 +20,7 @@
       <li class="menu-icon"><a routerLink="/feed">
         <span class="material-icons">home</span></a>
       </li>
-      <li class="menu-icon"><a routerLink="/feed">
+      <li class="menu-icon"><a routerLink="/search">
         <span class="material-icons">search</span></a>
       </li>
       <li class="menu-icon"><a routerLink="/create-post">

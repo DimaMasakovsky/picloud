@@ -16,10 +16,17 @@
 
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="this.authorUser.photoURL | urlParentesis"></div>
+  <div 
+    class="image" 
+    [style.backgroundImage]="this.authorUser.photoURL | urlParentesis"
+    (click)="this.router.navigate(['/profile', this.authorUser.uid]); this.matDialog.closeAll()">
+  </div>
 </ng-template>
 
 
 <ng-template #defaultImage>
-  <div class="image"></div>
+  <div 
+    class="image"
+    (click)="this.router.navigate(['/profile', this.authorUser.uid]); this.matDialog.closeAll()">
+  </div>
 </ng-template>

@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { CrudService } from '../services/crud.service';
 import { User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
@@ -25,9 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     private authService: AuthService,
     private router: Router,
-  ) {
-    this.userID = route.snapshot.params.id;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.postsSubscription = this.crudService.handleData('posts', {
@@ -35,12 +34,18 @@ export class ProfileComponent implements OnInit, OnDestroy {
       direction: 'desc',
     });
     this.subscriptions.push(
-      this.crudService.getObjectByRef('users', this.userID).subscribe((user: User) => {
-        this.user = user;
-      }),
       this.crudService.getCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
       }),
+      this.route.params
+        .pipe(
+          switchMap((routeParams) => {
+            return this.crudService.getObjectByRef('users', routeParams.id);
+          }),
+        )
+        .subscribe((user) => {
+          this.user = user;
+        }),
     );
   }
 

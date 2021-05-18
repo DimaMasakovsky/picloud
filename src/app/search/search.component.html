@@ -1,6 +1,9 @@
 <div class="icon-wrapper">
   <span class="material-icons">search</span>
-</div>  
-<input placeholder="Search">
+</div>
+<form [formGroup]="searchForm">
+  <input placeholder="Search" formControlName="search">
+</form>  
+
   
 

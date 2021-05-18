@@ -2,12 +2,14 @@
 
 :host {
   @include justify-align-direction(flex-start, center, row);
-
+  width: 100%;
   background-color: color(background);
   padding: 0.5rem;
   border: 0.1rem solid #B0B0B0;
   border-radius: 0.5rem;
-  
+  form {
+    width: 100%;
+  }
   input {
     background-color: color(background);
     border: none;
