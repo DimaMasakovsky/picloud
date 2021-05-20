@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { User } from '../interfaces';
+import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CrudService } from '../services/crud.service';
 
 @Component({
@@ -15,7 +18,11 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private crudService: CrudService) {}
+  constructor(
+    private crudService: CrudService,
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.postsSubscription = this.crudService.handleData('posts', {
@@ -25,6 +32,16 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.crudService.getCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
+      }),
+      this.route.queryParams.subscribe((queryParams) => {
+        if (queryParams.postId) {
+          const dialogRef = this.dialog.open(PostModalComponent, {
+            data: { postID: queryParams.postId },
+            width: '80vw',
+            maxHeight: '90%',
+            hasBackdrop: true,
+          });
+        }
       }),
     );
   }

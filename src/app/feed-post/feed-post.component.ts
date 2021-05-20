@@ -1,11 +1,8 @@
-import { isNgTemplate } from '@angular/compiler';
-import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Overlay } from '@angular/cdk/overlay';
-import { Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { Post, User } from '../interfaces';
 import { CrudService } from '../services/crud.service';
-import { PostModalComponent } from '../post-modal/post-modal.component';
 
 @Component({
   selector: 'app-feed-post',
@@ -19,7 +16,7 @@ export class FeedPostComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private crudService: CrudService, private dialog: MatDialog) {}
+  constructor(private crudService: CrudService, private router: Router) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -34,11 +31,6 @@ export class FeedPostComponent implements OnInit, OnDestroy {
   }
 
   public openModal(): void {
-    const dialogRef = this.dialog.open(PostModalComponent, {
-      data: { postID: this.post.id },
-      width: '80vw',
-      maxHeight: '90%',
-      hasBackdrop: true,
-    });
+    this.router.navigate(['/feed'], { queryParams: { postId: this.post.id } });
   }
 }

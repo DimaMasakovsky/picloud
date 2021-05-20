@@ -5,8 +5,10 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CrudService } from '../services/crud.service';
 import { StorageService } from '../services/storage.service';
 
@@ -30,6 +32,8 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     public router: Router,
     public storage: StorageService,
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +49,16 @@ export class SearchPageComponent implements OnInit, OnDestroy {
       this.storage.searchValue$.subscribe((val) => {
         this.updateSearchResults(val);
       }),
+      this.route.queryParams.subscribe((queryParams) => {
+        if (queryParams.postId) {
+          const dialogRef = this.dialog.open(PostModalComponent, {
+            data: { postID: queryParams.postId },
+            width: '80vw',
+            maxHeight: '90%',
+            hasBackdrop: true,
+          });
+        }
+      }),
     );
   }
 
@@ -55,6 +69,10 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   public trackFunction(index: any, item: any): string {
     return item.id;
+  }
+
+  public openModal(postId: string): void {
+    this.router.navigate([], { queryParams: { postId }, queryParamsHandling: 'merge' });
   }
 
   ngOnDestroy(): void {

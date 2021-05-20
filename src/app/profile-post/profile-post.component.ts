@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Post } from '../interfaces';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 
@@ -12,16 +13,14 @@ export class ProfilePostComponent implements OnInit {
   @Input()
   post: Post;
 
-  constructor(private dialog: MatDialog) {}
+  @Input()
+  userID: string;
+
+  constructor(private dialog: MatDialog, public router: Router) {}
 
   ngOnInit(): void {}
 
   public openModal(): void {
-    const dialogRef = this.dialog.open(PostModalComponent, {
-      data: { postID: this.post.id },
-      width: '80vw',
-      maxHeight: '90%',
-      hasBackdrop: true,
-    });
+    this.router.navigate(['/profile', this.userID], { queryParams: { postId: this.post.id } });
   }
 }

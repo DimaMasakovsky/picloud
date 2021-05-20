@@ -9,7 +9,8 @@
       <li 
         class="post-wrapper" 
         *ngIf="(post.textContent | uppercase).includes(this.filter | uppercase) 
-        || (post.tag | uppercase).includes(this.filter | uppercase)">
+        || (post.tag | uppercase).includes(this.filter | uppercase)"
+        (click)="openModal(post.id)">
         <div class="image" [style.backgroundImage]="post.contentPicURL | urlParentesis"></div>
         <h5 class="text-content">{{post.textContent}}</h5>
       </li>

@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscription } from 'rxjs';
+import { merge, Observable, Subscription } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { Post, User, Commentary } from '../interfaces';
 import { CrudService } from '../services/crud.service';
@@ -37,6 +37,7 @@ export class PostModalComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public router: Router,
     public matDialog: MatDialog,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +65,7 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.router.navigate([], { queryParams: { postId: null }, queryParamsHandling: 'merge' });
   }
 
   private initForm(): void {

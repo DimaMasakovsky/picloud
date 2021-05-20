@@ -1,18 +1,18 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { switchMap, tap } from 'rxjs/operators';
 import { CrudService } from '../services/crud.service';
 import { User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
+import { PostModalComponent } from '../post-modal/post-modal.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  private userID: string;
-
   public user: User;
 
   public currentUser: User;
@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     private authService: AuthService,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +47,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .subscribe((user) => {
           this.user = user;
         }),
+      this.route.queryParams.subscribe((queryParams) => {
+        if (queryParams.postId) {
+          const dialogRef = this.dialog.open(PostModalComponent, {
+            data: { postID: queryParams.postId },
+            width: '80vw',
+            maxHeight: '90%',
+            hasBackdrop: true,
+          });
+        }
+      }),
     );
   }
 

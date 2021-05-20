@@ -3,7 +3,7 @@
   <ul *ngIf="canView()">
     <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction;">
       <li *ngIf="user?.posts.includes(post.id)">
-        <app-profile-post [post]="post"></app-profile-post>
+        <app-profile-post [post]="post" [userID]="user.uid"></app-profile-post>
       </li>
     </ng-container>    
   </ul>
