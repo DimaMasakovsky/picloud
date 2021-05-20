@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
 import { StorageService } from '../services/storage.service';
 
@@ -8,13 +10,23 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   public searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private storage: StorageService) {}
+  private subscriptions: Array<Subscription> = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private storage: StorageService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.router.events.subscribe(() => {
+      this.searchForm.reset();
+    });
   }
 
   initForm(): void {
@@ -31,5 +43,9 @@ export class SearchComponent implements OnInit {
       .subscribe((val: string) => {
         this.storage.search = val;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
