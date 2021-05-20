@@ -68,6 +68,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add: responsive design',
         'https://github.com/DimaMasakovsky/picloud/commit/24bb332023e0fcc2fb652c4d36d47a5a9f9b2bd6',
       ),
+      '18.05': this.ProjectUpdateData(
+        'Add: search, fix: profile routing bug',
+        'https://github.com/DimaMasakovsky/picloud/commit/08c4e9a48d7e2bd984dcb189fd9d4a71de14964b',
+      ),
     });
   }
 

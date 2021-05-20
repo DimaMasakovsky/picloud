@@ -1,0 +1,44 @@
+@import '../../styles.scss';
+
+:host {
+  background-color: color(background);
+  width: 100%;
+  min-height: 100vh;
+}
+section {
+  @include justify-align-direction(flex-start, flex-start, column);
+  width: 50%;
+  margin: 1rem auto; 
+  margin-top: 4.2rem + 1.5rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  @include desktop-medium {
+    width: 70%;
+  }
+  @include mobile {
+    margin-top: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-family: $font-secondary;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.6rem;
+    font-family: $font-main;
+    margin-bottom: 1rem;
+  }
+  img {
+    margin: 2rem 0;
+    width: 60%;
+    align-self: center;
+  }
+  .stars {
+    align-self: center;
+  }
+}

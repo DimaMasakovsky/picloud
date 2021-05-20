@@ -21,6 +21,11 @@
          autocomplete="off"
          #hiddenfileinput
       />
+      <mat-slide-toggle 
+        class="toggle" 
+        [checked]="user.isPrivate"
+        (click)="togglePrivate()">Private profile
+      </mat-slide-toggle>
     </form>
     <ul>
       <li>

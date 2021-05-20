@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $picloud-primary: mat-palette($mat-indigo);
-$picloud-accent: mat-palette($mat-pink, A200, A100, A400);
+$picloud-accent: mat-palette($mat-blue, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $picloud-warn: mat-palette($mat-red);
@@ -27,7 +27,6 @@ $picloud-theme: mat-light-theme((
     warn: $picloud-warn,
   )
 ));
-
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -103,6 +102,7 @@ a {
   background-color: color(error);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23ffffff'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z'/%3E%3C/svg%3E");
 }
+
 // Angular Material addons
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

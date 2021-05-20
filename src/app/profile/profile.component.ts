@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.route.params
         .pipe(
           switchMap((routeParams) => {
-            return this.crudService.getObjectByRef('users', routeParams.id);
+            return this.crudService.handleObjectByRef('users', routeParams.id);
           }),
         )
         .subscribe((user) => {
@@ -59,5 +59,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   signOut(): void {
     this.authService.signOut().subscribe(() => this.router.navigate(['']));
+  }
+
+  public canView(): boolean {
+    // eslint-disable-next-line no-nested-ternary
+    return this.user.uid === this.currentUser.uid
+      ? true
+      : this.user.isPrivate
+      ? this.user.followers.includes(this.currentUser.uid)
+      : true;
   }
 }

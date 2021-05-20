@@ -9,6 +9,8 @@ import { AuthGuard } from './guards/auth.guard.service';
 import { LoginGuard } from './guards/login.guard';
 import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,20 @@ const routes: Routes = [
     path: 'search',
     component: SearchPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '404',
+    component: NotFoundComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '404',
   },
 ];
 

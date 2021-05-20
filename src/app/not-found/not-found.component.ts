@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: 'app-not-found',
+  templateUrl: './not-found.component.html',
+  styleUrls: ['./not-found.component.scss'],
 })
-export class FooterComponent implements OnInit {
+export class NotFoundComponent implements OnInit {
   constructor(public router: Router) {}
 
   ngOnInit(): void {}

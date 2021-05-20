@@ -15,25 +15,23 @@ export class FollowButtonComponent implements OnInit {
   constructor(private crudService: CrudService) {}
 
   ngOnInit(): void {
-    this.crudService.getCurrentUserData().subscribe((user: User) => {
+    this.crudService.handleCurrentUserData().subscribe((user: User) => {
       this.currentUser = user;
     });
   }
 
   public follow(): void {
-    this.currentUser.following.push(this.user.uid);
-    this.currentUser.followingCount += 1;
-    this.user.followers.push(this.currentUser.uid);
-    this.user.followersCount += 1;
+    this.currentUser.followingCount = this.currentUser.following.push(this.user.uid);
+    this.user.followersCount = this.user.followers.push(this.currentUser.uid);
 
     this.crudService.updateObject('users', this.currentUser.uid, this.currentUser);
     this.crudService.updateObject('users', this.user.uid, this.user);
   }
 
   public unfollow(): void {
-    this.currentUser.following.splice(this.currentUser.following.indexOf(this.user.uid));
+    this.currentUser.following.splice(this.currentUser.following.indexOf(this.user.uid), 1);
     this.currentUser.followingCount -= 1;
-    this.user.followers.splice(this.user.followers.indexOf(this.currentUser.uid));
+    this.user.followers.splice(this.user.followers.indexOf(this.currentUser.uid), 1);
     this.user.followersCount -= 1;
 
     this.crudService.updateObject('users', this.currentUser.uid, this.currentUser);

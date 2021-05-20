@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +35,8 @@ import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { RecommendedUsersComponent } from './recommended-users/recommended-users.component';
 import { CreatePostPageComponent } from './create-post-page/create-post-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { AboutComponent } from './about/about.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +60,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
     RecommendedUsersComponent,
     CreatePostPageComponent,
     SearchPageComponent,
+    AboutComponent,
+    NotFoundComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [
@@ -68,6 +73,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
     AngularFireAuthModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSlideToggleModule,
     OverlayModule,
     ToastrModule.forRoot({
       timeOut: 3000,

@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { CrudService } from '../services/crud.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-search-page',
@@ -28,6 +29,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     private crudService: CrudService,
     private cdr: ChangeDetectorRef,
     public router: Router,
+    public storage: StorageService,
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,11 @@ export class SearchPageComponent implements OnInit, OnDestroy {
       fieldPath: 'displayName',
       direction: 'desc',
     });
+    this.subscriptions.push(
+      this.storage.searchValue$.subscribe((val) => {
+        this.updateSearchResults(val);
+      }),
+    );
   }
 
   public updateSearchResults(inputValue: string): void {

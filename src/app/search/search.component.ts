@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-search',
@@ -8,11 +9,9 @@ import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs/operators';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @Output() searchInputEvent = new EventEmitter<string>();
-
   public searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private storage: StorageService) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -29,6 +28,8 @@ export class SearchComponent implements OnInit {
         debounceTime(1000),
         distinctUntilChanged(),
       )
-      .subscribe((val) => this.searchInputEvent.emit(val));
+      .subscribe((val: string) => {
+        this.storage.search = val;
+      });
   }
 }

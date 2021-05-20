@@ -27,7 +27,6 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private crudService: CrudService,
     private uploadService: UploadService,
     private toast: ToastrService,

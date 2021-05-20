@@ -2,11 +2,14 @@
 
 :host { 
   @include justify-align-direction(center, center, row);
-  position: fixed;
-  width: 8rem;
-  height: 4rem;
-  bottom: 1rem;
-  right: 1rem;
-  background-color: rgba(1,1,1,0.5);
-  color: white;
+  width: 100%;
+  color: color(text-secondary);
+  font-family: $font-main;
+  font-size: 1.6rem;
+  font-weight: 400;
+  box-sizing: border-box;
+  margin: 1rem;
+  a {
+    cursor: pointer;
+  }
 }

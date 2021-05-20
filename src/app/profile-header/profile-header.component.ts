@@ -108,4 +108,10 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
         .subscribe(),
     );
   }
+
+  public togglePrivate(): void {
+    this.crudService.updateObject('users', this.currentUser.uid, {
+      isPrivate: !this.currentUser.isPrivate,
+    });
+  }
 }

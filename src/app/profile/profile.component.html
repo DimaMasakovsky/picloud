@@ -1,16 +1,21 @@
 <div class="wrapper" *ngIf="user && currentUser">
   <app-profile-header [userID]="user?.uid"></app-profile-header>
-  <ul>
+  <ul *ngIf="canView()">
     <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction;">
       <li *ngIf="user?.posts.includes(post.id)">
         <app-profile-post [post]="post"></app-profile-post>
       </li>
     </ng-container>    
   </ul>
+  <div class="view-warning" *ngIf="!canView()">
+    <span class="material-icons">lock</span>
+    <p>You must be a follower to view this profile</p>
+  </div>  
   <button 
     fxHide.gt-xs
     *ngIf="user.uid === currentUser.uid"
     (click)="signOut()">Sign Out
   </button>
+  <app-footer></app-footer>
 </div>
 

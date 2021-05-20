@@ -98,4 +98,13 @@ export class CrudService {
       }),
     );
   }
+
+  public handleCurrentUserData(): any {
+    return this.authService.user$.pipe(
+      map((value) => value.uid),
+      switchMap((uid) => {
+        return this.handleObjectByRef('users', uid);
+      }),
+    );
+  }
 }

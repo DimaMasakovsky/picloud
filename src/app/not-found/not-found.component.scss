@@ -1,0 +1,74 @@
+@import '../../styles.scss';
+
+:host {
+  @include justify-align-direction(center, center, column);
+  background-color: color(background);
+  width: 100%;
+  min-height: 100vh;
+}
+img {
+  width: 50%;
+}
+section {
+  @include justify-align-direction(center,center,row);
+  width: 70%;
+  margin: 2rem auto; 
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  @include desktop-medium {
+    width: 70%;
+  }
+  @include mobile {
+    @include justify-align-direction(flex-start,center,column);
+    margin-top: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  h1 {
+    font-size: 10.2rem;
+    font-family: $font-secondary;
+    font-weight: 600;
+    @include mobile {
+      text-align: center;
+      margin-left: 0;
+    }
+  }
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    font-family: $font-secondary;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.8rem;
+    font-family: $font-main;
+  }
+  .wrapper {
+    @include justify-align-direction(flex-start, flex-start, column);
+    gap: 2rem;
+    margin-left: 2rem;
+    @include mobile {
+      margin-left: 0;
+      padding: 2rem;
+      @include justify-align-direction(flex-start, center, column);
+    }
+  }
+  button {
+    height: 2.4rem;
+    padding: 0.1rem 1.5rem;
+
+    cursor: pointer;
+    color: #ffffff;
+    background-color: color(accent);
+    border: 0.1rem solid color(accent);
+    outline: none;
+    border-radius: 0.5rem;
+    font-family: $font-main;
+    font-size: 1.6rem;  
+    &:disabled {
+      background-color: lighten(color(accent), 20%);
+      border: 0.1rem solid lighten(color(accent), 20%);
+    }
+  }
+}
