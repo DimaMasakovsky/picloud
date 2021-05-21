@@ -47,11 +47,26 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.postForm = this.fb.group({
-      textContent: ['', [Validators.required, Validators.pattern(/[ -~]/)]],
-      tag: ['', [Validators.required, Validators.pattern('[0-9a-zA-Zа-яёА-ЯЁ ]*')]],
+      textContent: ['', [Validators.required, Validators.maxLength(256)]],
+      tag: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('[0-9a-zA-Zа-яёА-ЯЁ ]*'),
+          Validators.maxLength(128),
+        ],
+      ],
       file: ['', [Validators.required]],
       fileUpload: ['', [Validators.required]],
     });
+  }
+
+  public get textContent() {
+    return this.postForm.get('textContent');
+  }
+
+  public get tag() {
+    return this.postForm.get('tag');
   }
 
   public onSubmit(): void {

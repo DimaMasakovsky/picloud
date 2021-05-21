@@ -7,7 +7,6 @@
   @include mobile {
     border-radius: 0;
   }
-  
   .wrapper {
     @include justify-align-direction(flex-start, flex-start,  row);
     width: 100%;
@@ -17,93 +16,108 @@
       @include justify-align-direction(flex-start,flex-start, column);
     }
   }
+  .mobile-top {
+    width: 100%;
+    @include justify-align-direction(flex-start, center, row);
+    gap: 1rem;
+    .bio {
+      margin-bottom: 0;
+    }
+  }
+  .mobile-display-name {
+    max-width: 23rem;
+  }
   .user-fields {
     margin: 0 2rem;
     @include mobile {
       margin: 0;
       width: 100%;
     }
-    h2 {
-      font-family: $font-secondary;
-      font-weight: 600;
-      font-size: 2.4rem;
-    }
-    .bio {
-      font-family: $font-main; 
-      font-size: 1.8rem; 
-      margin: 1rem 0;
-      word-wrap: break-word;
-    }
-    ul {
-      @include justify-align-direction(space-between, center, row);
-      margin-top: 1rem;
-      gap: 2rem;
-      li {
-        cursor: pointer;
-        h6 {
-          font-family: $font-main;
-          font-size: 2rem;
-        }
-        span {
-          font-family: $font-main;
-          font-size: 1.6rem;
-          color: color(text-secondary);
-        }
-      }
-    }
   }
-  .edit-controls {
-    cursor: pointer;
-    @include mobile {
-      align-self: flex-end;
-      margin-top: 1.5rem;
-    }
+  h2 {
+    font-family: $font-secondary;
+    font-weight: 600;
+    font-size: 2.4rem;
   }
-  form {
-    @include justify-align-direction(flex-start, flex-start, column);
+  .bio {
+    font-family: $font-main; 
+    font-size: 1.8rem; 
+    margin: 1rem 0;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 25rem;
+  }
+  ul {
+    @include justify-align-direction(space-between, center, row);
     margin-top: 1rem;
-    width: 100%;
-    input {
-      width: 98%;
-      height: 2.5rem;
-  
-      border-radius: 0.5rem;
-      border: 0.1rem solid rgb(238, 238, 238);
-      outline: none;
-      padding: 0.2rem;
-      font-size: 1.6rem;
-    }
-    .toggle {
-      font-size: 1.6rem;
-      font-family: $font-main;
-    }
-    button {
-      margin-top: 1rem;
-      @include justify-align-direction(center, center, row);
-      height: 3rem;
-      padding: 0.1rem 1.5rem;
-      width: 100%;  
+    gap: 2rem;
+    li {
       cursor: pointer;
-      color: #ffffff;
-      background-color: color(accent);
-      border: 0.1rem solid color(accent);
-      outline: none;
-      border-radius: 0.5rem;
-      font-family: $font-main;
-      font-size: 1.6rem;  
-      &:disabled {
-        background-color: lighten(color(accent), 20%);
-        border: 0.1rem solid lighten(color(accent), 20%);
+      h6 {
+        font-family: $font-main;
+        font-size: 2rem;
       }
       span {
-        color: #ffffff;
-        margin-right: 0.5rem;
+        font-family: $font-main;
+        font-size: 1.6rem;
+        color: color(text-secondary);
       }
     }
-    progress {
-      margin-top: 1rem; 
-      width: 100%;
+  }
+}
+.edit-controls {
+  cursor: pointer;
+  @include mobile {
+    align-self: flex-end;
+    margin-top: 1.5rem;
+  }
+}
+form {
+  @include justify-align-direction(flex-start, flex-start, column);
+  margin-top: 1rem;
+  width: 100%;
+  input {
+    width: 98%;
+    height: 2.5rem;
+
+    border-radius: 0.5rem;
+    border: 0.1rem solid rgb(238, 238, 238);
+    outline: none;
+    padding: 0.2rem;
+    font-size: 1.6rem;
+  }
+  .toggle {
+    font-size: 1.6rem;
+    font-family: $font-main;
+  }
+  button {
+    margin-top: 1rem;
+    @include justify-align-direction(center, center, row);
+    height: 3rem;
+    padding: 0.1rem 1.5rem;
+    width: 100%;  
+    cursor: pointer;
+    color: #ffffff;
+    background-color: color(accent);
+    border: 0.1rem solid color(accent);
+    outline: none;
+    border-radius: 0.5rem;
+    font-family: $font-main;
+    font-size: 1.6rem;  
+    &:disabled {
+      background-color: lighten(color(accent), 20%);
+      border: 0.1rem solid lighten(color(accent), 20%);
     }
+    span {
+      color: #ffffff;
+      margin-right: 0.5rem;
+    }
+  }
+  progress {
+    margin-top: 1rem; 
+    width: 100%;
   }
 }
 
@@ -115,13 +129,23 @@
     width: 12rem;
     height: 12rem;
     border-radius: 0.5rem;
+    @include desktop-medium {
+      width: 8rem;
+      height: 8rem;
+    }
     @include mobile {
       width: 6rem;
       height: 6rem;
     }
   }
 }
-
+.validator-error {
+  font-size: 1.4rem;
+  color: color(error);
+  margin-top: 0.2rem;
+  font-weight: 400;
+  font-family: $font-main;
+}
 #hidden-file-input {
   display: none;
 }

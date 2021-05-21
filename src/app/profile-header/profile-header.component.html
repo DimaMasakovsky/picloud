@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="user && currentUser">
+<div class="wrapper" *ngIf="user && currentUser && media.isActive('gt-xs')">
   <div class="image-wrapper">
     <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
     </ng-container>
@@ -9,6 +9,7 @@
     <p class="bio" *ngIf="!this.isEditing">{{user.bio}}</p>
     <form *ngIf="this.isEditing" [formGroup]="updateProfileForm">
       <input type="text" id="bio" formControlName="bio" [placeholder]="this.user.bio"/>
+      <span class="validator-error" *ngIf="bio.errors?.maxlength && bio.touched">Maximum length is 128</span>
       <button (click)="hiddenfileinput.click()">
         <span class="material-icons upload">image</span>Set new profile picture
       </button>
@@ -44,11 +45,66 @@
   </section>
   <section class="edit-controls" *ngIf="this.currentUser.uid == this.user.uid">
     <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
-    <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null" (click)="this.isEditing = false; onSubmit()">check</span>
+    <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null && this.updateProfileForm.valid" 
+    (click)="this.isEditing = false; onSubmit()">check</span>
   </section>
 </div>
 
-
+<div class="wrapper" *ngIf="user && currentUser && media.isActive('xs')">
+  <section class="mobile-top">
+    <div class="image-wrapper">
+      <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
+      </ng-container>
+      <app-follow-button [user]="user"></app-follow-button>
+    </div>
+    <div class="mobile-display-name">
+      <h2>{{user.displayName}}</h2>
+      <p class="bio" *ngIf="!this.isEditing">{{user.bio}}</p>
+    </div>
+    <section class="edit-controls" *ngIf="this.currentUser.uid == this.user.uid">
+      <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
+      <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null && this.updateProfileForm.valid" 
+      (click)="this.isEditing = false; onSubmit()">check</span>
+    </section>   
+  </section>  
+  <section class="user-fields">    
+    <form *ngIf="this.isEditing" [formGroup]="updateProfileForm">
+      <input type="text" id="bio" formControlName="bio" [placeholder]="this.user.bio"/>
+      <span class="validator-error" *ngIf="bio.errors?.maxlength && bio.touched">Maximum length is 128</span>
+      <button (click)="hiddenfileinput.click()">
+        <span class="material-icons upload">image</span>Set new profile picture
+      </button>
+      <progress max="100" min="0" [value]="progress"></progress>
+      <input type="file"
+         formControlName="file"
+         id="hidden-file-input"
+         (change)="onFileSelected($event)"
+         name="image"
+         autocomplete="off"
+         #hiddenfileinput
+      />
+      <mat-slide-toggle 
+        class="toggle" 
+        [checked]="user.isPrivate"
+        (click)="togglePrivate()">Private profile
+      </mat-slide-toggle>
+    </form>
+    <ul>
+      <li>
+        <h6>{{user.postsCount}}</h6>
+        <span>posts</span>
+      </li>
+      <li (click)="openUserList('followers')">
+        <h6>{{user.followersCount}}</h6>
+        <span>followers</span>
+      </li>
+      <li (click)="openUserList('following')">
+        <h6>{{user.followingCount}}</h6>
+        <span>following</span>
+      </li>
+    </ul>
+  </section>
+</div>
 
 
 <ng-template #userImage>

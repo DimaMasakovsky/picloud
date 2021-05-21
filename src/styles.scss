@@ -107,12 +107,12 @@ a {
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @mixin mobile {
-  @media (max-width: #{$mobile}) {
+  @media screen and (max-width: #{$mobile}) {
     @content;
   }
 }
 @mixin desktop-medium { 
-  @media (max-width: #{$desktop-medium}) {
+  @media screen and (min-width: 600px) and (max-width: #{$desktop-medium}) {
     @content;
   }
 }

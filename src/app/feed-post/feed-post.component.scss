@@ -32,5 +32,10 @@
     border-radius: 3rem;
     background-color: #285A36;
     color: #ffffff;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 25rem;
   }
 }

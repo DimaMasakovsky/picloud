@@ -78,10 +78,14 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   private initForm(): void {
     this.updateProfileForm = this.fb.group({
-      bio: ['', [Validators.pattern(/[ -~]/)]],
+      bio: ['', [Validators.maxLength(128)]],
       file: [''],
       fileUpload: [''],
     });
+  }
+
+  public get bio() {
+    return this.updateProfileForm.get('bio');
   }
 
   public onSubmit(): void {

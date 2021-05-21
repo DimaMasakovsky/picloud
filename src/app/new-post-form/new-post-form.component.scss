@@ -30,6 +30,12 @@ form {
       margin-bottom: 0;
     }
   }
+  .validator-error {
+    font-size: 1.4rem;
+    color: color(error);
+    margin-top: 0.2rem;
+    font-weight: 400;
+  }
   .wrapper {
     @include justify-align-direction(space-between, center,row);
   }
