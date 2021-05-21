@@ -1,11 +1,14 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, takeWhile, tap } from 'rxjs/operators';
 import { User } from '../interfaces';
 import { CrudService } from '../services/crud.service';
 import { UploadService } from '../services/upload.service';
+import { UserListComponent } from '../user-list/user-list.component';
 
 @Component({
   selector: 'app-profile-header',
@@ -30,11 +33,15 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   private subscriptions: Array<Subscription> = [];
 
+  private dialogWidth: '40vw' | '90vw';
+
   constructor(
     private uploadService: UploadService,
     private toast: ToastrService,
     private fb: FormBuilder,
     private crudService: CrudService,
+    private dialog: MatDialog,
+    public media: MediaObserver,
   ) {}
 
   ngOnChanges(): void {
@@ -48,8 +55,17 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     this.initForm();
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((user: User) => {
+      this.crudService.handleCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
+      }),
+      this.media.asObservable().subscribe(() => {
+        if (this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
+          this.dialog.closeAll();
+        }
+        if (this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
+          this.dialog.closeAll();
+        }
+        this.dialogWidth = this.media.isActive('lt-md') ? '90vw' : '40vw';
       }),
     );
   }
@@ -112,6 +128,16 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   public togglePrivate(): void {
     this.crudService.updateObject('users', this.currentUser.uid, {
       isPrivate: !this.currentUser.isPrivate,
+    });
+  }
+
+  public openUserList(category: 'followers' | 'following') {
+    this.dialog.open(UserListComponent, {
+      data: {
+        category,
+        userID: this.user.uid,
+      },
+      width: this.dialogWidth,
     });
   }
 }

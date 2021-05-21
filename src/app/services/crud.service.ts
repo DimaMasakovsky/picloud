@@ -90,15 +90,6 @@ export class CrudService {
     return from(this.firestoreService.collection(collectionName).doc(id).delete()).pipe(take(1));
   }
 
-  public getCurrentUserData(): any {
-    return this.authService.user$.pipe(
-      map((value) => value.uid),
-      switchMap((uid) => {
-        return this.firestoreService.collection('users').doc(uid).valueChanges();
-      }),
-    );
-  }
-
   public handleCurrentUserData(): any {
     return this.authService.user$.pipe(
       map((value) => value.uid),

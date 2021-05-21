@@ -28,7 +28,7 @@ export class RecommendedUsersComponent implements OnInit, OnDestroy {
       direction: 'asc',
     });
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((user: User) => {
+      this.crudService.handleCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
       }),
     );

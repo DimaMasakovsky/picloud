@@ -72,6 +72,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add: search, fix: profile routing bug',
         'https://github.com/DimaMasakovsky/picloud/commit/08c4e9a48d7e2bd984dcb189fd9d4a71de14964b',
       ),
+      '20.05': this.ProjectUpdateData(
+        'Add: ability to open post with link, private profile, fix: search reset on routing',
+        'https://github.com/DimaMasakovsky/picloud/commit/2cf8cb3948349a62d5ad469d72e90fb1eb075a07',
+      ),
     });
   }
 

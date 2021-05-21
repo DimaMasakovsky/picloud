@@ -37,6 +37,7 @@ import { CreatePostPageComponent } from './create-post-page/create-post-page.com
 import { SearchPageComponent } from './search-page/search-page.component';
 import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UserListComponent } from './user-list/user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SearchPageComponent,
     AboutComponent,
     NotFoundComponent,
+    UserListComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [

@@ -19,7 +19,7 @@ export class PostStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((value: User) => {
+      this.crudService.handleCurrentUserData().subscribe((value: User) => {
         this.currentUserID = value.uid;
       }),
     );

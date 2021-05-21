@@ -35,7 +35,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((value: User) => {
+      this.crudService.handleCurrentUserData().subscribe((value: User) => {
         this.currentUserData = value;
       }),
     );

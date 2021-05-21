@@ -32,11 +32,11 @@
         <h6>{{user.postsCount}}</h6>
         <span>posts</span>
       </li>
-      <li>
+      <li (click)="openUserList('followers')">
         <h6>{{user.followersCount}}</h6>
         <span>followers</span>
       </li>
-      <li>
+      <li (click)="openUserList('following')">
         <h6>{{user.followingCount}}</h6>
         <span>following</span>
       </li>

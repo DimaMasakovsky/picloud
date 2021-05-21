@@ -30,7 +30,7 @@ export class FeedComponent implements OnInit, OnDestroy {
       direction: 'desc',
     });
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((user: User) => {
+      this.crudService.handleCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
       }),
       this.route.queryParams.subscribe((queryParams) => {

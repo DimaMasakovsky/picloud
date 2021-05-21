@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       direction: 'desc',
     });
     this.subscriptions.push(
-      this.crudService.getCurrentUserData().subscribe((user: User) => {
+      this.crudService.handleCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
       }),
       this.route.params

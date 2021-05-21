@@ -48,7 +48,7 @@ export class PostModalComponent implements OnInit, OnDestroy {
           this.matDialog.closeAll();
         }
       }),
-      this.crudService.getCurrentUserData().subscribe((value) => {
+      this.crudService.handleCurrentUserData().subscribe((value) => {
         this.currentUser = value;
       }),
     );

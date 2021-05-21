@@ -31,7 +31,7 @@ export class CommentComponent implements OnInit {
     this.crudService.getObjectByRef('users', this.comment.author).subscribe((author: User) => {
       this.authorUser = author;
     });
-    this.crudService.getCurrentUserData().subscribe((value) => {
+    this.crudService.handleCurrentUserData().subscribe((value) => {
       this.currentUser = value;
     });
   }
