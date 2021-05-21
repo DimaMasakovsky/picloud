@@ -7,7 +7,7 @@ import { Post } from '../interfaces';
   providedIn: 'root',
 })
 export class StorageService {
-  public searchValue$: Subject<string> = new Subject<string>();
+  public searchValue$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   private _searchValue: string;
 

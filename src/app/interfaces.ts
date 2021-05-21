@@ -21,7 +21,7 @@ export interface Post {
   createTime: number;
   likeCount: number;
   likes: Array<string>;
-  tag: Array<string>;
+  tags: Array<string>;
   textContent: string;
   id?: string;
 }

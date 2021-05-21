@@ -2,6 +2,11 @@
   <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
   <ng-container *ngIf="canView()">
     <p class="post-text">{{post.textContent}}</p>
+    <ul class="tags-wrapper">
+      <li *ngFor="let tag of post.tags" class="tags">
+        <app-tag [tag]="tag"></app-tag>
+      </li>
+    </ul>
     <div class="image-wrapper">
       <img [src]="this.post.contentPicURL">
     </div>

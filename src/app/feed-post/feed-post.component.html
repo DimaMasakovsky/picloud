@@ -5,6 +5,6 @@
 <div class="footer-wrapper">
   <app-post-stats [post]="post"></app-post-stats>
   <div class="post-footer-tag">
-    #{{post.tag}}
+    <app-tag [tag]="post.tags[0]"></app-tag>
   </div>
 </div>

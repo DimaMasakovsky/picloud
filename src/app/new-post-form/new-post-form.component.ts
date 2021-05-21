@@ -48,7 +48,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
   private initForm(): void {
     this.postForm = this.fb.group({
       textContent: ['', [Validators.required, Validators.pattern(/[ -~]/)]],
-      tag: ['', [Validators.required, Validators.pattern(/[a-z0-9_-]/)]],
+      tag: ['', [Validators.required, Validators.pattern('[0-9a-zA-Zа-яёА-ЯЁ ]*')]],
       file: ['', [Validators.required]],
       fileUpload: ['', [Validators.required]],
     });
@@ -65,7 +65,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
         createTime: Date.now(),
         likeCount: 0,
         contentPicURL: this.imageLink,
-        tag: controls.tag.value,
+        tags: controls.tag.value.split(' '),
         textContent: controls.textContent.value,
       } as Post;
       this.subscriptions.push(

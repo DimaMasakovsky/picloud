@@ -10,6 +10,16 @@
   overflow: hidden;
   word-wrap: break-word;
 }
+.tags-wrapper {
+  width: 100%;
+  @include justify-align-direction(flex-start, center, row);
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  .tags {
+    font-size: 2.4rem;
+    color: color(accent);
+  }
+}
 .image-wrapper {
   @include justify-align-direction(center, center, none);
   width: 100%;
