@@ -28,6 +28,8 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   public commentIsUploading = false;
 
+  public postAuthor: User;
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: { postID: string },
@@ -37,17 +39,26 @@ export class PostModalComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public router: Router,
     public matDialog: MatDialog,
-    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.crudService.handleObjectByRef('posts', this.data.postID).subscribe((value) => {
-        this.post = value;
-        if (!value.author) {
-          this.matDialog.closeAll();
-        }
-      }),
+      this.crudService
+        .handleObjectByRef('posts', this.data.postID)
+        .pipe(
+          tap((post: Post) => {
+            this.post = post;
+            if (!post.author) {
+              this.matDialog.closeAll();
+            }
+          }),
+          switchMap((post: Post) => {
+            return this.crudService.handleObjectByRef('users', post.author);
+          }),
+        )
+        .subscribe((user: User) => {
+          this.postAuthor = user;
+        }),
       this.crudService.handleCurrentUserData().subscribe((value) => {
         this.currentUser = value;
       }),
@@ -127,5 +138,14 @@ export class PostModalComponent implements OnInit, OnDestroy {
       this.crudService.updateObject('users', this.currentUser.uid, data);
       this.toast.error('Post deleted!');
     }
+  }
+
+  public canView(): boolean {
+    // eslint-disable-next-line no-nested-ternary
+    return this.postAuthor.uid === this.currentUser.uid
+      ? true
+      : this.postAuthor.isPrivate
+      ? this.postAuthor.followers.includes(this.currentUser.uid)
+      : true;
   }
 }

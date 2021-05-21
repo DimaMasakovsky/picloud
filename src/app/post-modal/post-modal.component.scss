@@ -1,9 +1,14 @@
 @import '../../styles.scss';
 
-p {
+:host {
+  width: 100%;
+}
+.post-text {
   margin-top: 2rem;
   font-size: 2.4rem;
-  word-break: break-all;
+  width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 .image-wrapper {
   @include justify-align-direction(center, center, none);
@@ -103,5 +108,22 @@ form {
       background-color: lighten(color(error), 20%);
       border: 0.1rem solid lighten(color(error), 20%);
     }
+  }
+}
+.view-warning {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 2rem; 
+  background-color: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 0.5rem;
+  p {      
+    font-size: 1.8rem; 
+    margin-top: 1rem; 
+  }
+  @include mobile {
+    border-radius: 0;
   }
 }

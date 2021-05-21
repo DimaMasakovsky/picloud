@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, takeWhile, tap } from 'rxjs/operators';
@@ -35,6 +35,8 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   private dialogWidth: '40vw' | '90vw';
 
+  private dialogRef: MatDialogRef<UserListComponent>;
+
   constructor(
     private uploadService: UploadService,
     private toast: ToastrService,
@@ -59,11 +61,11 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
         this.currentUser = user;
       }),
       this.media.asObservable().subscribe(() => {
-        if (this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
-          this.dialog.closeAll();
+        if (this.dialogRef && this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
+          this.dialogRef.close();
         }
-        if (this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
-          this.dialog.closeAll();
+        if (this.dialogRef && this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
+          this.dialogRef.close();
         }
         this.dialogWidth = this.media.isActive('lt-md') ? '90vw' : '40vw';
       }),
@@ -132,7 +134,7 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public openUserList(category: 'followers' | 'following') {
-    this.dialog.open(UserListComponent, {
+    this.dialogRef = this.dialog.open(UserListComponent, {
       data: {
         category,
         userID: this.user.uid,

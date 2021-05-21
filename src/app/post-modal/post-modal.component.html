@@ -1,46 +1,52 @@
-<mat-dialog-content *ngIf="post">
+<mat-dialog-content *ngIf="post && postAuthor">
   <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
-  <p>{{post.textContent}}</p>
-  <div class="image-wrapper">
-    <img [src]="this.post.contentPicURL">
-  </div>
-  <div class="controls-wrapper">
-    <app-post-stats [post]="post"></app-post-stats>
-    <button 
-      class="delete-button"
-      *ngIf="this.post?.author === this.currentUser?.uid" 
-      (click)="deletePost()">Delete post!
-    </button>
-  </div>  
-  <ul class="users-liked" *ngIf="this.post.likeCount > 0">
-    <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">
-      <li *ngIf="post.likes?.includes(user.uid)">
-        <div 
-          class="small-profile-pic" 
-          (click)="this.router.navigate(['/profile', user.uid]); this.matDialog.closeAll()" 
-          [style.backgroundImage]="user.photoURL | urlParentesis">
-        </div>
+  <ng-container *ngIf="canView()">
+    <p class="post-text">{{post.textContent}}</p>
+    <div class="image-wrapper">
+      <img [src]="this.post.contentPicURL">
+    </div>
+    <div class="controls-wrapper">
+      <app-post-stats [post]="post"></app-post-stats>
+      <button 
+        class="delete-button"
+        *ngIf="this.post?.author === this.currentUser?.uid" 
+        (click)="deletePost()">Delete post!
+      </button>
+    </div>  
+    <ul class="users-liked" *ngIf="this.post.likeCount > 0">
+      <ng-container *ngFor="let user of userSubscription | async; trackBy:trackFunction;">
+        <li *ngIf="post.likes?.includes(user.uid)">
+          <div 
+            class="small-profile-pic" 
+            (click)="this.router.navigate(['/profile', user.uid]); this.matDialog.closeAll()" 
+            [style.backgroundImage]="user.photoURL | urlParentesis">
+          </div>
+        </li>
+      </ng-container>    
+    </ul>
+    <form [formGroup]="commentForm">
+      <ng-container [ngTemplateOutlet]="currentUser ? userImage : defaultImage">
+      </ng-container>
+      <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
+      <button 
+        class="comment-button"
+        [disabled]="this.commentForm.invalid || this.commentIsUploading"
+        (click)="onSubmit()">Comment!
+      </button>
+    </form>  
+    <ul class="comment-section">
+      <li *ngFor="let comment of commentsSubscription | async; trackBy:trackFunction">
+        <app-comment 
+          [comment]="comment" 
+          [post]="post"
+          *ngIf="post.comments?.includes(comment.id)"></app-comment>
       </li>
-    </ng-container>    
-  </ul>
-  <form [formGroup]="commentForm">
-    <ng-container [ngTemplateOutlet]="currentUser ? userImage : defaultImage">
-    </ng-container>
-    <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
-    <button 
-      class="comment-button"
-      [disabled]="this.commentForm.invalid || this.commentIsUploading"
-      (click)="onSubmit()">Comment!
-    </button>
-  </form>  
-  <ul class="comment-section">
-    <li *ngFor="let comment of commentsSubscription | async; trackBy:trackFunction">
-      <app-comment 
-        [comment]="comment" 
-        [post]="post"
-        *ngIf="post.comments?.includes(comment.id)"></app-comment>
-    </li>
-  </ul>
+    </ul>
+  </ng-container>
+  <div class="view-warning" *ngIf="!canView()">
+    <span class="material-icons">lock</span>
+    <p>You must be a follower to view this post</p>
+  </div>
 </mat-dialog-content>
 
 
