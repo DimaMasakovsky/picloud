@@ -8,8 +8,15 @@ ul {
     color: color(text-secondary-color);
     font-family: $font-main;
     margin-right:2rem;
+    @include mobile {
+      margin-right: 0.5rem;
+    }
+    .comment {
+      cursor: default;
+    }
     span {
       cursor: pointer;
+      
       &::selection {
         color: none;
         background: none;

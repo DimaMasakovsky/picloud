@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MediaObserver } from '@angular/flex-layout';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { User } from '../interfaces';
@@ -18,10 +19,15 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
+  private dialogWidth: '40vw' | '90vw';
+
+  private dialogRef: MatDialogRef<PostModalComponent>;
+
   constructor(
     private crudService: CrudService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    public media: MediaObserver,
   ) {}
 
   ngOnInit(): void {
@@ -35,13 +41,23 @@ export class FeedComponent implements OnInit, OnDestroy {
       }),
       this.route.queryParams.subscribe((queryParams) => {
         if (queryParams.postId) {
-          const dialogRef = this.dialog.open(PostModalComponent, {
+          this.dialogRef = this.dialog.open(PostModalComponent, {
             data: { postID: queryParams.postId },
-            width: '80vw',
+            width: this.dialogWidth,
             maxHeight: '90%',
             hasBackdrop: true,
+            autoFocus: false,
           });
         }
+      }),
+      this.media.asObservable().subscribe(() => {
+        if (this.dialogRef && this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
+          this.dialogRef.close();
+        }
+        if (this.dialogRef && this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
+          this.dialogRef.close();
+        }
+        this.dialogWidth = this.media.isActive('lt-md') ? '90vw' : '40vw';
       }),
     );
   }

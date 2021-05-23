@@ -11,7 +11,7 @@
     <span class="material-icons">lock</span>
     <p>You must be a follower to view this profile</p>
   </div>  
-  <button 
+  <button
     fxHide.gt-xs
     *ngIf="user.uid === currentUser.uid"
     (click)="signOut()">Sign Out

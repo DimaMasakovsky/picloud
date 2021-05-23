@@ -8,10 +8,12 @@
 </div>        
 
 <ng-template #userImage>
-  <div class="image" [style.backgroundImage]="this.user.photoURL | urlParentesis"></div>
+  <div class="image" [style.backgroundImage]="this.user.photoURL | urlParentesis"
+  (click)="this.router.navigate(['/profile', this.userID]); this.matDialog.closeAll()"></div>
 </ng-template>
 
 
 <ng-template #defaultImage>
-  <div class="image"></div>
+  <div class="image"
+  (click)="this.router.navigate(['/profile', this.userID]); this.matDialog.closeAll()"></div>
 </ng-template>

@@ -4,7 +4,7 @@
     <p class="stat-count" [class.liked]="this.post.likes?.includes(this.currentUserID)">{{post.likeCount}}</p>
   </li>
   <li>
-    <span class="material-icons">chat_bubble</span>
+    <span class="material-icons comment" >chat_bubble</span>
     <p class="stat-count">{{post.commentCount}}</p>
   </li>
 </ul>

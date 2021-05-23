@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { User } from '../interfaces';
@@ -24,6 +24,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     public data: { category: 'followers' | 'following'; userID: string },
     private crudService: CrudService,
     public router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +44,11 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   public trackFunction(index: any, item: any): string {
     return item.id;
+  }
+
+  public navigateTo(id: string): void {
+    this.router.navigate(['/profile', id]);
+    this.dialog.closeAll();
   }
 
   ngOnDestroy(): void {

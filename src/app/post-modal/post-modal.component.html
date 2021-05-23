@@ -7,9 +7,7 @@
         <app-tag [tag]="tag"></app-tag>
       </li>
     </ul>
-    <div class="image-wrapper">
-      <img [src]="this.post.contentPicURL">
-    </div>
+    <img [src]="this.post.contentPicURL">
     <div class="controls-wrapper">
       <app-post-stats [post]="post"></app-post-stats>
       <button 
@@ -32,7 +30,10 @@
     <form [formGroup]="commentForm">
       <ng-container [ngTemplateOutlet]="currentUser ? userImage : defaultImage">
       </ng-container>
-      <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
+      <div class="input-wrapper">
+        <input type="text" id="text-content" formControlName="textContent" placeholder="Share your impression">
+        <span class="validator-error" *ngIf="textContent.errors?.maxlength && textContent.touched">Maximum length is 256</span>
+      </div>
       <button 
         class="comment-button"
         [disabled]="this.commentForm.invalid || this.commentIsUploading"

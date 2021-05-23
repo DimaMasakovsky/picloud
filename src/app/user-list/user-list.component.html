@@ -1,24 +1,26 @@
 <mat-dialog-content>
   <ul *ngIf="data.category === 'followers'">
+    <h2>Followers:</h2>
     <ng-container *ngFor="let follower of userSubscription | async; trackBy:trackFunction;">
       <li *ngIf="user.followers.includes(follower.uid)">
         <div class="profile-pic" 
             [style.backgroundImage]="follower.photoURL | urlParentesis" 
-            (click)="this.router.navigate(['/profile', follower.uid]);">
+            (click)="navigateTo(follower.uid)">
         </div>
-        <p (click)="this.router.navigate(['/profile', follower.uid]);">{{follower.displayName}}</p>
+        <p (click)="navigateTo(follower.uid)">{{follower.displayName}}</p>
         <app-follow-button [user]="follower"></app-follow-button>
       </li>
     </ng-container>
   </ul>
   <ul *ngIf="data.category === 'following'">
+    <h2>Following:</h2>
     <ng-container *ngFor="let following of userSubscription | async; trackBy:trackFunction;">
       <li *ngIf="user.following.includes(following.uid)">
         <div class="profile-pic" 
             [style.backgroundImage]="following.photoURL | urlParentesis" 
-            (click)="this.router.navigate(['/profile', following.uid]);">
+            (click)="navigateTo(following.uid)">
         </div>
-        <p (click)="this.router.navigate(['/profile', following.uid]);">{{following.displayName}}</p>
+        <p (click)="navigateTo(following.uid)">{{following.displayName}}</p>
         <app-follow-button [user]="following"></app-follow-button>
       </li>
     </ng-container>

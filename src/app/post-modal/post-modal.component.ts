@@ -81,8 +81,12 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.commentForm = this.fb.group({
-      textContent: ['', [Validators.required]],
+      textContent: ['', [Validators.required, Validators.maxLength(256)]],
     });
+  }
+
+  public get textContent() {
+    return this.commentForm.get('textContent');
   }
 
   public onSubmit(): void {

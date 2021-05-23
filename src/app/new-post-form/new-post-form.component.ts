@@ -80,7 +80,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
         createTime: Date.now(),
         likeCount: 0,
         contentPicURL: this.imageLink,
-        tags: controls.tag.value.split(' '),
+        tags: controls.tag.value.trim().split(' '),
         textContent: controls.textContent.value,
       } as Post;
       this.subscriptions.push(

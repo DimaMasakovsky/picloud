@@ -10,6 +10,16 @@
   overflow: hidden;
   word-wrap: break-word;
 }
+.validator-error {
+  font-size: 1.4rem;
+  color: color(error);
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+.input-wrapper {
+  width: 100%;
+  @include justify-align-direction(flex-start, flex-start, column);
+}
 .tags-wrapper {
   width: 100%;
   @include justify-align-direction(flex-start, center, row);
@@ -22,21 +32,17 @@
     color: color(accent);
   }
 }
-.image-wrapper {
-  @include justify-align-direction(center, center, none);
-  width: 100%;
+img {
   margin: 2rem 0;
-  img {
-    width: 50%;
-    height: auto;
-    border-radius: 0.5rem;
-  }
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
 }
 button {
+  white-space: nowrap;
   margin-left: 1rem;
   height: 3rem;
   padding: 0.1rem 1.5rem;
-
   cursor: pointer;
   color: #ffffff;
   background-color: color(accent);
@@ -48,11 +54,15 @@ button {
   @include mobile {
     margin: 0;
     width: 100%;
+    padding: 0.1rem;
   }
   &:disabled {
     background-color: lighten(color(accent), 20%);
     border: 0.1rem solid lighten(color(accent), 20%);
   }
+}
+input.ng-invalid{
+  border-color: color(error);
 }
 form {
   width: 100%;

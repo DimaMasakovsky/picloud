@@ -53,9 +53,7 @@
 <div class="wrapper" *ngIf="user && currentUser && media.isActive('xs')">
   <section class="mobile-top">
     <div class="image-wrapper">
-      <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage">
-      </ng-container>
-      <app-follow-button [user]="user"></app-follow-button>
+      <ng-container [ngTemplateOutlet]="user ? userImage : defaultImage"></ng-container>
     </div>
     <div class="mobile-display-name">
       <h2>{{user.displayName}}</h2>
@@ -104,6 +102,7 @@
       </li>
     </ul>
   </section>
+  <app-follow-button [user]="user"></app-follow-button>
 </div>
 
 
