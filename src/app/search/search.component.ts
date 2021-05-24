@@ -24,17 +24,13 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-    this.router.events.subscribe(() => {
-      this.searchForm.reset();
-    });
   }
 
   initForm(): void {
     this.searchForm = this.fb.group({
       search: ['', [Validators.required]],
     });
-    const searchChanges = this.searchForm.valueChanges;
-    searchChanges
+    this.searchForm.valueChanges
       .pipe(
         map((value) => value.search),
         debounceTime(500),

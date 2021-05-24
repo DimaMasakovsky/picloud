@@ -84,6 +84,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'fix: minor improvements and fixes',
         'https://github.com/DimaMasakovsky/picloud/commit/3f6056759638687a9bb52e8e3c64d9a6a5c7138f',
       ),
+      '25.05': this.ProjectUpdateData(
+        'add: redirect to 404, fix: ui improvements',
+        'https://github.com/DimaMasakovsky/picloud/commit/45fe8f33dc0e82363856ecdb6e7935552f624fc1',
+      ),
     });
   }
 
