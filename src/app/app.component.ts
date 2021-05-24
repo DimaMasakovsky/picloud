@@ -80,6 +80,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'Add: followers list, validators, post-modal tags, private account private post',
         'https://github.com/DimaMasakovsky/picloud/commit/bbbbdbfe28b635730f82c9a92338bc2019a10840',
       ),
+      '23.05': this.ProjectUpdateData(
+        'fix: minor improvements and fixes',
+        'https://github.com/DimaMasakovsky/picloud/commit/3f6056759638687a9bb52e8e3c64d9a6a5c7138f',
+      ),
     });
   }
 

@@ -5,10 +5,11 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MediaObserver } from '@angular/flex-layout';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Post } from '../interfaces';
+import { Post, User } from '../interfaces';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CrudService } from '../services/crud.service';
 import { StorageService } from '../services/storage.service';
@@ -26,6 +27,10 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   private subscriptions: Array<Subscription> = [];
 
+  private dialogWidth: '40vw' | '90vw';
+
+  private dialogRef: MatDialogRef<PostModalComponent>;
+
   public filter: string;
 
   constructor(
@@ -35,6 +40,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     public storage: StorageService,
     private dialog: MatDialog,
     private route: ActivatedRoute,
+    private media: MediaObserver,
   ) {}
 
   ngOnInit(): void {
@@ -52,13 +58,28 @@ export class SearchPageComponent implements OnInit, OnDestroy {
       }),
       this.route.queryParams.subscribe((queryParams) => {
         if (queryParams.postId) {
-          const dialogRef = this.dialog.open(PostModalComponent, {
-            data: { postID: queryParams.postId },
-            width: '80vw',
-            maxHeight: '90%',
-            hasBackdrop: true,
+          this.crudService.getObjectByRef('posts', queryParams.postId).subscribe((post: Post) => {
+            if (post) {
+              this.dialogRef = this.dialog.open(PostModalComponent, {
+                data: { postID: queryParams.postId },
+                width: this.dialogWidth,
+                maxHeight: '90%',
+                hasBackdrop: true,
+              });
+            } else {
+              this.router.navigate(['/404']);
+            }
           });
         }
+      }),
+      this.media.asObservable().subscribe(() => {
+        if (this.dialogRef && this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
+          this.dialogRef.close();
+        }
+        if (this.dialogRef && this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
+          this.dialogRef.close();
+        }
+        this.dialogWidth = this.media.isActive('lt-md') ? '90vw' : '40vw';
       }),
     );
   }
@@ -77,16 +98,24 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   public postFilter(post: Post): boolean {
-    if (post.textContent.toLowerCase().includes(this.filter.toLowerCase())) return true;
-    // post.tags.forEach((tag: string) => {
-    //   if (tag.toLowerCase() === this.filter.toLowerCase()) return true;
-    // });
+    if (post.textContent.toLowerCase().includes(this.filter.toLowerCase())) {
+      return true;
+    }
 
     // eslint-disable-next-line no-restricted-syntax
     for (const tag of post.tags) {
-      if (tag.toLowerCase() === this.filter.toLowerCase()) return true;
+      if (tag.toLowerCase() === this.filter.toLowerCase()) {
+        return true;
+      }
     }
 
+    return false;
+  }
+
+  public userFilter(user: User): boolean {
+    if (user.displayName.toLowerCase().includes(this.filter.toLowerCase())) {
+      return true;
+    }
     return false;
   }
 

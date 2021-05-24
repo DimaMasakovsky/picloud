@@ -12,5 +12,15 @@
       </li>
     </ng-container>    
   </ul>
+  <!-- <ul>
+    <app-recommended-users></app-recommended-users>
+    <ng-container *ngFor="let post of pagination.data | async; trackBy:trackFunction">
+      <li class="post-wrapper">
+        <app-feed-post [post]="post"></app-feed-post>
+      </li>
+    </ng-container>   
+    <p *ngIf="pagination.done">No more posts!</p> 
+    <app-loading-spinner *ngIf="pagination.loading"></app-loading-spinner>
+  </ul> -->
 </div>
 

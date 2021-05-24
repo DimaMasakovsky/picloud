@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { take, tap, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-auth-window',
@@ -12,12 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthWindowComponent implements OnInit, OnDestroy {
   private subscriptions: Array<Subscription> = [];
 
-  constructor(
-    private firestore: AngularFirestore,
-    public authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 

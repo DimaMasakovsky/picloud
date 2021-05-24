@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     searchChanges
       .pipe(
         map((value) => value.search),
-        debounceTime(1000),
+        debounceTime(500),
         distinctUntilChanged(),
       )
       .subscribe((val: string) => {

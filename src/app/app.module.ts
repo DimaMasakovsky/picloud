@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
@@ -39,6 +39,7 @@ import { AboutComponent } from './about/about.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { TagComponent } from './tag/tag.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { TagComponent } from './tag/tag.component';
     NotFoundComponent,
     UserListComponent,
     TagComponent,
+    LoadingSpinnerComponent,
   ],
   entryComponents: [PostModalComponent],
   imports: [
@@ -78,7 +80,7 @@ import { TagComponent } from './tag/tag.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatSlideToggleModule,
-    OverlayModule,
+    ScrollingModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-center',

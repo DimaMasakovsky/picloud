@@ -138,12 +138,17 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public openUserList(category: 'followers' | 'following') {
-    this.dialogRef = this.dialog.open(UserListComponent, {
-      data: {
-        category,
-        userID: this.user.uid,
-      },
-      width: this.dialogWidth,
-    });
+    if (
+      (this.user.followersCount !== 0 && category === 'followers') ||
+      (this.user.followingCount !== 0 && category === 'following')
+    ) {
+      this.dialogRef = this.dialog.open(UserListComponent, {
+        data: {
+          category,
+          userID: this.user.uid,
+        },
+        width: this.dialogWidth,
+      });
+    }
   }
 }

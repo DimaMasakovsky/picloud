@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MediaObserver } from '@angular/flex-layout';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { switchMap, tap } from 'rxjs/operators';
 import { CrudService } from '../services/crud.service';
-import { User } from '../interfaces';
+import { Post, User } from '../interfaces';
 import { AuthService } from '../services/auth.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 @Component({
@@ -21,12 +22,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public postsSubscription: any;
 
+  private dialogRef: MatDialogRef<PostModalComponent>;
+
+  private dialogWidth: '40vw' | '90vw';
+
   constructor(
     private route: ActivatedRoute,
     private crudService: CrudService,
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
+    public media: MediaObserver,
   ) {}
 
   ngOnInit(): void {
@@ -35,11 +41,27 @@ export class ProfileComponent implements OnInit, OnDestroy {
       direction: 'desc',
     });
     this.subscriptions.push(
+      this.media.asObservable().subscribe(() => {
+        if (this.dialogRef && this.dialogWidth === '40vw' && this.media.isActive('lt-md')) {
+          this.dialogRef.close();
+        }
+        if (this.dialogRef && this.dialogWidth === '90vw' && this.media.isActive('gt-sm')) {
+          this.dialogRef.close();
+        }
+        this.dialogWidth = this.media.isActive('lt-md') ? '90vw' : '40vw';
+      }),
       this.crudService.handleCurrentUserData().subscribe((user: User) => {
         this.currentUser = user;
       }),
       this.route.params
         .pipe(
+          tap((routeParams) => {
+            this.crudService.getObjectByRef('users', routeParams.id).subscribe((user) => {
+              if (!user) {
+                this.router.navigate(['/404']);
+              }
+            });
+          }),
           switchMap((routeParams) => {
             return this.crudService.handleObjectByRef('users', routeParams.id);
           }),
@@ -49,11 +71,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }),
       this.route.queryParams.subscribe((queryParams) => {
         if (queryParams.postId) {
-          const dialogRef = this.dialog.open(PostModalComponent, {
-            data: { postID: queryParams.postId },
-            width: '80vw',
-            maxHeight: '90%',
-            hasBackdrop: true,
+          this.crudService.getObjectByRef('posts', queryParams.postId).subscribe((post: Post) => {
+            if (post) {
+              this.dialogRef = this.dialog.open(PostModalComponent, {
+                data: { postID: queryParams.postId },
+                width: this.dialogWidth,
+                maxHeight: '90%',
+                hasBackdrop: true,
+              });
+            } else {
+              this.router.navigate(['/404']);
+            }
           });
         }
       }),

@@ -23,7 +23,7 @@
     <ng-container *ngFor="let user of usersSubscription | async; trackBy:trackFunction">
       <li 
         class="post-wrapper" 
-        *ngIf="(user.displayName | uppercase).includes(this.filter | uppercase)"
+        *ngIf="userFilter(user)"
         (click)="this.router.navigate(['/profile', user.uid]);">
         <div class="image" [style.backgroundImage]="user.photoURL | urlParentesis"></div>
         <h5 class="text-content">{{user.displayName}}</h5>
