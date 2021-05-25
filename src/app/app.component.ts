@@ -88,6 +88,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'add: redirect to 404, fix: ui improvements',
         'https://github.com/DimaMasakovsky/picloud/commit/45fe8f33dc0e82363856ecdb6e7935552f624fc1',
       ),
+      '25.05-1': this.ProjectUpdateData(
+        'fix: search stays even on route changes',
+        'https://github.com/DimaMasakovsky/picloud/commit/45fe8f33dc0e82363856ecdb6e7935552f624fc1',
+      ),
     });
   }
 

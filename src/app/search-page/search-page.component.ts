@@ -65,6 +65,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
                 width: this.dialogWidth,
                 maxHeight: '90%',
                 hasBackdrop: true,
+                autoFocus: false,
               });
             } else {
               this.router.navigate(['/404']);
