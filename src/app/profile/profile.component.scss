@@ -6,11 +6,16 @@
   min-height: 100vh;
   width: 100%;
   background-color: color(background);
-
-  .wrapper {
+  box-sizing: border-box;
+  .content {
+    width: 100%;
     @include justify-align-direction(flex-start, center, column);
+  }
+  .wrapper {
+    @include justify-align-direction(space-between, center, column);
     width: 70vw;
     margin: 0 auto;
+    height: calc(100vh - 4.2rem - 1.5rem);
     margin-top: 4.2rem + 1.5rem;
     @include desktop-medium {
       width: 50rem;
@@ -18,6 +23,7 @@
     @include mobile {
       width: 100%;
       margin-top: 0;
+      height: calc(100vh - 5rem);
       margin-bottom: 5rem;
     }
     ul {

@@ -106,19 +106,24 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
 
   public onFileSelected(event): void {
     const file = event.target.files[0];
+    const types = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
-    this.subscriptions.push(
-      combineLatest(this.uploadService.uploadFile('postPictures', file))
-        .pipe(
-          tap(([percent, link]) => {
-            this.progress = percent.toString();
-            this.imageLink = link;
-            if (link) this.postForm.controls.fileUpload.setValue(true);
-          }),
-          takeWhile(([percent, link]) => !link),
-        )
-        .subscribe(),
-    );
+    if (types.includes(file.type)) {
+      this.subscriptions.push(
+        combineLatest(this.uploadService.uploadFile('postPictures', file))
+          .pipe(
+            tap(([percent, link]) => {
+              this.progress = percent.toString();
+              this.imageLink = link;
+              if (link) this.postForm.controls.fileUpload.setValue(true);
+            }),
+            takeWhile(([percent, link]) => !link),
+          )
+          .subscribe(),
+      );
+    } else {
+      this.toast.error('Only .png, .jpg or .webp images are accepted!');
+    }
   }
 
   public resetForm(): void {

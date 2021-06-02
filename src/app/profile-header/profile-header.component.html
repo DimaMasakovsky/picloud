@@ -10,11 +10,19 @@
     <form *ngIf="this.isEditing" [formGroup]="updateProfileForm">
       <input type="text" id="bio" formControlName="bio" [placeholder]="this.user.bio"/>
       <span class="validator-error" *ngIf="bio.errors?.maxlength && bio.touched">Maximum length is 128</span>
-      <button (click)="hiddenfileinput.click()">
+      <button type="button" class="upload-button" (click)="hiddenfileinput.click()">
         <span class="material-icons upload">image</span>Set new profile picture
       </button>
       <progress max="100" min="0" [value]="progress"></progress>
+      <mat-slide-toggle 
+        class="toggle" 
+        [checked]="user.isPrivate"
+        (click)="togglePrivate()">Private profile
+      </mat-slide-toggle>
+      <button type="button" class="save-button" [disabled]="!(this.isEditing && this.imageLink !== null && this.updateProfileForm.valid)" 
+      (click)="this.isEditing = false; onFormSubmit()">Save changes</button>
       <input type="file"
+         accept="image/*"
          formControlName="file"
          id="hidden-file-input"
          (change)="onFileSelected($event)"
@@ -22,11 +30,6 @@
          autocomplete="off"
          #hiddenfileinput
       />
-      <mat-slide-toggle 
-        class="toggle" 
-        [checked]="user.isPrivate"
-        (click)="togglePrivate()">Private profile
-      </mat-slide-toggle>
     </form>
     <ul>
       <li>
@@ -43,10 +46,8 @@
       </li>
     </ul>
   </section>
-  <section class="edit-controls" *ngIf="this.currentUser.uid == this.user.uid">
+  <section class="edit-controls" *ngIf="viewControl()">
     <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
-    <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null && this.updateProfileForm.valid" 
-    (click)="this.isEditing = false; onSubmit()">check</span>
   </section>
 </div>
 
@@ -61,19 +62,25 @@
     </div>
     <section class="edit-controls" *ngIf="this.currentUser.uid == this.user.uid">
       <span class="material-icons" *ngIf="!this.isEditing" (click)="this.isEditing = true">edit</span>
-      <span class="material-icons" *ngIf="this.isEditing && this.imageLink !== null && this.updateProfileForm.valid" 
-      (click)="this.isEditing = false; onSubmit()">check</span>
     </section>   
   </section>  
   <section class="user-fields">    
     <form *ngIf="this.isEditing" [formGroup]="updateProfileForm">
       <input type="text" id="bio" formControlName="bio" [placeholder]="this.user.bio"/>
       <span class="validator-error" *ngIf="bio.errors?.maxlength && bio.touched">Maximum length is 128</span>
-      <button (click)="hiddenfileinput.click()">
+      <button type="button" class="upload-button"  (click)="hiddenfileinput.click()">
         <span class="material-icons upload">image</span>Set new profile picture
       </button>
       <progress max="100" min="0" [value]="progress"></progress>
+      <mat-slide-toggle 
+        class="toggle" 
+        [checked]="user.isPrivate"
+        (click)="togglePrivate()">Private profile
+      </mat-slide-toggle>
+      <button type="button" class="save-button" [disabled]="!(this.isEditing && this.imageLink !== null && this.updateProfileForm.valid)" 
+      (click)="this.isEditing = false; onFormSubmit()">Save changes</button>
       <input type="file"
+         accept="image/*"
          formControlName="file"
          id="hidden-file-input"
          (change)="onFileSelected($event)"
@@ -81,11 +88,7 @@
          autocomplete="off"
          #hiddenfileinput
       />
-      <mat-slide-toggle 
-        class="toggle" 
-        [checked]="user.isPrivate"
-        (click)="togglePrivate()">Private profile
-      </mat-slide-toggle>
+      
     </form>
     <ul>
       <li>

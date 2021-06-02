@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import { MediaObserver } from '@angular/flex-layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { combineLatest, Subscription } from 'rxjs';
 import { finalize, takeWhile, tap } from 'rxjs/operators';
@@ -44,6 +45,7 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
     private crudService: CrudService,
     private dialog: MatDialog,
     public media: MediaObserver,
+    private router: Router,
   ) {}
 
   ngOnChanges(): void {
@@ -76,6 +78,12 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
+  public viewControl(): boolean {
+    return this.currentUser.uid === this.user.uid
+      ? this.router.url !== '/feed'
+      : this.router.url !== '/feed';
+  }
+
   private initForm(): void {
     this.updateProfileForm = this.fb.group({
       bio: ['', [Validators.maxLength(128)]],
@@ -88,7 +96,7 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
     return this.updateProfileForm.get('bio');
   }
 
-  public onSubmit(): void {
+  public onFormSubmit(): void {
     const { controls } = this.updateProfileForm;
     if (this.updateProfileForm.valid && this.imageLink !== null) {
       let data: {} = {};
@@ -116,19 +124,24 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
 
   public onFileSelected(event): void {
     const file = event.target.files[0];
+    const types = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
-    this.subscriptions.push(
-      combineLatest(this.uploadService.uploadFile('profilePictures', file))
-        .pipe(
-          tap(([percent, link]) => {
-            this.progress = percent.toString();
-            this.imageLink = link;
-            if (link) this.updateProfileForm.controls.fileUpload.setValue(true);
-          }),
-          takeWhile(([percent, link]) => !link),
-        )
-        .subscribe(),
-    );
+    if (types.includes(file.type)) {
+      this.subscriptions.push(
+        combineLatest(this.uploadService.uploadFile('profilePictures', file))
+          .pipe(
+            tap(([percent, link]) => {
+              this.progress = percent.toString();
+              this.imageLink = link;
+              if (link) this.updateProfileForm.controls.fileUpload.setValue(true);
+            }),
+            takeWhile(([percent, link]) => !link),
+          )
+          .subscribe(),
+      );
+    } else {
+      this.toast.error('Only .png, .jpg or .webp images are accepted!');
+    }
   }
 
   public togglePrivate(): void {

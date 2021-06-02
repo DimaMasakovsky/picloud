@@ -81,10 +81,13 @@ form {
   @include justify-align-direction(flex-start, flex-start, column);
   margin-top: 1rem;
   width: 100%;
+  @include mobile {
+    @include justify-align-direction(flex-start, center, column);
+  }
   input {
     width: 98%;
     height: 2.5rem;
-
+    text-align: center;
     border-radius: 0.5rem;
     border: 0.1rem solid rgb(238, 238, 238);
     outline: none;
@@ -96,16 +99,13 @@ form {
     font-family: $font-main;
   }
   button {
-    margin-top: 1rem;
     @include justify-align-direction(center, center, row);
+    margin-top: 1rem;
     height: 3rem;
     padding: 0.1rem 1.5rem;
     white-space: nowrap;
     width: 100%;  
     cursor: pointer;
-    color: #ffffff;
-    background-color: color(accent);
-    border: 0.1rem solid color(accent);
     outline: none;
     border-radius: 0.5rem;
     font-family: $font-main;
@@ -114,17 +114,27 @@ form {
       background-color: lighten(color(accent), 20%);
       border: 0.1rem solid lighten(color(accent), 20%);
     }
-    span {
-      color: #ffffff;
-      margin-right: 0.5rem;
-    }
+    
   }
   progress {
     margin-top: 1rem; 
     width: 100%;
   }
 }
-
+.upload-button {
+  color: color(text-secondary);
+  background-color: #ffffff;
+  border: 0.1rem solid rgb(238, 238, 238);
+  span {
+    color: color(text-secondary);
+    margin-right: 0.5rem;
+  }
+}
+.save-button {
+  color: #ffffff;
+  background-color: color(accent);
+  border: 0.1rem solid color(accent);
+}
 .image-wrapper {
   .image {
     background: blanchedalmond;

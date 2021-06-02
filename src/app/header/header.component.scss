@@ -2,6 +2,7 @@
 
 :host {
   width: 100%;
+  box-sizing: border-box;
 }
 .desktop-wrapper {
   position: fixed;
@@ -9,21 +10,21 @@
   width: 100%;
   height: 4.2rem;
 
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 15% 50% 35%;
-  align-items: center;
+  @include justify-align-direction(space-between, center, row);
 
   background: #FFFFFF;
-  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.25);  
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.25); 
+  .search-wrapper {
+    width: 55%;
+  } 
   nav {
-    margin: 0 0.5rem;
+    margin: 0 5rem;
+    width: 20%;
     ul { 
-      @include justify-align-direction(space-around, center, row);
-  
+      @include justify-align-direction(center, center, row);
       li {
         font-size: 1.4rem;
-        margin: 0 0.5rem;
+        margin: 0 2rem;
       }
     }
   }
@@ -31,6 +32,7 @@
   .logo-wrapper {
     @include justify-align-direction(center, center, column);
     margin: 0 1rem;
+    width: 15%;
     h1 { 
       font-size: 2.4rem;
       font-family: $font-secondary;
@@ -38,13 +40,18 @@
     }
   }
 }
+
 button {
+  margin: 0 3rem;
   padding: 0.4rem 1rem;
+  width: 10%;
+  max-width: 8rem;
   background: #FFFFFF;
   outline: none;
   border: 0.1rem solid black;
   border-radius: 0.5rem;
   font-family: $font-main;
+  white-space: nowrap;
   cursor: pointer;
 }
 

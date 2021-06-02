@@ -3,14 +3,17 @@
     <div class="logo-wrapper">
       <h1><a routerLink="/feed">picloud</a></h1>
     </div>  
-    <app-search (click)="router.navigate(['search'])"></app-search>
+    <div class="search-wrapper">
+      <app-search (click)="router.navigate(['search'])"></app-search>
+    </div>
+    
     <nav>
       <ul>
         <li><a routerLink="/feed">Home</a></li>
         <li><a routerLink="/profile/{{userID}}">Profile</a></li>
-        <li><button (click)="signOut()">Sign Out</button></li>
       </ul>
     </nav>
+    <button (click)="signOut()">Sign Out</button>
   </div>  
 </ng-container>
 

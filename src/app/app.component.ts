@@ -92,6 +92,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'fix: search stays even on route changes',
         'https://github.com/DimaMasakovsky/picloud/commit/45fe8f33dc0e82363856ecdb6e7935552f624fc1',
       ),
+      '25.05-2': this.ProjectUpdateData(
+        'fix: input autofocus',
+        'https://github.com/DimaMasakovsky/picloud/commit/0a0e014ee44c16fc054adbdf5967e5e3a7c7dcc9',
+      ),
     });
   }
 

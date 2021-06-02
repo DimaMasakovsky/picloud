@@ -22,6 +22,7 @@
   </ul>
   <div  *ngIf="imageLink" class="image" [style.backgroundImage]="this.imageLink | urlParentesis"></div>  
   <input type="file"
+         accept="image/*"
          formControlName="file"
          id="hidden-file-input"
          (change)="onFileSelected($event)"
