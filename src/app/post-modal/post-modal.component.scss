@@ -61,6 +61,12 @@ button {
     border: 0.1rem solid lighten(color(accent), 20%);
   }
 }
+button.close-btn {
+  border: 0.1rem solid rgb(238, 238, 238);
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  color: color(text-secondary);
+}
 input.ng-invalid{
   border-color: color(error);
 }

@@ -36,6 +36,20 @@ form {
     margin-top: 0.2rem;
     font-weight: 400;
   }
+  .pic-button-wrapper {
+    @include justify-align-direction(center,center, row);
+    padding: 0.2rem 1rem;
+    border: 0.1rem solid rgb(238, 238, 238);
+    border-radius: 0.5rem;
+    color: color(text-secondary);
+    cursor: pointer;
+    &:hover { 
+       color: color(accent); 
+    }
+  }
+  .ng-touched.ng-invalid {
+    border-color: color(error);
+  }
   .wrapper {
     @include justify-align-direction(space-between, center,row);
   }
@@ -74,13 +88,6 @@ form {
 #hidden-file-input {
   display: none;
 }
-.upload {
-  cursor: pointer;
-  display: inline-block;
-  &:hover { 
-    color: color(accent); 
-  }
-}
 
 .image {
   margin-top: 2rem;
@@ -93,4 +100,13 @@ form {
 }
 input.ng-touched.ng-invalid{
   border-color: color(error);
+}
+.mat-icons {
+  font-family: $font-icons;
+  font-size: 2.2rem;
+  margin-right: 0.3rem;
+  &::selection {
+    color: none;
+    background: none;
+  }  
 }

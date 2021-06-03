@@ -38,3 +38,17 @@
   }
 }
 
+button.close-btn {
+  border: 0.1rem solid rgb(238, 238, 238);
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  color: color(text-secondary);
+  white-space: nowrap;
+  margin-left: 1rem;
+  height: 3rem;
+  padding: 0.1rem 1.5rem;
+  cursor: pointer;
+  outline: none;
+  font-family: $font-main;
+  font-size: 1.6rem;
+}

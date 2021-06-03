@@ -126,7 +126,7 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
     const file = event.target.files[0];
     const types = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
 
-    if (types.includes(file.type)) {
+    if (types.includes(file.type) && file.size < 11000000) {
       this.subscriptions.push(
         combineLatest(this.uploadService.uploadFile('profilePictures', file))
           .pipe(
@@ -139,6 +139,8 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
           )
           .subscribe(),
       );
+    } else if (file.size > 11000000) {
+      this.toast.error('Pics should weight less than 10MB');
     } else {
       this.toast.error('Only .png, .jpg or .webp images are accepted!');
     }

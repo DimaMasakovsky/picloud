@@ -2,22 +2,24 @@
   <ul>
     <li>
       <label for="textContent">What's new?</label>
-      <input type="text" id="text-content" formControlName="textContent" placeholder="What's new?"/>
+      <input type="text" id="text-content" formControlName="textContent"/>
       <span class="validator-error" *ngIf="textContent.errors?.maxlength && textContent.touched">Maximum length is 256</span>
     </li>
     <li>
       <label for="tag">Tag</label>
-      <input type="text" id="tag" formControlName="tag" placeholder="Tag"/>
+      <input type="text" id="tag" formControlName="tag"/>
       <span class="validator-error" *ngIf="tag.errors?.maxlength && tag.touched">Maximum length is 128</span>
       <span class="validator-error" *ngIf="tag.errors?.pattern && tag.touched">Only cyrillic, latin and numbers are accepted</span>
     </li>
     <li class="wrapper">
-      <span class="material-icons upload" (click)="hiddenfileinput.click()">image</span>
+      <div class="pic-button-wrapper" 
+      [ngClass]="{ 'ng-invalid ng-touched': this.postForm.controls.file.invalid && this.postForm.controls.file.touched}"
+      (click)="hiddenfileinput.click()">
+        <span class="mat-icons">image</span>
+        <span>Attach pic!</span>
+      </div>
       <progress max="100" min="0" [value]="progress"></progress> 
-      <button
-        [disabled]="this.postForm.invalid || this.isLoading"        
-        (click)="this.isLoading = true; onSubmit();" 
-        >Post!</button>  
+      <button (click)="onSubmit();">Post!</button>  
     </li>
   </ul>
   <div  *ngIf="imageLink" class="image" [style.backgroundImage]="this.imageLink | urlParentesis"></div>  

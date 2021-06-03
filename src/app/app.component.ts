@@ -96,6 +96,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'fix: input autofocus',
         'https://github.com/DimaMasakovsky/picloud/commit/0a0e014ee44c16fc054adbdf5967e5e3a7c7dcc9',
       ),
+      '02.06': this.ProjectUpdateData(
+        'add: filter on file upload',
+        'https://github.com/DimaMasakovsky/picloud/commit/00647511fd9abe21cbfe2e429d35c6650fa0e275',
+      ),
     });
   }
 

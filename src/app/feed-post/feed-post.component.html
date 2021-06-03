@@ -1,10 +1,14 @@
 <app-post-header [userID]="post.author" [createTime]="post.createTime"></app-post-header>
+<p>{{post.textContent}}</p>
+<ul class="tags-wrapper">
+  <li *ngFor="let tag of post.tags" class="tags">
+    <app-tag [tag]="tag"></app-tag>
+  </li>
+</ul>
 <div class="post-image-wrapper" (click)="openModal()">
   <div class="post-image" [style.backgroundImage]="this.post.contentPicURL | urlParentesis"></div>
 </div>
 <div class="footer-wrapper">
   <app-post-stats [post]="post"></app-post-stats>
-  <div class="post-footer-tag">
-    <app-tag [tag]="post.tags[0]"></app-tag>
-  </div>
+  <button (click)="openModal()">Open in details</button>
 </div>

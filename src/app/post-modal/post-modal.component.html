@@ -53,8 +53,11 @@
     <span class="material-icons">lock</span>
     <p>You must be a follower to view this post</p>
   </div>
+  
 </mat-dialog-content>
-
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="close-btn">Close</button>
+</mat-dialog-actions>
 
 <ng-template #userImage>
   <div class="image" [style.backgroundImage]="this.currentUser.photoURL | urlParentesis" fxHide.xs></div>

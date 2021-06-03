@@ -71,7 +71,7 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
 
   public onSubmit(): void {
     const { controls } = this.postForm;
-    if (this.postForm.valid) {
+    if (this.postForm.valid && !this.isLoading) {
       const data: Post = {
         author: this.currentUserData.uid,
         commentCount: 0,
@@ -101,14 +101,18 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
           )
           .subscribe(),
       );
+    } else if (this.isLoading) {
+      this.toast.error("Image hasn't loaded yet!");
+    } else {
+      this.postForm.markAllAsTouched();
     }
   }
 
   public onFileSelected(event): void {
     const file = event.target.files[0];
     const types = ['image/jpg', 'image/png', 'image/jpeg', 'image/webp'];
-
-    if (types.includes(file.type)) {
+    if (types.includes(file.type) && file.size < 11000000) {
+      this.isLoading = true;
       this.subscriptions.push(
         combineLatest(this.uploadService.uploadFile('postPictures', file))
           .pipe(
@@ -119,8 +123,14 @@ export class NewPostFormComponent implements OnInit, OnDestroy {
             }),
             takeWhile(([percent, link]) => !link),
           )
-          .subscribe(),
+          .subscribe(([percent, link]) => {
+            if (percent === 100) {
+              this.isLoading = false;
+            }
+          }),
       );
+    } else if (file.size > 11000000) {
+      this.toast.error('Pics should weight less than 10MB');
     } else {
       this.toast.error('Only .png, .jpg or .webp images are accepted!');
     }

@@ -5,34 +5,39 @@
   box-sizing: border-box;
 }
 .desktop-wrapper {
+  // @include justify-align-direction(space-around, center, row);
   position: fixed;
   top: 0;
   width: 100%;
   height: 4.2rem;
-
-  @include justify-align-direction(space-between, center, row);
+  
+  display: grid;
+  grid-template-columns: 15% 50% 20% 15%;
+  align-content: center;
 
   background: #FFFFFF;
   box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.25); 
-  .search-wrapper {
-    width: 55%;
-  } 
   nav {
-    margin: 0 5rem;
-    width: 20%;
+    margin: 0 0.5rem;
+    justify-self: center;
+    align-self: center;
     ul { 
       @include justify-align-direction(center, center, row);
       li {
         font-size: 1.4rem;
-        margin: 0 2rem;
+        margin: 0 1.5rem;
       }
     }
   }
-  
+  .search-wrapper {
+    width: 100%;
+  }
   .logo-wrapper {
     @include justify-align-direction(center, center, column);
     margin: 0 1rem;
-    width: 15%;
+    @include desktop-medium {
+      margin: 0 1rem;
+    }
     h1 { 
       font-size: 2.4rem;
       font-family: $font-secondary;
@@ -42,10 +47,11 @@
 }
 
 button {
-  margin: 0 3rem;
+  justify-self: center;
+  align-self: center;
+  margin: 0 1rem;
   padding: 0.4rem 1rem;
-  width: 10%;
-  max-width: 8rem;
+  width: 8rem;
   background: #FFFFFF;
   outline: none;
   border: 0.1rem solid black;

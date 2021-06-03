@@ -44,7 +44,7 @@ export class CommentComponent implements OnInit {
         comments: this.post.comments,
       });
       this.crudService.deleteObject('comments', this.comment.id);
-      this.toast.error('Comment deleted');
+      this.toast.success('Deleted');
     }
   }
 
