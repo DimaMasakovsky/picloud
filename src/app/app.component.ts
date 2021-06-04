@@ -100,6 +100,10 @@ export class AppComponent implements OnInit, OnDestroy {
         'add: filter on file upload',
         'https://github.com/DimaMasakovsky/picloud/commit/00647511fd9abe21cbfe2e429d35c6650fa0e275',
       ),
+      '03.06': this.ProjectUpdateData(
+        'fix: ui improvements',
+        'https://github.com/DimaMasakovsky/picloud/commit/c338ad2213d30d03406aa55f74c7c065542e38fd',
+      ),
     });
   }
 

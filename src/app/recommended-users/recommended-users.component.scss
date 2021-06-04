@@ -57,3 +57,8 @@
    width: 100%;
  }
 }
+.spinner-wrapper {
+  width: 100%;
+  @include justify-align-direction(center, center, row);
+  margin-top: 2rem;
+}

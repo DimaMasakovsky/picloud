@@ -16,8 +16,10 @@ export class TagComponent implements OnInit {
   ngOnInit(): void {}
 
   public searchByTag(): void {
-    this.router.navigate(['/search']);
+    this.router.navigate(['/search'], {
+      queryParams: { filter: this.tag },
+      queryParamsHandling: 'merge',
+    });
     this.dialog.closeAll();
-    this.storage.search = this.tag;
   }
 }

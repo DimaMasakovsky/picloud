@@ -52,3 +52,9 @@ button.close-btn {
   font-family: $font-main;
   font-size: 1.6rem;
 }
+
+.spinner-wrapper {
+  width: 100%;
+  @include justify-align-direction(center, center, row);
+  margin-top: 1rem;
+}

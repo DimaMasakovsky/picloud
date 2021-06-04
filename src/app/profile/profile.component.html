@@ -1,3 +1,7 @@
+<div class="spinner-wrapper" *ngIf="!user && !currentUser && ((postsSubscription | async) === (false || null || undefined))">
+  <div class="dots-bars-2"></div>
+</div>
+
 <div class="wrapper" *ngIf="user && currentUser">
   <div class="content">
     <app-profile-header [userID]="user?.uid"></app-profile-header>

@@ -1,14 +1,15 @@
 <div class="search-wrapper">
   <app-search fxHide.gt-xs></app-search>
 </div>
-<h2 *ngIf="!filter">Search for people and posts!</h2>
-<section *ngIf="filter">
+<h2 *ngIf="!(filteredPostsArray?.length || filteredUsersArray?.length) && !filter">Search for people and posts!</h2>
+<h2 *ngIf="!(filteredPostsArray?.length || filteredUsersArray?.length) && filter">There are no matches!</h2>
+
+<section *ngIf="filteredPostsArray?.length">
   <h6>Posts:</h6>
   <ul>
-    <ng-container *ngFor="let post of postsSubscription | async; trackBy:trackFunction">
+    <ng-container *ngFor="let post of filteredPostsArray; trackBy:trackFunction">
       <li 
         class="post-wrapper" 
-        *ngIf="postFilter(post)"
         (click)="openModal(post.id)">
         <div class="image" [style.backgroundImage]="post.contentPicURL | urlParentesis"></div>
         <h5 class="text-content">{{post.textContent}}</h5>
@@ -17,13 +18,12 @@
   </ul>
 </section>
 
-<section *ngIf="filter">
+<section *ngIf="filteredUsersArray?.length">
   <h6>Users:</h6>
   <ul>
-    <ng-container *ngFor="let user of usersSubscription | async; trackBy:trackFunction">
+    <ng-container *ngFor="let user of filteredUsersArray; trackBy:trackFunction">
       <li 
         class="post-wrapper" 
-        *ngIf="userFilter(user)"
         (click)="this.router.navigate(['/profile', user.uid]);">
         <div class="image" [style.backgroundImage]="user.photoURL | urlParentesis"></div>
         <h5 class="text-content">{{user.displayName}}</h5>

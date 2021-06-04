@@ -1,6 +1,9 @@
 <div class="wrapper" *ngIf="currentUser" >
   <h6>Recommended users:</h6>
   <ul>
+      <div class="spinner-wrapper" *ngIf="((usersSubscription | async) === (false || null || undefined))">
+      <div class="dots-bars-2"></div>
+    </div>
     <ng-container *ngFor="let user of usersSubscription | async; trackBy:trackFunction">
       <li *ngIf="user.uid !== currentUser.uid" class="user-card">
         <div class="profile-pic" 

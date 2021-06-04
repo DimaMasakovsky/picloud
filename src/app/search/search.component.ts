@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
       )
       .subscribe((val: string) => {
-        this.storage.search = val;
+        this.router.navigate([], { queryParams: { filter: val }, queryParamsHandling: 'merge' });
       });
   }
 

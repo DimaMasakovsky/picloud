@@ -8,7 +8,7 @@ import {
 import { MediaObserver } from '@angular/flex-layout';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { Post, User } from '../interfaces';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CrudService } from '../services/crud.service';
@@ -21,10 +21,6 @@ import { StorageService } from '../services/storage.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
-  public postsSubscription: Observable<any>;
-
-  public usersSubscription: Observable<any>;
-
   private subscriptions: Array<Subscription> = [];
 
   private dialogWidth: '40vw' | '90vw';
@@ -32,6 +28,14 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   private dialogRef: MatDialogRef<PostModalComponent>;
 
   public filter: string;
+
+  private usersArray: any;
+
+  public filteredUsersArray: Array<User>;
+
+  private postsArray: any;
+
+  public filteredPostsArray: Array<Post>;
 
   constructor(
     private crudService: CrudService,
@@ -44,19 +48,24 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.postsSubscription = this.crudService.handleData('posts', {
-      fieldPath: 'createTime',
-      direction: 'desc',
-    });
-    this.usersSubscription = this.crudService.handleData('users', {
-      fieldPath: 'displayName',
-      direction: 'desc',
-    });
     this.subscriptions.push(
-      this.storage.searchValue$.subscribe((val) => {
-        this.updateSearchResults(val);
-      }),
-      this.route.queryParams.subscribe((queryParams) => {
+      combineLatest(
+        this.crudService.handleData('posts', { fieldPath: 'createTime', direction: 'desc' }),
+        this.crudService.handleData('users', { fieldPath: 'displayName', direction: 'desc' }),
+        this.route.queryParams,
+      ).subscribe(([postArr, userArr, queryParams]) => {
+        this.postsArray = postArr;
+        this.usersArray = userArr;
+        this.cdr.detectChanges();
+        if (queryParams.filter) {
+          this.filter = queryParams.filter;
+          this.filterData(queryParams.filter);
+          this.cdr.detectChanges();
+        }
+        if (queryParams.filter === '') {
+          this.filteredPostsArray = [];
+          this.filteredUsersArray = [];
+        }
         if (queryParams.postId) {
           this.crudService.getObjectByRef('posts', queryParams.postId).subscribe((post: Post) => {
             if (post) {
@@ -85,9 +94,15 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  public updateSearchResults(inputValue: string): void {
-    this.filter = inputValue;
-    this.cdr.detectChanges();
+  private filterData(filter: string) {
+    this.filteredUsersArray = this.usersArray?.filter((el) =>
+      el.displayName.toLowerCase().includes(filter.toLowerCase()),
+    );
+    this.filteredPostsArray = this.postsArray?.filter((el) => {
+      return (
+        el.textContent.toLowerCase().includes(filter.toLowerCase()) || el.tags.includes(filter)
+      );
+    });
   }
 
   public trackFunction(index: any, item: any): string {
@@ -96,28 +111,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   public openModal(postId: string): void {
     this.router.navigate([], { queryParams: { postId }, queryParamsHandling: 'merge' });
-  }
-
-  public postFilter(post: Post): boolean {
-    if (post.textContent.toLowerCase().includes(this.filter.toLowerCase())) {
-      return true;
-    }
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const tag of post.tags) {
-      if (tag.toLowerCase() === this.filter.toLowerCase()) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  public userFilter(user: User): boolean {
-    if (user.displayName.toLowerCase().includes(this.filter.toLowerCase())) {
-      return true;
-    }
-    return false;
   }
 
   ngOnDestroy(): void {

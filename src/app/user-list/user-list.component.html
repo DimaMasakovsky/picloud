@@ -1,4 +1,7 @@
 <mat-dialog-content>
+  <div class="spinner-wrapper" *ngIf="((userSubscription | async) === (false || null || undefined))">
+    <div class="dots-bars-2"></div>
+  </div>
   <ul *ngIf="data.category === 'followers'">
     <h2>Followers:</h2>
     <ng-container *ngFor="let follower of userSubscription | async; trackBy:trackFunction;">

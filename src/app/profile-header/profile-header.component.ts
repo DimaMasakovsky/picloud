@@ -79,9 +79,7 @@ export class ProfileHeaderComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public viewControl(): boolean {
-    return this.currentUser.uid === this.user.uid
-      ? this.router.url !== '/feed'
-      : this.router.url !== '/feed';
+    return !this.router.url.includes('/feed') && this.currentUser.uid === this.user.uid;
   }
 
   private initForm(): void {
